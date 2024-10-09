@@ -18,6 +18,11 @@ const config: Config = {
       "light-green": "#F0FFF6",
       border: "#ECECEC",
     },
+    extend: {
+      fontFamily: {
+        pretendard: ["var(--font-pretendard)"],
+      },
+    },
   },
   plugins: [],
 };
