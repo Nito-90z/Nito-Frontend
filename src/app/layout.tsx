@@ -22,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard flex justify-center items-center w-screen h-dvh`}
+        className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh`}
       >
-        <div className="max-w-[430px] w-full h-full">
+        <div className="mx-auto max-w-[430px] min-w-[360px] w-full h-full bg-brand">
           {/* Header */}
           <main>{children}</main>
           {/* Footer */}
