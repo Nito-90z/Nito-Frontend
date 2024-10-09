@@ -21,8 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} font-pretendard`}>
-        {children}
+      <body
+        className={`${pretendard.variable} font-pretendard flex justify-center items-center w-screen h-dvh`}
+      >
+        <div className="max-w-[430px] w-full h-full">
+          {/* Header */}
+          <main>{children}</main>
+          {/* Footer */}
+        </div>
       </body>
     </html>
   );
