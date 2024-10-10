@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import ProductList from "@/components/ProductList";
 
 // const PRODUCTS: Product[] = [
@@ -205,4 +206,14 @@ import ProductList from "@/components/ProductList";
 
 export default function HomePage() {
   return <div>{/* <ProductList products={PRODUCTS} /> */}</div>;
+=======
+import DefaultHeader from '@/components/header/DefaultHeader';
+
+export default function HomePage() {
+  return (
+    <div>
+      <DefaultHeader />홈
+    </div>
+  );
+>>>>>>> Stashed changes
 }
