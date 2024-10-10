@@ -12,7 +12,7 @@ export default function CheckBox(props: Props) {
       <div className='flex items-center gap-2'>
         <input
           type='checkbox'
-          id='uuid'
+          id={uuid}
           className={twMerge(
             "appearance-none w-5 h-5 border border-light-gray rounded-sm checked:bg-[url('/images/check.svg')] checked:bg-brand  checked:bg-no-repeat checked:bg-center cursor-pointer",
             className
