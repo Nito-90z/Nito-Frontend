@@ -16,11 +16,13 @@ export default function Badge({
   icon = false,
 }: Props) {
   return (
-    <div className={getBadgeStyle(size, direction)}>
+    <div className={getBadgeStyle(size, direction, icon)}>
       {icon && (
         <Image
           src={direction === "up" ? upIcon : downIcon}
-          alt={`${children}% ${direction} badge`}
+          alt={
+            icon ? `${children}% ${direction} badge` : JSON.stringify(children)
+          }
           className={
             size === "sm" ? "w-[9.5px] h-[10.04px]" : "w-[11.36px] h-3"
           }
@@ -31,13 +33,20 @@ export default function Badge({
   );
 }
 
-function getBadgeStyle(size: "sm" | "lg", direction: "up" | "down") {
-  const baseStyle = "flex justify-center items-center p-[1px] w-fit rounded-sm";
+function getBadgeStyle(
+  size: "sm" | "lg",
+  direction: "up" | "down",
+  icon: boolean
+) {
+  const baseStyle =
+    "flex justify-center items-center shrink-0 py-[1px] px-1 w-fit rounded-sm";
   const sizeStyle = size === "sm" ? " text-xs" : "text-base";
   const directionStyle =
     direction === "up"
       ? "text-green bg-light-green"
-      : "text-brand bg-light-brand";
+      : icon
+      ? "text-brand bg-light-brand"
+      : "text-white bg-brand";
 
   return `${baseStyle} ${sizeStyle} ${directionStyle}`;
 }
