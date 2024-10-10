@@ -1,12 +1,13 @@
 import { twMerge } from "tailwind-merge";
 
-type InputProps = Omit<React.ComponentPropsWithoutRef<"input">, "type"> & {
+type Props = Omit<React.ComponentPropsWithoutRef<"input">, "type"> & {
   type:
     | "text"
     | "password"
     | "email"
 };
-export default function Input(props: InputProps) {
+
+export default function Input(props: Props) {
   const { className, ...rest } = props;
   return (
     <>
