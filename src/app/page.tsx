@@ -203,6 +203,7 @@ import ProductList from "@/components/ProductList";
 //   },
 // ];
 
+// test
 export default function HomePage() {
   return <div>{/* <ProductList products={PRODUCTS} /> */}</div>;
 }
