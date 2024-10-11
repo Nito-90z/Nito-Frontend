@@ -6,8 +6,10 @@ import { nicknameValidationCheckFetcher } from "@/fetchers/user";
 import {
   NICKNAME_DUPLICATE_ERROR_MESSAGE,
   NICKNAME_VALID_MESSAGE,
+  NICKNAME_VALIDATION_ERROR_MESSAGE,
 } from "@/constants/message/nickname";
 import { twMerge } from "tailwind-merge";
+import { NICKNAME_PATTERN } from "@/constants/regex/nickname";
 
 type Props = {
   nickname: string;
@@ -36,6 +38,12 @@ export default function NicknameForm({
   });
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (nickname.trim() === "" || !NICKNAME_PATTERN.test(nickname.trim())) {
+      onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, "text-brand");
+      inputRef.current?.focus();
+      return;
+    }
 
     mutate();
   };
