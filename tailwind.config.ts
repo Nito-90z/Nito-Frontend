@@ -14,6 +14,7 @@ const config: Config = {
       colors: {
         black: "#171717",
         gray: "#AEAEAE",
+        "platinum": "#F5F5F5",
         "light-gray": "#D9D9D9",
         "dark-gray": "#333333",
         brand: "#FC5660",
@@ -21,6 +22,7 @@ const config: Config = {
         green: "#1CCA62",
         "light-green": "#F0FFF6",
         border: "#ECECEC",
+        text: '#555555'
       },
     },
   },

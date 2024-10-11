@@ -1,4 +1,12 @@
+import DefaultHeader from '@/components/header/DefaultHeader';
+import SearchBar from '@/components/header/SearchBar';
+import SearchBarComplete from '@/components/header/SearchBarComplete';
+import SelectHeader from '@/components/header/SelectHeader';
+import SubHeader from '@/components/header/SubHeader';
 import ProductList from "@/components/ProductList";
+import Category from '@/components/subHeader/Category';
+import DetailOption from '@/components/subHeader/DetailOption';
+import Main from '@/components/subHeader/Main';
 
 // const PRODUCTS: Product[] = [
 //   {
@@ -205,5 +213,14 @@ import ProductList from "@/components/ProductList";
 
 // test
 export default function HomePage() {
-  return <div>{/* <ProductList products={PRODUCTS} /> */}</div>;
+  return <div>{/* <ProductList products={PRODUCTS} /> */}
+  <DefaultHeader />
+  <SelectHeader />
+  <SubHeader />
+  <SearchBar />
+  <SearchBarComplete />
+  <Main/>
+  <Category />
+  <DetailOption />
+  </div>;
 }
