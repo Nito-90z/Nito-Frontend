@@ -1,4 +1,4 @@
-import { generateNickname } from "@/services/auth";
+import { generateNickname } from "@/services/user";
 import { NextResponse } from "next/server";
 
 export async function GET() {

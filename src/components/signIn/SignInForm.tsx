@@ -1,12 +1,12 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import NicknameForm from "./NicknameForm";
 import Button from "../common/Button";
 import CloseIcon from "../common/icons/CloseIcon";
 import Agreement from "./Agreement";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { generateNicknameFetcher } from "@/fetchers/auth";
+import { generateNicknameFetcher } from "@/fetchers/user";
 
 export type AgreementType = {
   isOverAge14: boolean;
@@ -29,18 +29,26 @@ const TRUE_AGREEMENTS = {
   isMarketing: true,
 };
 
+const INITIAL_ERROR_MESSAGE = {
+  value: "",
+  color: "",
+};
+
 export default function SignInForm() {
   const { data } = useSuspenseQuery<{ nickname: string }>({
     queryKey: ["generate-nickname"],
     queryFn: generateNicknameFetcher,
   });
   const [nickname, setNickname] = useState(data.nickname);
-  const [nicknameComment, setNicknameComment] = useState("");
+  const [nicknameComment, setNicknameComment] = useState(INITIAL_ERROR_MESSAGE);
   const [agreement, setAgreement] = useState<AgreementType>(INITIAL_AGREEMENT);
   const isAllAgree = Object.values(agreement).every((v) => v === true);
 
   const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
+  };
+  const handleNicknameComment = (value: string, color: string) => {
+    setNicknameComment({ value, color });
   };
   const handleAgreementChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -53,6 +61,12 @@ export default function SignInForm() {
       setAgreement(TRUE_AGREEMENTS);
     }
   };
+
+  useEffect(() => {
+    if (nickname) return;
+
+    setNicknameComment(INITIAL_ERROR_MESSAGE);
+  }, [nickname]);
   return (
     <div className="flex flex-col h-full">
       <div className="grow flex flex-col gap-6">
@@ -63,7 +77,7 @@ export default function SignInForm() {
           nickname={nickname}
           onChange={handleNicknameChange}
           commentMessage={nicknameComment}
-          onCommentChange={setNicknameComment}
+          onCommentChange={handleNicknameComment}
         />
         <Agreement
           agreement={agreement}
