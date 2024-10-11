@@ -43,6 +43,7 @@ export default function SignInForm() {
   const [nicknameComment, setNicknameComment] = useState(INITIAL_ERROR_MESSAGE);
   const [agreement, setAgreement] = useState<AgreementType>(INITIAL_AGREEMENT);
   const isAllAgree = Object.values(agreement).every((v) => v === true);
+  const isValidate = isAllAgree && nickname.trim() !== "";
 
   const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
@@ -86,7 +87,10 @@ export default function SignInForm() {
         />
       </div>
       <div className="px-4 py-5">
-        <Button className="bg-brand disabled:bg-light-gray">
+        <Button
+          className="bg-brand disabled:bg-light-gray"
+          disabled={!isValidate}
+        >
           회원가입 완료하기
         </Button>
       </div>

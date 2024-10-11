@@ -36,10 +36,17 @@ export default function NicknameForm({
       inputRef.current?.focus();
     },
   });
+
+  const handleBlur = () => {
+    if (isValidate(nickname)) {
+      onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, "text-brand");
+      inputRef.current?.focus();
+    }
+  };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (nickname.trim() === "" || !NICKNAME_PATTERN.test(nickname.trim())) {
+    if (isValidate(nickname)) {
       onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, "text-brand");
       inputRef.current?.focus();
       return;
@@ -61,6 +68,7 @@ export default function NicknameForm({
           placeholder="닉네임을 입력해주세요"
           value={nickname}
           onChange={onChange}
+          onBlur={handleBlur}
         />
 
         <Button
@@ -77,4 +85,11 @@ export default function NicknameForm({
       )}
     </form>
   );
+}
+
+function isValidate(nickname: string) {
+  if (nickname.trim() === "" || !NICKNAME_PATTERN.test(nickname.trim()))
+    return false;
+
+  return true;
 }
