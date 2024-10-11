@@ -21,6 +21,7 @@ const config: Config = {
         green: "#1CCA62",
         "light-green": "#F0FFF6",
         border: "#ECECEC",
+        text: "#555555",
       },
     },
   },
