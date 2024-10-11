@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../css/index.css";
+import QueryProvider from "@/contexts/QueryContext";
 
 export const metadata: Metadata = {
   title: "Nito",
@@ -24,11 +25,13 @@ export default function RootLayout({
       <body
         className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh bg-[#ECECEC]`}
       >
-        <div className="flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full h-full bg-white">
-          {/* Header */}
-          <main className="grow">{children}</main>
-          {/* Footer */}
-        </div>
+        <QueryProvider>
+          <main className="flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full h-full bg-white">
+            {/* Header */}
+            <div className="grow">{children}</div>
+            {/* Footer */}
+          </main>
+        </QueryProvider>
       </body>
     </html>
   );

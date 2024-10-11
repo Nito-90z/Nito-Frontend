@@ -5,6 +5,8 @@ import NicknameForm from "./NicknameForm";
 import Button from "../common/Button";
 import CloseIcon from "../common/icons/CloseIcon";
 import Agreement from "./Agreement";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { generateNicknameFetcher } from "@/fetchers/auth";
 
 export type AgreementType = {
   isOverAge14: boolean;
@@ -28,8 +30,14 @@ const TRUE_AGREEMENTS = {
 };
 
 export default function SignInForm() {
-  const [nickname, setNickname] = useState("");
+  const { data } = useSuspenseQuery<{ nickname: string }>({
+    queryKey: ["generate-nickname"],
+    queryFn: generateNicknameFetcher,
+  });
+  const [nickname, setNickname] = useState(data.nickname);
+  const [nicknameComment, setNicknameComment] = useState("");
   const [agreement, setAgreement] = useState<AgreementType>(INITIAL_AGREEMENT);
+  const isAllAgree = Object.values(agreement).every((v) => v === true);
 
   const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
@@ -39,9 +47,6 @@ export default function SignInForm() {
     setAgreement((prev) => ({ ...prev, [name]: checked }));
   };
   const handleAllAgreementChange = () => {
-    const isAllAgree = Object.values(agreement).every(
-      (value) => value === true
-    );
     if (isAllAgree) {
       setAgreement(INITIAL_AGREEMENT);
     } else {
@@ -54,7 +59,12 @@ export default function SignInForm() {
         <Button className="self-end p-1 w-fit h-fit bg-transparent">
           <CloseIcon />
         </Button>
-        <NicknameForm nickname={nickname} onChange={handleNicknameChange} />
+        <NicknameForm
+          nickname={nickname}
+          onChange={handleNicknameChange}
+          commentMessage={nicknameComment}
+          onCommentChange={setNicknameComment}
+        />
         <Agreement
           agreement={agreement}
           onChange={handleAgreementChange}
