@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import NullProductIcon from "../../common/icons/NullProductIcon";
+import NullProductImageIcon from "../../common/icons/NullProductImageIcon";
 
 export default function NullProductImage({
   className,
@@ -13,7 +13,7 @@ export default function NullProductImage({
         className
       )}
     >
-      <NullProductIcon />
+      <NullProductImageIcon />
       <p className="text-xs text-[#8F8F8F] font-bold">이미지 준비중</p>
     </div>
   );

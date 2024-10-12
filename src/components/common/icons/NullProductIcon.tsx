@@ -3,6 +3,6 @@ import nullProductIcon from "../../../../public/images/null-product.svg";
 
 export default function NullProductIcon() {
   return (
-    <Image src={nullProductIcon} alt="heart" width={27.16} height={21.58} />
+    <Image src={nullProductIcon} alt="No products" width={58.95} height={14} />
   );
 }
