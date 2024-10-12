@@ -1,4 +1,4 @@
-// 상
+// 상품 리스트
 // const PRODUCTS: Product[] = [
 //   {
 //     id: 1,
@@ -102,6 +102,7 @@
 //   },
 // ];
 
+// 찜한 상품 리스트
 const PRODUCTS: FavoriteProduct[] = [
   {
     id: 1,
@@ -117,7 +118,7 @@ const PRODUCTS: FavoriteProduct[] = [
       isLowestPriceEver: true,
       isOutOfStock: false,
       discountRate: 10,
-      isStopSelling: false,
+      isStopSelling: true,
     },
     isAlarm: true,
   },
@@ -182,8 +183,7 @@ const PRODUCTS: FavoriteProduct[] = [
         enTitle: "4K Monitor",
         koTitle: "4K 모니터",
       },
-      image:
-        "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
+      image: null,
       presentPrice: "399.99",
       isLowestPriceEver: true,
       isOutOfStock: false,
@@ -194,8 +194,8 @@ const PRODUCTS: FavoriteProduct[] = [
   },
 ];
 
-import ProductList from "@/components/ProductList";
-import NullProductList from "@/components/wishList/NullProductList";
+import ProductList from "@/components/products/ProductList";
+import NullProductList from "@/components/products/wishList/NullProductList";
 
 export default function HomePage() {
   return (

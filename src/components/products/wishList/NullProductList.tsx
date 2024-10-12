@@ -1,4 +1,4 @@
-import HeartIcon from "../common/icons/HeartIcon";
+import HeartIcon from "../../common/icons/HeartIcon";
 
 export default function NullProductList() {
   return (

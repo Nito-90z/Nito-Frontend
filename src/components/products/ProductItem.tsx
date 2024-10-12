@@ -1,14 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Badge from "./common/Badge";
+import Badge from "../common/Badge";
 import { twMerge } from "tailwind-merge";
 import { convertDollarToWon } from "@/utils/currency-converter";
-import CircleButton from "./common/CircleButton";
-import RestockAlarmIcon from "./common/icons/RestockAlarmIcon";
-import AlarmIcon from "./common/icons/AlarmIcon";
-import PlusIcon from "./common/icons/PlusIcon";
-import RestockAlarmOffIcon from "./common/icons/RestockAlarmOffIcon";
+import CircleButton from "../common/CircleButton";
+import RestockAlarmIcon from "../common/icons/RestockAlarmIcon";
+import AlarmIcon from "../common/icons/AlarmIcon";
+import PlusIcon from "../common/icons/PlusIcon";
+import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
+import ProductImage from "./wishList/ProductImage";
 
 type Props = {
   product: Product | FavoriteProductInfo;
@@ -31,7 +32,7 @@ export default function ProductItem({ product, isAlarm }: Props) {
   return (
     <li className="flex items-start gap-3 py-4 border-b border-border cursor-pointer">
       <div className="relative">
-        <Image
+        <ProductImage
           src={image ?? ""}
           alt={`${title.koTitle} product image`}
           width={80}
