@@ -8,8 +8,14 @@ import CircleButton from "./common/CircleButton";
 import RestockAlarmIcon from "./common/icons/RestockAlarmIcon";
 import AlarmIcon from "./common/icons/AlarmIcon";
 import PlusIcon from "./common/icons/PlusIcon";
+import RestockAlarmOffIcon from "./common/icons/RestockAlarmOffIcon";
 
-export default function ProductItem({ product }: { product: Product }) {
+type Props = {
+  product: Product | FavoriteProductInfo;
+  isAlarm: boolean;
+};
+
+export default function ProductItem({ product, isAlarm }: Props) {
   const {
     image,
     title,
@@ -20,6 +26,8 @@ export default function ProductItem({ product }: { product: Product }) {
     isLowestPriceEver,
   } = product;
   const isUnavailable = isOutOfStock || isStopSelling;
+  const isFavorite = !("isFavorite" in product) || product.isFavorite;
+
   return (
     <li className="flex items-start gap-3 py-4 border-b border-border cursor-pointer">
       <div className="relative">
@@ -49,17 +57,21 @@ export default function ProductItem({ product }: { product: Product }) {
           >
             {title.koTitle}
           </p>
-          {isOutOfStock ? (
-            <CircleButton size="sm">
-              <RestockAlarmIcon size="sm" />
-            </CircleButton>
-          ) : isStopSelling ? (
-            <CircleButton size="sm">
-              <AlarmIcon size="sm" />
-            </CircleButton>
-          ) : (
+          {!isFavorite ? (
             <CircleButton size="sm" className="bg-dark-gray">
               <PlusIcon size="sm" />
+            </CircleButton>
+          ) : isUnavailable ? (
+            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+              {isAlarm ? (
+                <RestockAlarmIcon size="sm" />
+              ) : (
+                <RestockAlarmOffIcon size="sm" />
+              )}
+            </CircleButton>
+          ) : (
+            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+              <AlarmIcon size="sm" />
             </CircleButton>
           )}
         </div>
