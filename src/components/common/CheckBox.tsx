@@ -1,5 +1,6 @@
 import { useId } from "react";
 import CheckIcon from "./icons/CheckIcon";
+import { twMerge } from "tailwind-merge";
 
 type Props = Omit<
   React.ComponentPropsWithoutRef<"input">,
@@ -24,7 +25,11 @@ export default function Checkbox(props: Props) {
         <input
           type="checkbox"
           id={uuid}
-          className={`peer relative ${containerStyle} cursor-pointer appearance-none rounded-sm border border-light-gray transition-all checked:bg-brand`}
+          className={twMerge(
+            "peer relative cursor-pointer appearance-none rounded-sm border border-light-gray transition-all bg-white checked:bg-brand",
+            containerStyle,
+            className
+          )}
           {...rest}
         />
         <div

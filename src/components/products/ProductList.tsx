@@ -1,10 +1,19 @@
+import { twMerge } from "tailwind-merge";
 import ProductItem from "./ProductItem";
+
+type Props = {
+  products: (Product | FavoriteProduct)[];
+  isEditing?: boolean;
+  selected?: number[];
+  onSelect?: (id: number) => void;
+};
 
 export default function ProductList({
   products,
-}: {
-  products: (Product | FavoriteProduct)[];
-}) {
+  isEditing,
+  selected,
+  onSelect,
+}: Props) {
   return (
     <ul className="flex flex-col gap-3 p-4">
       {products.map((item) => {
@@ -12,7 +21,14 @@ export default function ProductList({
         const isAlarm = "isAlarm" in item && item.isAlarm;
 
         return (
-          <ProductItem key={product.id} product={product} isAlarm={isAlarm} />
+          <ProductItem
+            key={product.id}
+            product={product}
+            isAlarm={isAlarm}
+            isEditing={isEditing}
+            selected={selected}
+            onSelect={onSelect}
+          />
         );
       })}
     </ul>

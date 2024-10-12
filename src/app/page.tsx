@@ -1,5 +1,9 @@
+"use client";
+
+import Button from "@/components/common/Button";
 import ProductList from "@/components/products/ProductList";
 import NullProductList from "@/components/products/wishList/NullProductList";
+import { useState } from "react";
 
 // 찜한 상품 리스트
 const PRODUCTS: FavoriteProduct[] = [
@@ -50,7 +54,7 @@ const PRODUCTS: FavoriteProduct[] = [
       image: null,
       presentPrice: "49.99",
       isLowestPriceEver: true,
-      isOutOfStock: true,
+      isOutOfStock: false,
       discountRate: 5,
       isStopSelling: false,
     },
@@ -68,7 +72,7 @@ const PRODUCTS: FavoriteProduct[] = [
         "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
       presentPrice: "29.99",
       isLowestPriceEver: false,
-      isOutOfStock: true,
+      isOutOfStock: false,
       discountRate: 20,
       isStopSelling: false,
     },
@@ -94,12 +98,35 @@ const PRODUCTS: FavoriteProduct[] = [
 ];
 
 export default function HomePage() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [selected, setSelected] = useState<number[]>([]);
+
+  const handleSelect = (id: number) => {
+    if (selected.includes(id)) {
+      setSelected((prev) => prev.filter((item) => item !== id));
+    } else {
+      setSelected((prev) => [...prev, id]);
+    }
+  };
+  const handleEditing = () => {
+    setIsEditing((prev) => !prev);
+    if (isEditing) {
+      setSelected([]);
+    }
+  };
   return (
     <section className="h-full">
+      {/* 헤더 삽입 후 편집 버튼으로 수정 */}
+      <Button onClick={handleEditing}>편집</Button>
       {PRODUCTS.length === 0 ? (
         <NullProductList />
       ) : (
-        <ProductList products={PRODUCTS} />
+        <ProductList
+          products={PRODUCTS}
+          isEditing={isEditing}
+          selected={selected}
+          onSelect={handleSelect}
+        />
       )}
     </section>
   );

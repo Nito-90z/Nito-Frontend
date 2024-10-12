@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Badge from "../common/Badge";
 import { twMerge } from "tailwind-merge";
 import { convertDollarToWon } from "@/utils/currency-converter";
@@ -10,14 +9,25 @@ import AlarmIcon from "../common/icons/AlarmIcon";
 import PlusIcon from "../common/icons/PlusIcon";
 import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
 import ProductImage from "./wishList/ProductImage";
+import Checkbox from "../common/CheckBox";
 
 type Props = {
   product: Product | FavoriteProductInfo;
   isAlarm: boolean;
+  isEditing?: boolean;
+  selected?: number[];
+  onSelect?: (id: number) => void;
 };
 
-export default function ProductItem({ product, isAlarm }: Props) {
+export default function ProductItem({
+  product,
+  isAlarm,
+  isEditing,
+  selected,
+  onSelect,
+}: Props) {
   const {
+    id,
     image,
     title,
     isOutOfStock,
@@ -28,9 +38,35 @@ export default function ProductItem({ product, isAlarm }: Props) {
   } = product;
   const isUnavailable = isOutOfStock || isStopSelling;
   const isFavorite = !("isFavorite" in product) || product.isFavorite;
+  const isSelected = selected?.includes(id);
+
+  const handleClick = () => {
+    if (isEditing) {
+      onSelect && onSelect(id);
+    } else {
+      // 상세 페이지로 이동
+    }
+  };
 
   return (
-    <li className="flex items-start gap-3 py-4 border-b border-border cursor-pointer">
+    <li
+      className={twMerge(
+        "relative flex items-start gap-3 py-4 border-b border-border cursor-pointer",
+        isEditing && "opacity-50",
+        isSelected && "opacity-100"
+      )}
+      onClick={handleClick}
+    >
+      {isEditing && (
+        <div
+          className={twMerge(
+            "absolute top-0 left-0 content-center pl-[26px] w-full h-full z-10 rounded",
+            isSelected && "bg-brand bg-opacity-20"
+          )}
+        >
+          <Checkbox size="lg" checked={isSelected} className="border-black" />
+        </div>
+      )}
       <div className="relative">
         <ProductImage
           src={image ?? ""}
