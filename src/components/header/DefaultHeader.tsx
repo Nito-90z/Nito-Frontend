@@ -5,13 +5,9 @@ import logoIcon from '../../../public/images/logo.svg';
 export default function DefaultHeader() {
   return (
     <header className='w-full h-20 bg-white flex items-center justify-between px-4 py-[15px] border-b border-border'>
-      <div className='flex items-center'>
-        <Image src={logoIcon} alt='logo' width={96.18} height={30} />
-      </div>
+      <Image src={logoIcon} alt='logo' width={96.18} height={30} />
 
-      <div className='flex items-center gap-[10px]'>
-        <HeaderAlarmIcon />
-      </div>
+      <HeaderAlarmIcon />
     </header>
   );
 }

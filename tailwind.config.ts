@@ -15,6 +15,7 @@ const config: Config = {
         black: "#171717",
         gray: "#AEAEAE",
         "platinum": "#F5F5F5",
+        "gray-text": "#8F8F8F",
         "light-gray": "#D9D9D9",
         "dark-gray": "#333333",
         brand: "#FC5660",

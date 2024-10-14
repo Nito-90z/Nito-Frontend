@@ -71,11 +71,11 @@ export default function DropdownMenu() {
               </button>
             </div>
           </div>
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-2 text-gray-text'>
             <CheckBox>역대 최저가</CheckBox>
             <CheckBox>품절 제외</CheckBox>
           </div>
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-2 text-gray-text'>
             <CheckBox>Lowest Ever</CheckBox>
             <CheckBox>Excluding out of stock</CheckBox>
           </div>

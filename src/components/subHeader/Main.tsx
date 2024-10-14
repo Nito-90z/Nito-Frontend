@@ -1,4 +1,5 @@
 'use client';
+
 import HeaderAlarmIcon from '../common/icons/HeaderAlarmIcon';
 
 export default function Main() {
@@ -23,7 +24,6 @@ export default function Main() {
             낮은 가격순
           </button>
         </div>
-
         <button className='text-sm'>편집</button>
       </div>
     </div>

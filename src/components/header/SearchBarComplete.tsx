@@ -17,14 +17,14 @@ export default function SearchBarComplete() {
           </button>
         </div>
         <div className='flex flex-col gap-6'>
-          <div className='flex justify-between items-center gap-6'>
+          <div className='flex justify-between items-center gap-6 text-gray-text'>
             <p>전체(12)</p>
             <div className='flex gap-2'>
               <CheckBox>역대 최저가</CheckBox>
               <CheckBox>품절 제외</CheckBox>
             </div>
           </div>
-          <div className='flex items-center gap-6'>
+          <div className='flex items-center gap-6 text-gray-text'>
             <p>All(12)</p>
             <CheckBox>Lowest Ever</CheckBox>
             <CheckBox>Excluding out of stock</CheckBox>
