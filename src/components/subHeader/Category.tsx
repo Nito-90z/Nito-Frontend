@@ -58,10 +58,10 @@ export default function DropdownMenu() {
         )}
       </div>
       <div className='w-full px-2 bg-white py-4'>
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3  text-sm'>
           <div className='flex justify-between items-center'>
             <p>전체(12)</p>
-            <div className='items-center'>
+            <div className='items-center text-gray-text'>
               <button onClick={() => {}} className='pr-2 rounded'>
                 할인율순
               </button>

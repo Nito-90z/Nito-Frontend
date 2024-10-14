@@ -15,7 +15,7 @@ export default function Main() {
       </header>
 
       <div className='w-full px-3 bg-white flex items-center justify-between'>
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1 text-gray-text text-sm'>
           <button onClick={() => {}} className='px-1 rounded'>
             할인율순
           </button>

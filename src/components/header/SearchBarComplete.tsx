@@ -6,8 +6,8 @@ export default function SearchBarComplete() {
   return (
     <div>
       <SearchBar />
-      <div className='w-full py-1 px-4 bg-white'>
-        <div className='flex items-center gap-1 mb-4'>
+      <div className='w-full py-1 px-4 bg-white text-sm'>
+        <div className='flex items-center gap-1 text-gray-text mb-4'>
           <button onClick={() => {}} className='px-1 py-2 rounded'>
             할인율순
           </button>

@@ -21,7 +21,7 @@ export default function NavBar() {
           type='button'
           onClick={() => setSelected('favorite')}
           className={`flex flex-col items-center justify-center ${
-            selected === 'favorite' ? 'text-brand' : 'text-text'
+            selected === 'favorite' ? 'text-brand font-bold' : 'text-text'
           }`}
         >
           {selected === 'favorite' ? <HeartBrandIcon /> : <HeartIcon />}
@@ -32,7 +32,7 @@ export default function NavBar() {
           type='button'
           onClick={() => setSelected('product')}
           className={`flex flex-col items-center justify-center ${
-            selected === 'product' ? 'text-brand' : 'text-text'
+            selected === 'product' ? 'text-brand font-bold' : 'text-text'
           }`}
         >
           {selected === 'product' ? <ProductBrandIcon /> : <ProductIcon />}
@@ -53,7 +53,7 @@ export default function NavBar() {
           type='button'
           onClick={() => setSelected('search')}
           className={`flex flex-col items-center justify-center ${
-            selected === 'search' ? 'text-brand' : 'text-text'
+            selected === 'search' ? 'text-brand font-bold' : 'text-text'
           }`}
         >
           {selected === 'search' ? <SearchBrandIcon /> : <SearchIcon />}
@@ -64,7 +64,7 @@ export default function NavBar() {
           type='button'
           onClick={() => setSelected('mypage')}
           className={`flex flex-col items-center justify-center ${
-            selected === 'mypage' ? 'text-brand' : 'text-text'
+            selected === 'mypage' ? 'text-brand font-bold' : 'text-text'
           }`}
         >
           {selected === 'mypage' ? <UserBrandIcon /> : <UserIcon />}
