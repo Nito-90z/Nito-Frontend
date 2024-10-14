@@ -1,4 +1,6 @@
 import { usePathname } from "next/navigation";
+import Button from "../common/Button";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   menu: {
@@ -18,15 +20,16 @@ export default function NavBarMenu({
   const pathname = usePathname();
 
   return (
-    <button
+    <Button
       type="button"
       onClick={onClick}
-      className={`flex flex-col items-center justify-center gap-[2px] ${
+      className={twMerge(
+        "flex flex-col items-center justify-center gap-[2px] bg-transparent w-fit",
         path === pathname ? "text-brand font-bold" : "text-text"
-      }`}
+      )}
     >
       {pathname === path ? onIcon : offIcon}
       <span className="text-xs">{title}</span>
-    </button>
+    </Button>
   );
 }
