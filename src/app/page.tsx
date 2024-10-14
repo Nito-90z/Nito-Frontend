@@ -102,6 +102,7 @@ const PRODUCTS: FavoriteProduct[] = [
 export default function HomePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [selected, setSelected] = useState<number[]>([]);
+  const selectedCount = selected.length;
 
   const handleSelect = (id: number) => {
     if (selected.includes(id)) {
@@ -111,15 +112,23 @@ export default function HomePage() {
     }
   };
   const handleEditing = () => {
-    // API : 찜한 상품 목록 업데이트
     setIsEditing((prev) => !prev);
+    setSelected([]);
+  };
+  const handleDelete = () => {
+    if (selectedCount === 0) return;
+    // API : 찜한 상품 목록 업데이트
     setSelected([]);
   };
   return (
     <section className="h-full">
       {isEditing ? (
         <SelectHeader
-          mainText="상품 선택"
+          mainText={
+            selectedCount === 0
+              ? "상품 선택"
+              : `${selectedCount}개의 상품 선택됨`
+          }
           buttonText="완료"
           onClick={handleEditing}
         />
@@ -135,6 +144,13 @@ export default function HomePage() {
           selected={selected}
           onSelect={handleSelect}
         />
+      )}
+      {isEditing && (
+        <div className="z-50 absolute -bottom-16 p-5 left-0 w-full bg-white">
+          <Button disabled={selectedCount === 0} onClick={handleDelete}>
+            삭제
+          </Button>
+        </div>
       )}
     </section>
   );

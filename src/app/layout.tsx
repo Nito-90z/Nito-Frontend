@@ -27,7 +27,9 @@ export default function RootLayout({
       >
         <div className="flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
           {/* Header */}
-          <main className="grow max-h-[calc(100%-64px)]">{children}</main>
+          <main className="relative grow max-h-[calc(100%-64px)]">
+            {children}
+          </main>
           {/* Footer */}
           <NavBar />
         </div>

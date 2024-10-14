@@ -1,5 +1,6 @@
 "use client";
 
+import { twMerge } from "tailwind-merge";
 import Button from "../common/Button";
 import HeaderAlarmIcon from "../common/icons/HeaderAlarmIcon";
 
@@ -22,17 +23,27 @@ export default function Main({ count, onEditing }: Props) {
         </div>
       </header>
       <div className="w-full pb-2 px-4 bg-white flex items-center justify-between">
-        <div className="flex items-center gap-1 text-gray-text text-sm">
-          <button onClick={() => {}} className="px-1 rounded">
+        <div className="flex items-center gap-2 text-light-gray text-sm">
+          <Button
+            onClick={() => {}}
+            className="w-fit h-fit text-light-gray bg-transparent"
+          >
             할인율순
-          </button>
+          </Button>
           |
-          <button onClick={() => {}} className="px-1 rounded">
+          <Button
+            onClick={() => {}}
+            className="w-fit h-fit text-light-gray bg-transparent"
+          >
             낮은 가격순
-          </button>
+          </Button>
         </div>
         <Button
-          className="text-sm text-dark-gray bg-transparent w-fit h-fit"
+          disabled={count === 0}
+          className={twMerge(
+            "text-sm text-dark-gray bg-transparent w-fit h-fit",
+            count === 0 && "text-light-gray"
+          )}
           onClick={onEditing}
         >
           편집
