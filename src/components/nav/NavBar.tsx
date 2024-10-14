@@ -20,23 +20,26 @@ export default function NavBar() {
       <button
         type="button"
         onClick={() => setSelected("favorite")}
-        className={`flex flex-col items-center justify-center ${
+        className={`flex flex-col items-center justify-center gap-[2px] ${
           selected === "favorite" ? "text-brand font-bold" : "text-text"
         }`}
       >
-        {selected === "favorite" ? <HeartBrandIcon /> : <HeartIcon />}
-        <span className="text-sm">찜한 상품</span>
+        {selected === "favorite" ? (
+          <HeartBrandIcon />
+        ) : (
+          <HeartIcon className="w-[25.44px] h-5" />
+        )}
+        <span className="text-xs">찜한 상품</span>
       </button>
-
       <button
         type="button"
         onClick={() => setSelected("product")}
-        className={`flex flex-col items-center justify-center ${
+        className={`flex flex-col items-center justify-center gap-[2px] ${
           selected === "product" ? "text-brand font-bold" : "text-text"
         }`}
       >
         {selected === "product" ? <ProductBrandIcon /> : <ProductIcon />}
-        <span className="text-sm">상품</span>
+        <span className="text-xs">상품</span>
       </button>
 
       {/* 중앙의 CircleButton */}
@@ -52,23 +55,23 @@ export default function NavBar() {
       <button
         type="button"
         onClick={() => setSelected("search")}
-        className={`flex flex-col items-center justify-center ${
+        className={`flex flex-col items-center justify-center gap-[2px] ${
           selected === "search" ? "text-brand font-bold" : "text-text"
         }`}
       >
         {selected === "search" ? <SearchBrandIcon /> : <SearchIcon />}
-        <span className="text-sm">검색</span>
+        <span className="text-xs">검색</span>
       </button>
 
       <button
         type="button"
         onClick={() => setSelected("mypage")}
-        className={`flex flex-col items-center justify-center ${
+        className={`flex flex-col items-center justify-center gap-[2px] ${
           selected === "mypage" ? "text-brand font-bold" : "text-text"
         }`}
       >
         {selected === "mypage" ? <UserBrandIcon /> : <UserIcon />}
-        <span className="text-sm">마이 페이지</span>
+        <span className="text-xs">마이 페이지</span>
       </button>
     </nav>
   );
