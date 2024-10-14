@@ -1,8 +1,10 @@
 "use client";
 
 import Button from "@/components/common/Button";
+import SelectHeader from "@/components/header/SelectHeader";
 import ProductList from "@/components/products/ProductList";
 import NullProductList from "@/components/products/wishList/NullProductList";
+import Main from "@/components/subHeader/Main";
 import { useState } from "react";
 
 // 찜한 상품 리스트
@@ -109,15 +111,21 @@ export default function HomePage() {
     }
   };
   const handleEditing = () => {
+    // API : 찜한 상품 목록 업데이트
     setIsEditing((prev) => !prev);
-    if (isEditing) {
-      setSelected([]);
-    }
+    setSelected([]);
   };
   return (
     <section className="h-full">
-      {/* 헤더 삽입 후 편집 버튼으로 수정 */}
-      <Button onClick={handleEditing}>편집</Button>
+      {isEditing ? (
+        <SelectHeader
+          mainText="상품 선택"
+          buttonText="완료"
+          onClick={handleEditing}
+        />
+      ) : (
+        <Main count={PRODUCTS.length} onEditing={() => setIsEditing(true)} />
+      )}
       {PRODUCTS.length === 0 ? (
         <NullProductList />
       ) : (

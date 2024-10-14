@@ -5,6 +5,7 @@ type Props = Omit<React.ComponentPropsWithoutRef<"input">, "type"> & {
     | "text"
     | "password"
     | "email"
+    | "search"
 };
 
 export default function Input(props: Props) {
@@ -13,7 +14,7 @@ export default function Input(props: Props) {
     <>
       <input
         className={twMerge(
-          "w-full h-11 rounded-sm px-4 text-sm font-medium placeholder:text-base",
+          "h-11 w-full rounded-sm px-4 text-sm font-medium placeholder:text-base focus:outline-none",
           className
         )}
         {...rest}

@@ -30,6 +30,7 @@ export default function Checkbox(props: Props) {
             containerStyle,
             className
           )}
+          readOnly
           {...rest}
         />
         <div

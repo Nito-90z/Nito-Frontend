@@ -15,7 +15,12 @@ export default function ProductList({
   onSelect,
 }: Props) {
   return (
-    <ul className="flex flex-col gap-3 p-4">
+    <ul
+      className={twMerge(
+        "flex flex-col gap-3 p-4 overflow-y-auto",
+        isEditing ? "max-h-[calc(100%-62px)]" : "max-h-[calc(100%-102px)]"
+      )}
+    >
       {products.map((item) => {
         const product = "product" in item ? item.product : item;
         const isAlarm = "isAlarm" in item && item.isAlarm;
