@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh`}
+        className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh bg-[#ECECEC]`}
       >
-        <div className="mx-auto max-w-[430px] min-w-[360px] w-full h-full">
+        <div className="flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full h-full bg-white">
           {/* Header */}
-          <main>{children}</main>
+          <main className="grow max-h-dvh">{children}</main>
           {/* Footer */}
         </div>
       </body>
