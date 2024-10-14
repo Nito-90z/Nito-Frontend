@@ -3,7 +3,7 @@ import NullProductIcon from "../common/icons/NullProductIcon";
 
 export default function NullProductList() {
   return (
-    <div className="flex flex-col justify-center items-center text-center h-full text-text">
+    <div className="flex flex-col justify-center items-center text-center max-h-[calc(100%-232px)] h-full text-text">
       <NullProductIcon />
       <div className="mt-3">
         <p>

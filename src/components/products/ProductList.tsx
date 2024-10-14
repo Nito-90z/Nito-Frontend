@@ -17,7 +17,7 @@ export default function ProductList({
   return (
     <ul
       className={twMerge(
-        "flex flex-col gap-3 p-4 overflow-y-auto",
+        "flex flex-col gap-3 p-4",
         isEditing ? "max-h-[calc(100%-62px)]" : "max-h-[calc(100%-102px)]"
       )}
     >

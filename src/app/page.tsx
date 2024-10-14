@@ -121,7 +121,7 @@ export default function HomePage() {
     setSelected([]);
   };
   return (
-    <section className="h-full">
+    <section className="pb-4 h-full overflow-y-auto">
       {isEditing ? (
         <SelectHeader
           mainText={

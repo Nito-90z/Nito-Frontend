@@ -51,7 +51,7 @@ export default function ProductItem({
   return (
     <li
       className={twMerge(
-        "relative flex items-start gap-3 py-4 border-b border-border cursor-pointer",
+        "relative flex items-start gap-3 py-4 border-b border-border cursor-pointer last:border-none",
         isEditing && "opacity-50",
         isSelected && "opacity-100"
       )}

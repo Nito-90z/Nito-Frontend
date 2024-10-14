@@ -14,7 +14,7 @@ export default function SelectHeader({
   onClick,
 }: Props) {
   return (
-    <header className="w-full bg-white relative flex items-center justify-center px-4 py-[16.5px] border-b border-border">
+    <header className="sticky top-0 w-full bg-white flex items-center justify-center px-4 py-[16.5px] border-b border-border z-50">
       <h1 className="text-xl font-bold text-black">{mainText}</h1>
       <Button
         onClick={onClick}
