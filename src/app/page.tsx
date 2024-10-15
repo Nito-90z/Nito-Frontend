@@ -214,13 +214,9 @@ import Main from '@/components/subHeader/Main';
 // test
 export default function HomePage() {
   return <div>{/* <ProductList products={PRODUCTS} /> */}
-  <DefaultHeader />
-  <SelectHeader />
-  <SubHeader />
-  <SearchBar />
-  <SearchBarComplete />
-  <Main/>
-  <Category />
-  <DetailOption />
+  <DefaultHeader/>
+  <SelectHeader mainText={'마이 페이지'} buttonText={'완료'}/>
+  <SubHeader text={'마이페이지'} />
+  
   </div>;
 }

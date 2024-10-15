@@ -3,7 +3,7 @@ import Input from '../common/Input';
 
 export default function SearchBar() {
   return (
-    <header className='w-full h-20 bg-white flex items-center justify-between px-6'>
+    <header className='w-full h-16 bg-white flex items-center justify-between px-6'>
       <button className='flex items-center justify-center w-8 h-8'>
         <MoreIcon />
       </button>

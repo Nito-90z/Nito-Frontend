@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../css/index.css';
 import NavBar from '@/components/nav/NavBar';
+import DefaultHeader from '../components/header/DefaultHeader';
 
 export const metadata: Metadata = {
   title: 'Nito',
@@ -29,7 +30,7 @@ export default function RootLayout({
           {/* Header */}
           <main>{children}</main>
           {/* Footer */}
-          <NavBar />
+          {/* <NavBar /> */}
         </div>
       </body>
     </html>

@@ -1,30 +1,25 @@
-// 미완성입니다. 
 'use client';
-import { useState } from 'react';
+import React from 'react';
 
-export default function ToggleButton() {
-  const [isOn, setIsOn] = useState(false);
+type Props = {
+  isOn: boolean;
+  toggleHandler: () => void;
+};
 
-  const toggleHandler = () => {
-    setIsOn(!isOn);
-  };
-
-  // 토글 버튼은 svg 파일로 icon화 하는 것 보단 수치를 바로바로 적용하는게 더 쉬워서 이렇게 적용함
+export default function ToggleButton({ isOn, toggleHandler }: Props) {
   return (
-    <div className='flex items-center cursor-pointer'>
+    <div className='flex items-center justify-center'>
       <div
         onClick={toggleHandler}
-        className={`relative w-[50px] h-[30px] rounded-full transition-colors duration-500 ${
+        className={`relative w-[50px] h-[30px] border-gray rounded-full transition-colors duration-500 cursor-pointer ${
           isOn ? 'bg-brand' : 'bg-gray'
         }`}
       >
-        <div className='items-center'>
-          <div
-            className={`absolute w-[24px] h-[24px] rounded-full bg-white transition-transform duration-500 ${
-              isOn ? 'transform translate-x-5' : ''
-            }`}
-          />
-        </div>
+        <div
+          className={`absolute top-0.5 bottom-0.5 left-0.5 w-[25px] h-[25px] rounded-full bg-white transition-transform duration-500 ${
+            isOn ? 'transform translate-x-[20px]' : ''
+          }`}
+        />
       </div>
     </div>
   );
