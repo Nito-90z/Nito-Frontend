@@ -211,7 +211,7 @@ export default function ProductListPage() {
   return (
     <section className="h-full overflow-y-auto">
       <SubHeader text="상품 리스트" />
-      <CategoryDefault />
+      <CategoryDefault className="sticky top-0" />
       {PRODUCTS.length === 0 ? (
         <NullProductList />
       ) : (

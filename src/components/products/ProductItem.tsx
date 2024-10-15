@@ -9,7 +9,7 @@ import AlarmIcon from "../common/icons/AlarmIcon";
 import PlusIcon from "../common/icons/PlusIcon";
 import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
 import ProductImage from "./wishList/ProductImage";
-import Checkbox from "../common/CheckBox";
+import CheckBox from "../common/CheckBox";
 
 type Props = {
   product: Product | FavoriteProductInfo;
@@ -64,7 +64,7 @@ export default function ProductItem({
             isSelected && "bg-brand bg-opacity-20"
           )}
         >
-          <Checkbox size="lg" checked={isSelected} className="border-black" />
+          <CheckBox size="lg" checked={isSelected} className="border-black" />
         </div>
       )}
       <div className="relative">

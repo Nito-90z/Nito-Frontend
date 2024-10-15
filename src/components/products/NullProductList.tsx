@@ -1,4 +1,3 @@
-import React from "react";
 import NullProductIcon from "../common/icons/NullProductIcon";
 
 export default function NullProductList() {

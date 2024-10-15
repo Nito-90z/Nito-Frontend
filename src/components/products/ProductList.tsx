@@ -2,6 +2,7 @@ import { twMerge } from "tailwind-merge";
 import ProductItem from "./ProductItem";
 
 type Props = {
+  className?: string;
   products: (Product | FavoriteProduct)[];
   isEditing?: boolean;
   selected?: number[];
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export default function ProductList({
+  className,
   products,
   isEditing,
   selected,
@@ -18,7 +20,8 @@ export default function ProductList({
     <ul
       className={twMerge(
         "flex flex-col gap-3 p-4",
-        isEditing ? "max-h-[calc(100%-62px)]" : "max-h-[calc(100%-102px)]"
+        isEditing ? "max-h-[calc(100%-62px)]" : "max-h-[calc(100%-102px)]",
+        className
       )}
     >
       {products.map((item) => {

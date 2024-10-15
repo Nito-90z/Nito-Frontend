@@ -1,18 +1,24 @@
+import { ForwardedRef, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-type Props = Omit<React.ComponentPropsWithoutRef<"input">, "type"> & {
+type Props = Omit<React.ComponentPropsWithRef<"input">, "type"> & {
   type: "text" | "password" | "email" | "search";
 };
 
-export default function Input(props: Props) {
-  const { className, ...rest } = props;
-  return (
-    <input
-      className={twMerge(
-        "h-11 w-full rounded-sm px-4 font-medium focus:outline-none",
-        className
-      )}
-      {...rest}
-    />
-  );
-}
+const Input = forwardRef(
+  (props: Props, ref: ForwardedRef<HTMLInputElement>) => {
+    const { className, ...rest } = props;
+    return (
+      <input
+        ref={ref}
+        className={twMerge(
+          "h-11 w-full rounded-sm px-4 font-medium focus:outline-none",
+          className
+        )}
+        {...rest}
+      />
+    );
+  }
+);
+
+export default Input;

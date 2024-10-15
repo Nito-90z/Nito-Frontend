@@ -9,6 +9,7 @@ type Props = {
   value: string;
   setValue: (value: string) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  setIsSearchBarFocus: (value: boolean) => void;
 };
 
 export default function SearchBar({
@@ -16,6 +17,7 @@ export default function SearchBar({
   value,
   setValue,
   onSubmit,
+  setIsSearchBarFocus,
 }: Props) {
   const router = useRouter();
 
@@ -30,6 +32,9 @@ export default function SearchBar({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
+            autoFocus
+            onBlur={() => setIsSearchBarFocus(false)}
+            onFocus={() => setIsSearchBarFocus(true)}
             className="pl-4 pr-9 placeholder:text-gray placeholder:font-normal bg-platinum font-normal rounded-sm"
             type="search"
           />
