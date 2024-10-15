@@ -1,16 +1,33 @@
 "use client";
 
-import Image from "next/image";
-import Badge from "./common/Badge";
+import Badge from "../common/Badge";
 import { twMerge } from "tailwind-merge";
 import { convertDollarToWon } from "@/utils/currency-converter";
-import CircleButton from "./common/CircleButton";
-import RestockAlarmIcon from "./common/icons/RestockAlarmIcon";
-import AlarmIcon from "./common/icons/AlarmIcon";
-import PlusIcon from "./common/icons/PlusIcon";
+import CircleButton from "../common/CircleButton";
+import RestockAlarmIcon from "../common/icons/RestockAlarmIcon";
+import AlarmIcon from "../common/icons/AlarmIcon";
+import PlusIcon from "../common/icons/PlusIcon";
+import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
+import ProductImage from "./wishList/ProductImage";
+import Checkbox from "../common/CheckBox";
 
-export default function ProductItem({ product }: { product: Product }) {
+type Props = {
+  product: Product | FavoriteProductInfo;
+  isAlarm: boolean;
+  isEditing?: boolean;
+  selected?: number[];
+  onSelect?: (id: number) => void;
+};
+
+export default function ProductItem({
+  product,
+  isAlarm,
+  isEditing,
+  selected,
+  onSelect,
+}: Props) {
   const {
+    id,
     image,
     title,
     isOutOfStock,
@@ -20,10 +37,38 @@ export default function ProductItem({ product }: { product: Product }) {
     isLowestPriceEver,
   } = product;
   const isUnavailable = isOutOfStock || isStopSelling;
+  const isFavorite = !("isFavorite" in product) || product.isFavorite;
+  const isSelected = selected?.includes(id);
+
+  const handleClick = () => {
+    if (isEditing) {
+      onSelect && onSelect(id);
+    } else {
+      // 상세 페이지로 이동
+    }
+  };
+
   return (
-    <li className="flex items-start gap-3 py-4 border-b border-border cursor-pointer">
+    <li
+      className={twMerge(
+        "relative flex items-start gap-3 py-4 border-b border-border cursor-pointer last:border-none",
+        isEditing && "opacity-50",
+        isSelected && "opacity-100"
+      )}
+      onClick={handleClick}
+    >
+      {isEditing && (
+        <div
+          className={twMerge(
+            "absolute top-0 left-0 content-center pl-[26px] w-full h-full z-10 rounded",
+            isSelected && "bg-brand bg-opacity-20"
+          )}
+        >
+          <Checkbox size="lg" checked={isSelected} className="border-black" />
+        </div>
+      )}
       <div className="relative">
-        <Image
+        <ProductImage
           src={image ?? ""}
           alt={`${title.koTitle} product image`}
           width={80}
@@ -49,17 +94,21 @@ export default function ProductItem({ product }: { product: Product }) {
           >
             {title.koTitle}
           </p>
-          {isOutOfStock ? (
-            <CircleButton size="sm">
-              <RestockAlarmIcon size="sm" />
-            </CircleButton>
-          ) : isStopSelling ? (
-            <CircleButton size="sm">
-              <AlarmIcon size="sm" />
-            </CircleButton>
-          ) : (
+          {!isFavorite ? (
             <CircleButton size="sm" className="bg-dark-gray">
               <PlusIcon size="sm" />
+            </CircleButton>
+          ) : isUnavailable ? (
+            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+              {isAlarm ? (
+                <RestockAlarmIcon size="sm" />
+              ) : (
+                <RestockAlarmOffIcon size="sm" />
+              )}
+            </CircleButton>
+          ) : (
+            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+              <AlarmIcon size="sm" />
             </CircleButton>
           )}
         </div>
