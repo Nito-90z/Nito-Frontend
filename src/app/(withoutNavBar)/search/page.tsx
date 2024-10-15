@@ -1,8 +1,10 @@
 "use client";
 
 import SearchBar from "@/components/header/SearchBar";
-import SearchResult from "@/components/search/SearchResult";
+import RecentSearch from "@/components/search/RecentSearch";
 import { FormEvent, useEffect, useState } from "react";
+
+const SEARCH_RESULTS = ["우유", "우유빵", "우유거품기", "우디향"];
 
 export default function SearchPage() {
   const [keyword, setKeyword] = useState("");
@@ -46,12 +48,10 @@ export default function SearchPage() {
       <SearchBar
         placeholder="상품명 검색"
         value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
+        setValue={setKeyword}
         onSubmit={handleSubmit}
-        onClick={() => ({})}
       />
-      <SearchResult
-        keyword={keyword}
+      <RecentSearch
         recentSearches={recentSearches}
         onDelete={handleRecentSearchesDelete}
         onClear={handleRecentSearchesClear}

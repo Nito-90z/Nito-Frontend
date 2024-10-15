@@ -2,14 +2,12 @@ import RecentSearchItem from "./RecentSearchItem";
 import Button from "../common/Button";
 
 type Props = {
-  keyword: string;
   recentSearches: string[];
   onDelete: (id: number) => void;
   onClear: () => void;
 };
 
-export default function SearchResult({
-  keyword,
+export default function RecentSearch({
   recentSearches,
   onDelete,
   onClear,
