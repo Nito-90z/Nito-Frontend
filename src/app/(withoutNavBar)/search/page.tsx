@@ -1,5 +1,6 @@
 "use client";
 
+import SearchBar from "@/components/header/SearchBar";
 import SearchResult from "@/components/search/SearchResult";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -42,14 +43,13 @@ export default function SearchPage() {
   }, [recentSearches]);
   return (
     <section className="flex flex-col gap-5 h-full">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          className="w-full h-[62px] bg-brand"
-        />
-      </form>
+      <SearchBar
+        placeholder="상품명 검색"
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+        onSubmit={handleSubmit}
+        onClick={() => ({})}
+      />
       <SearchResult
         keyword={keyword}
         recentSearches={recentSearches}
