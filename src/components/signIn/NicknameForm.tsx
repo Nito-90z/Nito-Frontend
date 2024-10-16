@@ -6,7 +6,7 @@ import {
   NICKNAME_VALIDATION_ERROR_MESSAGE,
 } from "@/constants/message/nickname";
 import { twMerge } from "tailwind-merge";
-import { NICKNAME_PATTERN } from "@/constants/regex/nickname";
+import { NICKNAME_PATTERN } from "@/constants/regex";
 import { useNicknameCheck } from "@/hooks/user";
 import axios from "axios";
 

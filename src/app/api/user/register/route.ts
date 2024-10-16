@@ -1,15 +1,22 @@
 import { signIn } from "@/services/user";
+import { checkDevice } from "@/utils/device";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
 
 export async function POST(request: NextRequest) {
+  const headersList = headers();
+
   try {
     const { body } = await request.json();
     const registerData = {
       ...body,
       device: {
-        os: "ios",
-        uid: "uid",
-        token: "token",
+        os: checkDevice(headersList.get("user-agent") || "")
+          ? "ios"
+          : "android",
+        uid: uuidv4(),
+        token: uuidv4(),
       },
     };
 
