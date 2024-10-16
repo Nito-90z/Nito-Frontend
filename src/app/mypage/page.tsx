@@ -1,4 +1,4 @@
-export default function SearchBarComplete() {
+export default function MyPage() {
   return (
     <div>
       Enter

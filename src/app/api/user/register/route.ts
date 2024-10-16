@@ -1,4 +1,3 @@
-import { NICKNAME_DUPLICATE_ERROR_MESSAGE } from "@/constants/message/nickname";
 import { signIn } from "@/services/user";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -20,7 +19,7 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     const errorMessage =
       error.status === 400
-        ? NICKNAME_DUPLICATE_ERROR_MESSAGE
+        ? error.response.data.nickname[0]
         : "Something went wrong";
 
     return NextResponse.json(

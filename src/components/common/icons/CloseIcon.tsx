@@ -1,6 +1,6 @@
 import Image from "next/image";
-import closeIcon from "../../../../public/images/close.svg";
+import closeLogo from "../../../../public/images/close.svg";
 
 export default function CloseIcon() {
-  return <Image src={closeIcon} alt="close" width={16} height={16} />;
+  return <Image src={closeLogo} alt="close" width={24} height={24} />;
 }

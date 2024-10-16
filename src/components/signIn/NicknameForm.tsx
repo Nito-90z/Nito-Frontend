@@ -62,7 +62,7 @@ export default function NicknameForm({
           ref={inputRef}
           type="text"
           id="nickname"
-          className="h-14"
+          className="h-14 text-dark-gray font-normal border border-light-gray"
           placeholder="닉네임을 입력해주세요"
           value={nickname}
           onChange={onChange}
