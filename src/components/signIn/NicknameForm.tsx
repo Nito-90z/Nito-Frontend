@@ -1,15 +1,14 @@
 import { ChangeEvent, FormEvent, useRef } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import { useMutation } from "@tanstack/react-query";
-import { nicknameValidationCheckFetcher } from "@/fetchers/user";
 import {
-  NICKNAME_DUPLICATE_ERROR_MESSAGE,
   NICKNAME_VALID_MESSAGE,
   NICKNAME_VALIDATION_ERROR_MESSAGE,
 } from "@/constants/message/nickname";
 import { twMerge } from "tailwind-merge";
 import { NICKNAME_PATTERN } from "@/constants/regex/nickname";
+import { useNicknameCheck } from "@/hooks/user";
+import axios from "axios";
 
 type Props = {
   nickname: string;
@@ -25,34 +24,33 @@ export default function NicknameForm({
   onCommentChange,
 }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const { mutate } = useMutation({
-    mutationFn: () => nicknameValidationCheckFetcher(nickname),
-    onSuccess: () => {
-      onCommentChange(NICKNAME_VALID_MESSAGE, "text-[#4850FF]");
-    },
-    onError: () => {
-      onCommentChange(NICKNAME_DUPLICATE_ERROR_MESSAGE, "text-brand");
-      inputRef.current?.focus();
-    },
-  });
+  const { mutateAsync, isPending } = useNicknameCheck();
 
   const handleBlur = () => {
-    if (isValidate(nickname)) {
+    if (!isValidateNickname(nickname)) {
       onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, "text-brand");
-      inputRef.current?.focus();
     }
   };
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (isValidate(nickname)) {
+    if (!isValidateNickname(nickname)) {
       onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, "text-brand");
       inputRef.current?.focus();
       return;
     }
 
-    mutate();
+    try {
+      await mutateAsync({ nickname });
+      onCommentChange(NICKNAME_VALID_MESSAGE, "text-[#4850FF]");
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          onCommentChange(error.response.data.message, "text-brand");
+          inputRef.current?.focus();
+        }
+      }
+    }
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[6px]">
@@ -70,10 +68,13 @@ export default function NicknameForm({
           onChange={onChange}
           onBlur={handleBlur}
         />
-
+        {/* 로딩 시간이 길어지는 경우 로딩 UI를 보여주는 것도 생각! */}
         <Button
-          className="px-4 w-fit bg-brand disabled:bg-light-gray whitespace-nowrap"
-          disabled={!nickname}
+          className={twMerge(
+            "relative px-4 w-[85px] bg-brand disabled:bg-light-gray whitespace-nowrap",
+            isPending && "disabled:bg-brand"
+          )}
+          disabled={!nickname || isPending}
         >
           중복확인
         </Button>
@@ -87,9 +88,8 @@ export default function NicknameForm({
   );
 }
 
-function isValidate(nickname: string) {
-  if (nickname.trim() === "" || !NICKNAME_PATTERN.test(nickname.trim()))
-    return false;
+function isValidateNickname(nickname: string) {
+  if (nickname.trim() === "") return false;
 
-  return true;
+  return NICKNAME_PATTERN.test(nickname.trim());
 }

@@ -7,6 +7,9 @@ import CloseIcon from "../common/icons/CloseIcon";
 import Agreement from "./Agreement";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { generateNicknameFetcher } from "@/fetchers/user";
+import { NICKNAME_DUPLICATE_ERROR_MESSAGE } from "@/constants/message/nickname";
+import axios from "axios";
+import { useSignIn } from "@/hooks/user";
 
 export type AgreementType = {
   isOverAge14: boolean;
@@ -22,32 +25,34 @@ const INITIAL_AGREEMENT = {
   isMarketing: false,
 };
 
-const TRUE_AGREEMENTS = {
+const ALL_AGREEMENTS = {
   isOverAge14: true,
   isServiceAccept: true,
   isInfoAccept: true,
   isMarketing: true,
 };
 
-const INITIAL_ERROR_MESSAGE = {
+const INITIAL_ERROR_COMMNET = {
   value: "",
   color: "",
 };
 
 export default function SignInForm() {
   const { data } = useSuspenseQuery<{ nickname: string }>({
-    queryKey: ["generate-nickname"],
+    queryKey: ["nickname"],
     queryFn: generateNicknameFetcher,
+    staleTime: 60 * 1000,
   });
   const [nickname, setNickname] = useState(data.nickname);
-  const [nicknameComment, setNicknameComment] = useState(INITIAL_ERROR_MESSAGE);
+  const [nicknameComment, setNicknameComment] = useState(INITIAL_ERROR_COMMNET);
   const [agreement, setAgreement] = useState<AgreementType>(INITIAL_AGREEMENT);
   const isAllAgree = Object.values(agreement).every((v) => v === true);
-  const isValidate = isAllAgree && nickname.trim() !== "";
+  const isValidate =
+    agreement.isOverAge14 &&
+    agreement.isServiceAccept &&
+    nickname.trim() !== "";
+  const { mutateAsync } = useSignIn();
 
-  const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
-  };
   const handleNicknameComment = (value: string, color: string) => {
     setNicknameComment({ value, color });
   };
@@ -59,14 +64,28 @@ export default function SignInForm() {
     if (isAllAgree) {
       setAgreement(INITIAL_AGREEMENT);
     } else {
-      setAgreement(TRUE_AGREEMENTS);
+      setAgreement(ALL_AGREEMENTS);
+    }
+  };
+  const handleSignIn = async () => {
+    if (!isValidate) return;
+
+    try {
+      await mutateAsync({ nickname, agreement });
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          setNicknameComment({
+            value: error.response.data.message,
+            color: "text-brand",
+          });
+        }
+      }
     }
   };
 
   useEffect(() => {
-    if (nickname) return;
-
-    setNicknameComment(INITIAL_ERROR_MESSAGE);
+    setNicknameComment(INITIAL_ERROR_COMMNET);
   }, [nickname]);
   return (
     <div className="flex flex-col h-full">
@@ -76,7 +95,7 @@ export default function SignInForm() {
         </Button>
         <NicknameForm
           nickname={nickname}
-          onChange={handleNicknameChange}
+          onChange={(e) => setNickname(e.target.value)}
           commentMessage={nicknameComment}
           onCommentChange={handleNicknameComment}
         />
@@ -90,6 +109,7 @@ export default function SignInForm() {
         <Button
           className="bg-brand disabled:bg-light-gray"
           disabled={!isValidate}
+          onClick={handleSignIn}
         >
           회원가입 완료하기
         </Button>

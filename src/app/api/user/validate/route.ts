@@ -7,14 +7,28 @@ export async function GET(request: NextRequest) {
   const nickname = searchParams.get("nickname");
 
   if (!nickname) {
-    return new Response("Bad Request", { status: 400 });
+    return NextResponse.json({ message: "Bad Request" }, { status: 400 });
   }
 
-  const data = await nicknameValidationCheck(nickname);
+  try {
+    const data = await nicknameValidationCheck(nickname);
 
-  if (data.nickname[0] === NICKNAME_DUPLICATE_ERROR_MESSAGE) {
-    return new Response("The nickname is already in use.", { status: 400 });
+    if (data.nickname[0] === NICKNAME_DUPLICATE_ERROR_MESSAGE) {
+      return NextResponse.json(
+        { message: NICKNAME_DUPLICATE_ERROR_MESSAGE },
+        { status: 400 }
+      );
+    }
+    return NextResponse.json(data);
+  } catch (error: any) {
+    const errorMessage =
+      error.status === 400
+        ? NICKNAME_DUPLICATE_ERROR_MESSAGE
+        : "Something went wrong";
+
+    return NextResponse.json(
+      { message: errorMessage },
+      { status: error.status || 500 }
+    );
   }
-
-  return NextResponse.json(data);
 }
