@@ -1,9 +1,39 @@
-import SubHeader from "@/components/header/SubHeader";
-import NullProductList from "@/components/products/NullProductList";
-import ProductList from "@/components/products/ProductList";
-import CategoryDefault from "@/components/subHeader/CategoryDefault";
+"use client";
 
-// 상품 리스트
+import SearchBar from "@/components/header/SearchBar";
+import RecentSearch from "@/components/search/RecentSearch";
+import AutoKeywords from "@/components/search/AutoKeywords";
+import { FormEvent, useEffect, useState } from "react";
+import ProductList from "@/components/products/ProductList";
+import NullProductList from "@/components/search/NullProductList";
+import { twMerge } from "tailwind-merge";
+import SortOptions from "@/components/subHeader/SortOptions";
+
+// 검색어 자동 완성
+const SEARCH_RESULTS = [
+  "우산",
+  "우주",
+  "우정",
+  "우편",
+  "우울증",
+  "우연히",
+  "우체국",
+  "초우량기업",
+  "영웅주의",
+  "대우조선해양",
+  "교육과정평가원",
+  "공무원연금공단",
+  "우주항공산업",
+  "우주비행사",
+  "우편배달부",
+  "두뇌회전속도",
+  "무궁화호열차",
+  "기후변화적응",
+  "국제우주정거장",
+  "세계자연유산위원회",
+];
+
+// 검색 결과 리스트
 const PRODUCTS: Product[] = [
   {
     id: 1,
@@ -207,15 +237,75 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-export default function ProductListPage() {
+export default function SearchPage() {
+  const [keyword, setKeyword] = useState("");
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [isSearchBarFocus, setIsSearchBarFocus] = useState(true);
+
+  const handleRecentSearchesDelete = (id: number) => {
+    setRecentSearches((prev) => prev.filter((_, index) => id !== index));
+  };
+  const handleRecentSearchesClear = () => {
+    setRecentSearches([]);
+    localStorage.setItem("recentSearches", JSON.stringify([]));
+  };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const word = keyword.trim();
+    if (word === "") return;
+
+    setRecentSearches((prev) => {
+      if (prev.includes(word)) {
+        return [word, ...prev.filter((k) => k !== word)];
+      }
+      return [word, ...prev];
+    });
+    // API : 검색 결과 가져오기
+  };
+
+  // 초기에 데이터가 비어있는 동안에 어떻게 보여줄지. 수정
+  useEffect(() => {
+    const recentSearches = localStorage.getItem("recentSearches") || "[]";
+    setRecentSearches(JSON.parse(recentSearches));
+  }, []);
+
+  useEffect(() => {
+    if (recentSearches.length === 0) return;
+
+    localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+  }, [recentSearches]);
   return (
-    <section className="h-full overflow-y-auto">
-      <SubHeader text="상품 리스트" />
-      <CategoryDefault />
-      {PRODUCTS.length === 0 ? (
-        <NullProductList />
+    <section
+      className={twMerge(
+        "flex flex-col gap-5 h-full",
+        keyword && !isSearchBarFocus && "gap-0"
+      )}
+    >
+      <SearchBar
+        placeholder="상품명 검색"
+        value={keyword}
+        setValue={setKeyword}
+        onSubmit={handleSubmit}
+        setIsSearchBarFocus={setIsSearchBarFocus}
+      />
+      {!keyword ? (
+        <RecentSearch
+          recentSearches={recentSearches}
+          onDelete={handleRecentSearchesDelete}
+          onClear={handleRecentSearchesClear}
+        />
+      ) : isSearchBarFocus ? (
+        <AutoKeywords results={SEARCH_RESULTS} />
       ) : (
-        <ProductList products={PRODUCTS} />
+        <div className="max-h-[calc(100%-62px)] h-full overflow-y-auto">
+          <SortOptions className="p-4 pb-2" />
+          {PRODUCTS.length === 0 ? (
+            <NullProductList />
+          ) : (
+            <ProductList products={PRODUCTS} className="max-h-none" />
+          )}
+        </div>
       )}
     </section>
   );

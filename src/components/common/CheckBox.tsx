@@ -9,7 +9,7 @@ type Props = Omit<
   size?: "sm" | "lg";
 };
 
-export default function Checkbox(props: Props) {
+export default function CheckBox(props: Props) {
   const { className, children, size, ...rest } = props;
   const uuid = useId();
   const containerStyle = size === "lg" ? "w-7 h-7" : "w-5 h-5";
