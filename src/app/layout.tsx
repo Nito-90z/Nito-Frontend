@@ -26,8 +26,9 @@ export default function RootLayout({
         className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh bg-[#ECECEC]`}
       >
         <QueryProvider>
-          <main className="flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
+          <main className="relative flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
             {children}
+            <div id="portal" />
           </main>
         </QueryProvider>
       </body>

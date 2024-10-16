@@ -7,7 +7,6 @@ import CloseIcon from "../common/icons/CloseIcon";
 import Agreement from "./Agreement";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { generateNicknameFetcher } from "@/fetchers/user";
-import { NICKNAME_DUPLICATE_ERROR_MESSAGE } from "@/constants/message/nickname";
 import axios from "axios";
 import { useSignIn } from "@/hooks/user";
 

@@ -32,7 +32,7 @@ export function useSignIn() {
       const { accessToken, refreshToken } = data;
       setCookie("accessToken", accessToken);
       setCookie("refreshToken", refreshToken);
-      router.push("/");
+      router.push("/tutorial");
     },
   });
 }
