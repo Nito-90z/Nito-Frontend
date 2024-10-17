@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../css/index.css';
-import NavBar from '@/components/nav/NavBar';
-import DefaultHeader from '../components/header/DefaultHeader';
 
 export const metadata: Metadata = {
   title: 'Nito',
@@ -24,14 +22,11 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body
-        className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh`}
+        className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh bg-[#ECECEC]`}
       >
-        <div className='mx-auto max-w-[430px] min-w-[360px] w-full h-full'>
-          {/* Header */}
-          <main>{children}</main>
-          {/* Footer */}
-          {/* <NavBar /> */}
-        </div>
+        <main className='flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white'>
+          {children}
+        </main>
       </body>
     </html>
   );

@@ -1,21 +1,55 @@
+import { FormEvent } from 'react';
 import MoreIcon from '../common/icons/MoreIcon';
 import Input from '../common/Input';
+import CloseIcon from '../common/icons/CloseIcon';
+import { useRouter } from 'next/navigation';
 
-export default function SearchBar() {
+type Props = {
+  placeholder: string;
+  value: string;
+  setValue: (value: string) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  setIsSearchBarFocus: (value: boolean) => void;
+};
+
+export default function SearchBar({
+  placeholder,
+  value,
+  setValue,
+  onSubmit,
+  setIsSearchBarFocus,
+}: Props) {
+  const router = useRouter();
+
   return (
-    <header className='w-full h-16 bg-white flex items-center justify-between px-6'>
-      <button className='flex items-center justify-center w-8 h-8'>
+    <header className='flex items-center gap-3 px-4 py-[9px] w-full bg-white'>
+      <button onClick={() => router.back()}>
         <MoreIcon />
       </button>
-      {/* 인풋 박스의 넓이는 임의로 조정함 -> 피그마엔 259px로 되어 있음 */}
-      <Input
-        placeholder='상품명 검색'
-        className='placeholder:text-gray placeholder:font-normal bg-platinum px-4 rounded-sm w-72 h-11'
-        type='search'
-      />
-      <button className='flex items-center justify-center h-7 w-7 font-normal text-base text-dark-gray'>
-        검색
-      </button>
+      <form onSubmit={onSubmit} className='flex grow gap-3'>
+        <div className='relative grow'>
+          <Input
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder={placeholder}
+            autoFocus
+            onBlur={() => setIsSearchBarFocus(false)}
+            onFocus={() => setIsSearchBarFocus(true)}
+            className='pl-4 pr-9 placeholder:text-gray placeholder:font-normal bg-platinum font-normal rounded-sm'
+            type='search'
+          />
+          {value && (
+            <button
+              type='button'
+              className='absolute top-0 bottom-0 right-3'
+              onClick={() => setValue('')}
+            >
+              <CloseIcon />
+            </button>
+          )}
+        </div>
+        <button className='text-dark-gray whitespace-nowrap'>검색</button>
+      </form>
     </header>
   );
 }

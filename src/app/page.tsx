@@ -1,9 +1,7 @@
 import DefaultHeader from '@/components/header/DefaultHeader';
 import SearchBar from '@/components/header/SearchBar';
-import SearchBarComplete from '@/components/header/SearchBarComplete';
 import SelectHeader from '@/components/header/SelectHeader';
 import SubHeader from '@/components/header/SubHeader';
-import ProductList from "@/components/ProductList";
 import Category from '@/components/subHeader/Category';
 import DetailOption from '@/components/subHeader/DetailOption';
 import Main from '@/components/subHeader/Main';
@@ -215,8 +213,7 @@ import Main from '@/components/subHeader/Main';
 export default function HomePage() {
   return <div>{/* <ProductList products={PRODUCTS} /> */}
   <DefaultHeader/>
-  <SelectHeader mainText={'마이 페이지'} buttonText={'완료'}/>
   <SubHeader text={'마이페이지'} />
-  
+
   </div>;
 }

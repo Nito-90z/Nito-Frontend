@@ -1,75 +1,80 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import HeartIcon from '../common/icons/HeartIcon';
-import ProductIcon from '../common/icons/ProductIcon';
-import SearchIcon from '../common/icons/SearchIcon';
-import UserIcon from '../common/icons/UserIcon';
-import CircleButton from '../common/CircleButton';
-import PlusIcon from '../common/icons/PlusIcon';
-import UserBrandIcon from '../common/icons/UserBrandIcon';
-import SearchBrandIcon from '../common/icons/SearchBrandIcon';
-import ProductBrandIcon from '../common/icons/ProductBrandIcon';
-import HeartBrandIcon from '../common/icons/HeartBrandIcon';
+import HeartIcon from "../common/icons/HeartIcon";
+import ProductIcon from "../common/icons/ProductIcon";
+import SearchIcon from "../common/icons/SearchIcon";
+import UserIcon from "../common/icons/UserIcon";
+import CircleButton from "../common/CircleButton";
+import PlusIcon from "../common/icons/PlusIcon";
+import UserBrandIcon from "../common/icons/UserBrandIcon";
+import SearchBrandIcon from "../common/icons/SearchBrandIcon";
+import ProductBrandIcon from "../common/icons/ProductBrandIcon";
+import HeartBrandIcon from "../common/icons/HeartBrandIcon";
+import NavBarMenu from "./NavBarMenu";
+import { useRouter } from "next/navigation";
+
+const LEFT_MENUS = [
+  {
+    title: "찜한 상품",
+    value: "favorite",
+    path: "/",
+    onIcon: <HeartBrandIcon />,
+    offIcon: <HeartIcon className="w-[25.44px] h-5" />,
+  },
+  {
+    title: "상품",
+    value: "product",
+    path: "/product-list",
+    onIcon: <ProductBrandIcon />,
+    offIcon: <ProductIcon />,
+  },
+];
+
+const RIGHT_MENUS = [
+  {
+    title: "검색",
+    value: "search",
+    path: "/search",
+    onIcon: <SearchBrandIcon />,
+    offIcon: <SearchIcon />,
+  },
+  {
+    title: "마이페이지",
+    value: "mypage",
+    path: "/mypage",
+    onIcon: <UserBrandIcon />,
+    offIcon: <UserIcon />,
+  },
+];
 
 export default function NavBar() {
-  const [selected, setSelected] = useState('favorite');
+  const router = useRouter();
 
   return (
-      <nav className='bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-border border-gray-200 flex items-center justify-around'>
-        <button
-          type='button'
-          onClick={() => setSelected('favorite')}
-          className={`flex flex-col items-center justify-center ${
-            selected === 'favorite' ? 'text-brand font-bold' : 'text-text'
-          }`}
+    <nav className="bottom-0 left-0 z-40 w-full h-16 bg-white border-t border-border border-gray-200 flex items-center justify-around">
+      {LEFT_MENUS.map((menu) => (
+        <NavBarMenu
+          key={menu.value}
+          menu={menu}
+          onClick={() => router.push(menu.path)}
+        />
+      ))}
+      {/* 중앙의 CircleButton */}
+      <div className="relative -translate-y-5">
+        <CircleButton
+          className=" bg-black rounded-full flex items-center justify-center"
+          size={"lg"}
         >
-          {selected === 'favorite' ? <HeartBrandIcon /> : <HeartIcon />}
-          <span className='text-sm'>찜한 상품</span>
-        </button>
-
-        <button
-          type='button'
-          onClick={() => setSelected('product')}
-          className={`flex flex-col items-center justify-center ${
-            selected === 'product' ? 'text-brand font-bold' : 'text-text'
-          }`}
-        >
-          {selected === 'product' ? <ProductBrandIcon /> : <ProductIcon />}
-          <span className='text-sm'>상품</span>
-        </button>
-
-        {/* 중앙의 CircleButton */}
-        <div className='relative -translate-y-5'>
-          <CircleButton
-            className=' bg-black rounded-full flex items-center justify-center'
-            size={'lg'}
-          >
-            <PlusIcon size={'lg'} />
-          </CircleButton>
-        </div>
-
-        <button
-          type='button'
-          onClick={() => setSelected('search')}
-          className={`flex flex-col items-center justify-center ${
-            selected === 'search' ? 'text-brand font-bold' : 'text-text'
-          }`}
-        >
-          {selected === 'search' ? <SearchBrandIcon /> : <SearchIcon />}
-          <span className='text-sm'>검색</span>
-        </button>
-
-        <button
-          type='button'
-          onClick={() => setSelected('mypage')}
-          className={`flex flex-col items-center justify-center ${
-            selected === 'mypage' ? 'text-brand font-bold' : 'text-text'
-          }`}
-        >
-          {selected === 'mypage' ? <UserBrandIcon /> : <UserIcon />}
-          <span className='text-sm'>마이 페이지</span>
-        </button>
-      </nav>
+          <PlusIcon size={"lg"} />
+        </CircleButton>
+      </div>
+      {RIGHT_MENUS.map((menu) => (
+        <NavBarMenu
+          key={menu.value}
+          menu={menu}
+          onClick={() => router.push(menu.path)}
+        />
+      ))}
+    </nav>
   );
 }

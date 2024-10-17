@@ -1,86 +1,57 @@
-'use client';
-import React, { useState } from 'react';
-import MoreUpIcon from '../common/icons/MoreUpIcon';
-import MoreDownIcon from '../common/icons/MoreDownIcon';
-import CheckBox from '../common/CheckBox';
+import { useState } from "react";
+import { twMerge } from "tailwind-merge";
+import MoreUpIcon from "../common/icons/MoreUpIcon";
+import MoreDownIcon from "../common/icons/MoreDownIcon";
 
-export default function DropdownMenu() {
+const OPTIONS = [
+  "Electronics",
+  "Computers",
+  "Smart Home",
+  "Arts & Craft",
+  "Automotive",
+  "Baby",
+  "Beauty and Personal Care",
+  `Women's Fashion`,
+  `men's Fashion`,
+];
+
+type Props = {
+  selectedOption: string;
+  setSelectedOption: (option: string) => void;
+};
+
+export default function Category({ selectedOption, setSelectedOption }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Cateogry');
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSelect = (option: React.SetStateAction<string>) => {
+  const handleSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
   };
-
-  const options = [
-    'Electronics',
-    'Computers',
-    'Smart Home',
-    'Arts & Craft',
-    'Automotive',
-    'Baby',
-    'Beauty and Personal Care',
-    `Women's Fashion`,
-    `men's Fashion`,
-  ];
-
   return (
-    <div>
-      <div className='relative inline-block w-full'>
-        <button
-          onClick={toggleDropdown}
-          className={`flex w-full items-center justify-between px-4 py-3 border border-border rounded-sm bg-white text-sm focus:outline-none ${
-            isOpen ? 'border-b-0' : ''
-          }`}
-        >
-          <span>{selectedOption}</span>
-          <span>{isOpen ? <MoreUpIcon /> : <MoreDownIcon />}</span>
-        </button>
-        {isOpen && (
-          <div
-            className={`w-full rounded-sm bg-white border border-t-0 border-border max-h-40 absolute overflow-auto`}
-          >
-            {options.map((option, index) => (
-              <div
-                key={index}
-                onClick={() => handleSelect(option)}
-                className='px-4 py-2 text-sm text-gray cursor-pointer'
-              >
-                {option}
-              </div>
-            ))}
-          </div>
+    <div className="relative inline-block mb-4 w-full">
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={twMerge(
+          "flex w-full items-center justify-between px-4 py-[10px] border border-border rounded-sm bg-white text-sm focus:outline-none",
+          isOpen && "border-b-0"
         )}
-      </div>
-      <div className='w-full px-2 bg-white py-4'>
-        <div className='flex flex-col gap-3  text-sm'>
-          <div className='flex justify-between items-center'>
-            <p>전체(12)</p>
-            <div className='items-center text-gray-text'>
-              <button onClick={() => {}} className='pr-2 rounded'>
-                할인율순
-              </button>
-              |
-              <button onClick={() => {}} className='pl-2 rounded'>
-                낮은 가격순
-              </button>
-            </div>
-          </div>
-          <div className='flex items-center gap-2 text-gray-text'>
-            <CheckBox>역대 최저가</CheckBox>
-            <CheckBox>품절 제외</CheckBox>
-          </div>
-          <div className='flex items-center gap-2 text-gray-text'>
-            <CheckBox>Lowest Ever</CheckBox>
-            <CheckBox>Excluding out of stock</CheckBox>
-          </div>
-        </div>
-      </div>
+      >
+        <span>{selectedOption}</span>
+        <span>{isOpen ? <MoreUpIcon /> : <MoreDownIcon />}</span>
+      </button>
+      {isOpen && (
+        <ul className="w-full rounded-sm bg-white border border-t-0 border-border max-h-60 absolute overflow-auto z-30">
+          {OPTIONS.map((option, index) => (
+            <li
+              key={index}
+              onClick={() => handleSelect(option)}
+              className="px-4 py-[10px] text-sm text-gray cursor-pointer"
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
