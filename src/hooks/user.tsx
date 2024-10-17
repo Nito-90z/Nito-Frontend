@@ -1,5 +1,5 @@
-import { AgreementType } from "@/components/signIn/SignInForm";
 import { nicknameValidationCheckFetcher, signInFetcher } from "@/fetchers/user";
+import { AgreementType } from "@/models/user";
 import { useMutation } from "@tanstack/react-query";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";

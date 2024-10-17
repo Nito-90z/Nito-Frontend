@@ -1,4 +1,4 @@
-import { NICKNAME_DUPLICATE_ERROR_MESSAGE } from "@/constants/message/nickname";
+import { NICKNAME_DUPLICATE_ERROR_MESSAGE } from "@/constants";
 import { nicknameValidationCheck } from "@/services/user";
 import { NextRequest, NextResponse } from "next/server";
 

@@ -9,13 +9,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { generateNicknameFetcher } from "@/fetchers/user";
 import axios from "axios";
 import { useSignIn } from "@/hooks/user";
-
-export type AgreementType = {
-  isOverAge14: boolean;
-  isServiceAccept: boolean;
-  isInfoAccept: boolean;
-  isMarketing: boolean;
-};
+import { AgreementType } from "@/models/user";
 
 const INITIAL_AGREEMENT = {
   isOverAge14: false,

@@ -1,14 +1,14 @@
 import { ChangeEvent, FormEvent, useRef } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import {
-  NICKNAME_VALID_MESSAGE,
-  NICKNAME_VALIDATION_ERROR_MESSAGE,
-} from "@/constants/message/nickname";
 import { twMerge } from "tailwind-merge";
-import { NICKNAME_PATTERN } from "@/constants/regex";
 import { useNicknameCheck } from "@/hooks/user";
 import axios from "axios";
+import {
+  NICKNAME_PATTERN,
+  NICKNAME_VALID_MESSAGE,
+  NICKNAME_VALIDATION_ERROR_MESSAGE,
+} from "@/constants";
 
 type Props = {
   nickname: string;

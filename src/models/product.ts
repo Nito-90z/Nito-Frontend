@@ -1,4 +1,4 @@
-type Product = {
+export type Product = {
   id: number; // 상품의 고유 ID
   image: string | null; // 상품 이미지 (nullable 가능성)
   title: {
@@ -18,7 +18,7 @@ type Product = {
   presentPriceUpdatedAt: string; // 현재가 업데이트 일자
 };
 
-type FavoriteProductInfo = Omit<
+export type FavoriteProductInfo = Omit<
   Product,
   | "price"
   | "code"
@@ -28,7 +28,7 @@ type FavoriteProductInfo = Omit<
   | "presentPriceUpdatedAt"
 >;
 
-type FavoriteProduct = {
+export type FavoriteProduct = {
   id: number; // 필수, 읽기 전용
   product: FavoriteProductInfo;
   isAlarm: boolean; // 알림 여부 (nullable, 선택적)

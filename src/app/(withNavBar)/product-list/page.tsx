@@ -2,6 +2,7 @@ import SubHeader from "@/components/header/SubHeader";
 import NullProductList from "@/components/products/NullProductList";
 import ProductList from "@/components/products/ProductList";
 import CategoryDefault from "@/components/subHeader/CategoryDefault";
+import { Product } from "@/models/product";
 
 // 상품 리스트
 const PRODUCTS: Product[] = [
