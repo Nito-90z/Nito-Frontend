@@ -13,6 +13,10 @@ export async function middleware(request: NextRequest) {
       );
     }
 
+    if (nextUrl.pathname.startsWith("/signin")) {
+      return NextResponse.next();
+    }
+
     const { pathname, search, origin, basePath } = nextUrl;
     const signInUrl = new URL(`${basePath}/signin`, origin);
     signInUrl.searchParams.append(
@@ -32,5 +36,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/product-list", "/search", "/mypage", "/signin"],
+  matcher: ["/", "/product-list", "/search", "/mypage", '/signin'],
 };
