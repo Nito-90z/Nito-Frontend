@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import Button from '../common/Button';
 import CloseIcon from '../common/icons/CloseIcon';
 import Input from '../common/Input';
+import { ERROR_MESSAGE } from '@/constants';
+import Button from '../common/Button';
 
 export default function ChangeName() {
-  const [errorMessage, setErrorMessage] = useState('6자 이상 12자 이하의 영문 혹은 영문과 숫자를 조합');
+  const [errorMessage, setErrorMessage] = useState(ERROR_MESSAGE);
 
   return (
     <div className='absolute bottom-0 z-50 w-full rounded-t-2xl bg-white shadow-xl p-4'>

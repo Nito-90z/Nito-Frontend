@@ -18,9 +18,9 @@ export default function MyPage() {
       <NotiSetting />
       <UserSetting />
       <UserService />
-      {/* <ChangeName /> */}
+      {/* <ChangeName />
       <WithDraw />
-      <PriceDiscount/>
+      <PriceDiscount/> */}
       </div>
     </section>
   );
