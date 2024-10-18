@@ -71,7 +71,7 @@ export default function ProductItem({
       <div className="relative">
         <ProductImage
           src={image ?? ""}
-          alt={`${title.koTitle} product image`}
+          alt={`${title} product image`}
           width={80}
           height={80}
           className={twMerge(
@@ -93,7 +93,7 @@ export default function ProductItem({
               isUnavailable && "opacity-50"
             )}
           >
-            {title.koTitle}
+            {title}
           </p>
           {!isFavorite ? (
             <CircleButton size="sm" className="bg-dark-gray">

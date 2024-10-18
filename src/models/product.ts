@@ -1,10 +1,12 @@
+export type CategoryItem = {
+  id: number;
+  enTitle: string;
+};
+
 export type Product = {
   id: number; // 상품의 고유 ID
   image: string | null; // 상품 이미지 (nullable 가능성)
-  title: {
-    enTitle: string; // 상품명(영문)
-    koTitle: string; // 상품명(한글)
-  };
+  title: string;
   isOutOfStock: boolean; // 품절 여부
   presentPrice: string; // 현재가 (소수점 2자리까지 허용)
   isLowestPriceEver: boolean; // 역대 최저가 상품 여부
