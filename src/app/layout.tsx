@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../css/index.css";
 import QueryProvider from "@/contexts/QueryContext";
+import ModalProvider from "@/contexts/ModalContext";
 
 export const metadata: Metadata = {
   title: "Nito",
@@ -26,10 +27,12 @@ export default function RootLayout({
         className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh bg-[#ECECEC]`}
       >
         <QueryProvider>
-          <main className="relative flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
-            {children}
-            <div id="portal" />
-          </main>
+          <ModalProvider>
+            <main className="relative flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
+              {children}
+              <div id="portal" />
+            </main>
+          </ModalProvider>
         </QueryProvider>
       </body>
     </html>

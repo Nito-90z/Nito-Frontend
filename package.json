@@ -18,7 +18,8 @@
     "react-dom": "^18",
     "react-spinners": "^0.14.1",
     "tailwind-merge": "^2.5.3",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

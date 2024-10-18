@@ -1,5 +1,7 @@
+import CompleteSignInModal from "@/components/common/CompleteSignInModal";
 import { nicknameValidationCheckFetcher, signInFetcher } from "@/fetchers/user";
 import { AgreementType } from "@/models/user";
+import { useModalStore } from "@/stores/modal";
 import { useMutation } from "@tanstack/react-query";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
@@ -11,8 +13,9 @@ export function useNicknameCheck() {
   });
 }
 
-export function useSignIn() {
+export function useSignIn(callbackUrl: string) {
   const router = useRouter();
+  const setModal = useModalStore.use.setModal();
 
   return useMutation({
     mutationFn: ({
@@ -32,7 +35,8 @@ export function useSignIn() {
       const { accessToken, refreshToken } = data;
       setCookie("accessToken", accessToken);
       setCookie("refreshToken", refreshToken);
-      router.push("/tutorial");
+      router.push(callbackUrl);
+      setModal(<CompleteSignInModal />);
     },
   });
 }

@@ -30,7 +30,7 @@ const INITIAL_ERROR_COMMNET = {
   color: "",
 };
 
-export default function SignInForm() {
+export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
   const { data } = useSuspenseQuery<{ nickname: string }>({
     queryKey: ["nickname"],
     queryFn: generateNicknameFetcher,
@@ -44,7 +44,7 @@ export default function SignInForm() {
     agreement.isOverAge14 &&
     agreement.isServiceAccept &&
     nickname.trim() !== "";
-  const { mutateAsync } = useSignIn();
+  const { mutateAsync } = useSignIn(callbackUrl);
 
   const handleNicknameComment = (value: string, color: string) => {
     setNicknameComment({ value, color });

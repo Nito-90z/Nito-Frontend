@@ -6,7 +6,15 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-export default async function SignInPage() {
+type Props = {
+  searchParams: {
+    callbackUrl: string;
+  };
+};
+
+export default async function SignInPage({
+  searchParams: { callbackUrl },
+}: Props) {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -17,7 +25,7 @@ export default async function SignInPage() {
   return (
     <section className="pt-4 px-4 h-full">
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <SignInForm />
+        <SignInForm callbackUrl={callbackUrl} />
       </HydrationBoundary>
     </section>
   );
