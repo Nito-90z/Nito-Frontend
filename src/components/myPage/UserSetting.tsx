@@ -1,5 +1,5 @@
 import Button from '../common/Button';
-import MoreIcon from '../common/icons/MoreIcon';
+import MoreRightIcon from '../common/icons/MoreRight';
 
 export default function UserSetting() {
   return (
@@ -11,7 +11,7 @@ export default function UserSetting() {
       <div className='flex items-center justify-between px-4 py-4'>
         <span className=' pt-1 text-base text-dark-gray'>언어 변경</span>
         <Button className='w-10 h-6 bg-white'>
-          <MoreIcon />
+          <MoreRightIcon />
         </Button>
       </div>
 
@@ -20,7 +20,7 @@ export default function UserSetting() {
           가격 할인 설정
         </span>
         <Button className='w-10 h-6 bg-white'>
-          <MoreIcon />
+          <MoreRightIcon />
         </Button>
       </div>
     </div>

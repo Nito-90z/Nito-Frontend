@@ -9,7 +9,7 @@ export default function ChangeName() {
   const [errorMessage, setErrorMessage] = useState('6자 이상 12자 이하의 영문 혹은 영문과 숫자를 조합');
 
   return (
-    <div className='fixed inset-x-0 bottom-0 z-50 w-full rounded-t-2xl bg-white shadow-xl pr-4 pt-2 pb-4 pl-2'>
+    <div className='absolute bottom-0 z-50 w-full rounded-t-2xl bg-white shadow-xl p-4'>
       <div className='flex justify-center items-center gap-24 pb-2'>
         <div className='h-6 w-6' />
         <div className='flex text-black font-bold'>닉네임 변경하기</div>

@@ -1,5 +1,5 @@
 import Button from '../common/Button';
-import MoreIcon from '../common/icons/MoreIcon';
+import MoreRightIcon from '../common/icons/MoreRight';
 
 export default function UserService() {
   return (
@@ -10,7 +10,7 @@ export default function UserService() {
       <div className='flex items-center justify-between px-4 py-4'>
         <span className=' pt-1 text-base text-dark-gray'>NITO 사용법</span>
         <Button className='w-10 h-6 bg-white'>
-          <MoreIcon />
+          <MoreRightIcon />
         </Button>
       </div>
       <div className='flex items-center justify-between px-4 py-4'>
@@ -18,7 +18,7 @@ export default function UserService() {
           개인정보처리방침
         </span>
         <Button className='w-10 h-6 bg-white'>
-          <MoreIcon />
+          <MoreRightIcon />
         </Button>
       </div>
       <div className='flex items-center justify-between px-4 py-4'>
@@ -26,7 +26,7 @@ export default function UserService() {
           이용약관
         </span>
         <Button className='w-10 h-6 bg-white'>
-          <MoreIcon />
+          <MoreRightIcon />
         </Button>
       </div>
       <div className='flex items-center justify-between px-4 py-4'>

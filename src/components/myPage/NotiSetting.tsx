@@ -5,6 +5,7 @@ import Button from '../common/Button';
 import MoreIcon from '../common/icons/MoreIcon';
 import { useState } from 'react';
 import Toast from '../common/Toast';
+import MoreRightIcon from '../common/icons/MoreRight';
 
 export default function NotiSetting() {
   const [serviceToast, setServiceToast] = useState(true);
@@ -71,7 +72,7 @@ export default function NotiSetting() {
           다양한 이벤트와 혜택에 대한 정보를 받아보세요.
         </p>
         <Button className='w-10 h-6 bg-white'>
-          <MoreIcon />
+          <MoreRightIcon />
         </Button>
       </div>
       {showServiceToast && (
