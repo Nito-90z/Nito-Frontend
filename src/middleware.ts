@@ -24,9 +24,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(signInUrl);
   }
 
+  if (nextUrl.pathname.startsWith("/signin")) {
+    return NextResponse.redirect(nextUrl.origin);
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/product-list", "/search", "/mypage"],
+  matcher: ["/", "/product-list", "/search", "/mypage", "/signin"],
 };

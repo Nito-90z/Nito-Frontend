@@ -35,7 +35,7 @@ export function useSignIn(callbackUrl: string) {
       const { accessToken, refreshToken } = data;
       setCookie("accessToken", accessToken);
       setCookie("refreshToken", refreshToken);
-      router.push(callbackUrl);
+      router.push(callbackUrl ? callbackUrl : "/");
       setModal(<CompleteSignInModal />);
     },
   });
