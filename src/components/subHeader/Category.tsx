@@ -33,7 +33,7 @@ export default function Category({ selectedOption, setSelectedOption }: Props) {
         onClick={() => setIsOpen((prev) => !prev)}
         className={twMerge(
           "flex w-full items-center justify-between px-4 py-[10px] border border-border rounded-sm bg-white text-sm focus:outline-none",
-          isOpen && "border-b-0"
+          isOpen && "border-b-transparent"
         )}
       >
         <span>{selectedOption}</span>

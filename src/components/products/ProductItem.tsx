@@ -10,6 +10,7 @@ import PlusIcon from "../common/icons/PlusIcon";
 import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
 import ProductImage from "./wishList/ProductImage";
 import CheckBox from "../common/CheckBox";
+import { FavoriteProductInfo, Product } from "@/models/product";
 
 type Props = {
   product: Product | FavoriteProductInfo;

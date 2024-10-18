@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import ProductItem from "./ProductItem";
+import { FavoriteProduct, Product } from "@/models/product";
 
 type Props = {
   className?: string;

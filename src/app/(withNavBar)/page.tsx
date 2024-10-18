@@ -5,6 +5,7 @@ import SelectHeader from "@/components/header/SelectHeader";
 import ProductList from "@/components/products/ProductList";
 import NullProductList from "@/components/products/wishList/NullProductList";
 import Main from "@/components/subHeader/Main";
+import { FavoriteProduct } from "@/models/product";
 import { useState } from "react";
 
 // 찜한 상품 리스트

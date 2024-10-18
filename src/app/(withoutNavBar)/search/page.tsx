@@ -8,6 +8,7 @@ import ProductList from "@/components/products/ProductList";
 import NullProductList from "@/components/search/NullProductList";
 import { twMerge } from "tailwind-merge";
 import SortOptions from "@/components/subHeader/SortOptions";
+import { Product } from "@/models/product";
 
 // 검색어 자동 완성
 const SEARCH_RESULTS = [
