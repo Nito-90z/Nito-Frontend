@@ -1,6 +1,12 @@
 export type CategoryItem = {
-  id: number;
+  id: number | null;
   enTitle: string;
+};
+
+export type CategoryPage = {
+  count: number;
+  cursor: string | null;
+  results: CategoryItem[];
 };
 
 export type Product = {
