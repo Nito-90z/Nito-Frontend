@@ -1,6 +1,5 @@
 import { SignInData } from "@/fetchers/user";
 import { instance } from "@/libs/instance";
-import { authInstance } from "@/libs/instance.authorization";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 
