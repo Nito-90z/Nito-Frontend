@@ -1,8 +1,8 @@
-import { FormEvent } from "react";
-import MoreIcon from "../common/icons/MoreIcon";
-import Input from "../common/Input";
-import CloseIcon from "../common/icons/CloseIcon";
-import { useRouter } from "next/navigation";
+import { FormEvent } from 'react';
+import MoreIcon from '../common/icons/MoreIcon';
+import Input from '../common/Input';
+import CloseIcon from '../common/icons/CloseIcon';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   placeholder: string;
@@ -22,12 +22,12 @@ export default function SearchBar({
   const router = useRouter();
 
   return (
-    <header className="flex items-center gap-3 px-4 py-[9px] w-full bg-white">
+    <header className='flex items-center gap-3 px-4 py-[9px] w-full bg-white'>
       <button onClick={() => router.back()}>
         <MoreIcon />
       </button>
-      <form onSubmit={onSubmit} className="flex grow gap-3">
-        <div className="relative grow">
+      <form onSubmit={onSubmit} className='flex grow gap-3'>
+        <div className='relative grow'>
           <Input
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -35,20 +35,20 @@ export default function SearchBar({
             autoFocus
             onBlur={() => setIsSearchBarFocus(false)}
             onFocus={() => setIsSearchBarFocus(true)}
-            className="pl-4 pr-9 placeholder:text-gray placeholder:font-normal bg-platinum font-normal rounded-sm"
-            type="search"
+            className='pl-4 pr-9 placeholder:text-gray placeholder:font-normal bg-platinum font-normal rounded-sm'
+            type='search'
           />
           {value && (
             <button
-              type="button"
-              className="absolute top-0 bottom-0 right-3"
-              onClick={() => setValue("")}
+              type='button'
+              className='absolute top-0 bottom-0 right-3'
+              onClick={() => setValue('')}
             >
               <CloseIcon />
             </button>
           )}
         </div>
-        <button className="text-dark-gray whitespace-nowrap">검색</button>
+        <button className='text-dark-gray whitespace-nowrap'>검색</button>
       </form>
     </header>
   );
