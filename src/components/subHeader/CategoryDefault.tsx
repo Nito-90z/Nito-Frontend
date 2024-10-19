@@ -4,11 +4,16 @@ import { twMerge } from "tailwind-merge";
 import Category from "./Category";
 import SortOptions from "./SortOptions";
 
-export default function CategoryDefault({ className }: { className?: string }) {
+type Props = { 
+  count: number;
+  className?: string 
+}
+
+export default function CategoryDefault({ count, className }: Props) {
   return (
     <div className={twMerge("p-4 pb-2 bg-white z-30", className)}>
       <Category />
-      <SortOptions />
+      <SortOptions count={count}/>
     </div>
   );
 }

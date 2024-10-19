@@ -7,18 +7,10 @@ import NullProductImage from "./NullProductImage";
 type Props = {
   src: string | null;
   alt: string;
-  width?: number;
-  height?: number;
   className?: string;
 };
 
-export default function ProductImage({
-  src,
-  alt,
-  width,
-  height,
-  className,
-}: Props) {
+export default function ProductImage({ src, alt, className }: Props) {
   const [isImageError, setIsImageError] = useState(false);
 
   return isImageError ? (
@@ -27,8 +19,8 @@ export default function ProductImage({
     <Image
       src={src || ""}
       alt={alt}
-      width={width || 80}
-      height={height || 80}
+      width={80}
+      height={80}
       className={className}
       onError={() => setIsImageError(true)}
     />

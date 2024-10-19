@@ -9,6 +9,15 @@ export type CategoryPage = {
   results: CategoryItem[];
 };
 
+export type ProductQuery = {
+  page_size: number;
+  category_id: number | null;
+  is_lowest_price_ever: boolean;
+  is_out_of_stock: boolean;
+  ordering: "present_price" | "-discount_rate" | null;
+  search: string | null;
+};
+
 export type Product = {
   id: number; // 상품의 고유 ID
   image: string | null; // 상품 이미지 (nullable 가능성)

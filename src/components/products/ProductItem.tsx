@@ -68,12 +68,10 @@ export default function ProductItem({
           <CheckBox size="lg" checked={isSelected} className="border-black" />
         </div>
       )}
-      <div className="relative">
+      <div className="relative shrink-0 w-20 h-20">
         <ProductImage
           src={image ?? ""}
           alt={`${title} product image`}
-          width={80}
-          height={80}
           className={twMerge(
             "object-cover aspect-square rounded",
             isUnavailable && "brightness-50"
