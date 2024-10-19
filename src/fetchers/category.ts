@@ -1,7 +1,7 @@
 import { queryInstance } from "@/libs/instance";
 
 export async function getCategoryFetcher(
-  cursor?: string | null,
+  cursor: string | null,
   page_size: number = 20
 ) {
   const cursor_query = cursor ? `cursor=${cursor}&` : "";

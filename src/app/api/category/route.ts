@@ -7,10 +7,6 @@ export async function GET(request: NextRequest) {
   const cursor = searchParams.get("cursor");
   const page_size = searchParams.get("page_size");
 
-  if (!page_size) {
-    return NextResponse.json({ message: "Bad Request" }, { status: 400 });
-  }
-
   const data = await getCategory(cursor, Number(page_size));
 
   return NextResponse.json(data);
