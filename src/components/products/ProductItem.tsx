@@ -41,7 +41,7 @@ export default function ProductItem({
     isLowestPriceEver,
   } = product;
   const isUnavailable = isOutOfStock || isStopSelling;
-  const isFavorite = !("isFavorite" in product) || product.isFavorite;
+  const isFavoritePage = !("isFavorite" in product);
   const isSelected = selected?.includes(id);
 
   const handleClick = () => {
@@ -95,7 +95,7 @@ export default function ProductItem({
           >
             {title}
           </p>
-          {!isFavorite ? (
+          {!isFavoritePage ? (
             <CircleButton
               size="sm"
               className="bg-dark-gray"
