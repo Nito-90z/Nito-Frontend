@@ -11,6 +11,7 @@ import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
 import ProductImage from "./wishList/ProductImage";
 import CheckBox from "../common/CheckBox";
 import { FavoriteProductInfo, Product } from "@/models/product";
+import AlarmOffIcon from "../common/icons/AlarmOffIcon";
 
 type Props = {
   product: Product | FavoriteProductInfo;
@@ -18,6 +19,7 @@ type Props = {
   isEditing?: boolean;
   selected?: number[];
   onSelect?: (id: number) => void;
+  addFavorite: (id: number) => void;
 };
 
 export default function ProductItem({
@@ -26,6 +28,7 @@ export default function ProductItem({
   isEditing,
   selected,
   onSelect,
+  addFavorite,
 }: Props) {
   const {
     id,
@@ -48,7 +51,6 @@ export default function ProductItem({
       // 상세 페이지로 이동
     }
   };
-
   return (
     <li
       className={twMerge(
@@ -94,7 +96,11 @@ export default function ProductItem({
             {title}
           </p>
           {!isFavorite ? (
-            <CircleButton size="sm" className="bg-dark-gray">
+            <CircleButton
+              size="sm"
+              className="bg-dark-gray"
+              onClick={() => addFavorite(id)}
+            >
               <PlusIcon size="sm" />
             </CircleButton>
           ) : isUnavailable ? (
@@ -107,7 +113,7 @@ export default function ProductItem({
             </CircleButton>
           ) : (
             <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
-              <AlarmIcon size="sm" />
+              {isAlarm ? <AlarmIcon size="sm" /> : <AlarmOffIcon size="sm" />}
             </CircleButton>
           )}
         </div>
@@ -132,9 +138,11 @@ export default function ProductItem({
             <span className="text-sm text-[#767676]">
               {convertDollarToWon(presentPrice)}
             </span>
-            <Badge size="sm" direction="down" icon>
-              {discountRate}%
-            </Badge>
+            {!!discountRate && (
+              <Badge size="sm" direction="down" icon>
+                {discountRate}%
+              </Badge>
+            )}
           </div>
         </div>
       </div>

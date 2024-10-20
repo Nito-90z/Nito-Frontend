@@ -3,9 +3,13 @@
 import { twMerge } from "tailwind-merge";
 import ProductItem from "./ProductItem";
 import { FavoriteProduct, Product } from "@/models/product";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
 import Spinner from "../common/Spinner";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useProductQueryStore } from "@/stores/productQuery";
+import { addFavoriteProductFetcher } from "@/fetchers/product";
+import Toast from "../common/Toast";
 
 type Props = {
   className?: string;
@@ -29,6 +33,17 @@ export default function ProductList({
   isFetching,
 }: Props) {
   const { ref, inView } = useInView({ threshold: 0 });
+  const [showToast, setShowToast] = useState(false);
+  const queryClient = useQueryClient();
+  const productQuery = useProductQueryStore.use.productQuery();
+  const { mutate } = useMutation({
+    mutationFn: ({ id }: { id: number }) => addFavoriteProductFetcher(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products", productQuery] });
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    },
+  });
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -56,6 +71,7 @@ export default function ProductList({
               isEditing={isEditing}
               selected={selected}
               onSelect={onSelect}
+              addFavorite={(id: number) => mutate({ id })}
             />
           );
         })}
@@ -64,6 +80,11 @@ export default function ProductList({
       {isFetching && (
         <div className="flex justify-center items-center mb-6">
           <Spinner size={24} />
+        </div>
+      )}
+      {showToast && (
+        <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-sm">
+          <Toast text="상품을 추가했어요" />
         </div>
       )}
     </div>

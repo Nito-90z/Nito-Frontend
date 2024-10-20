@@ -14,3 +14,9 @@ export async function getProducts(query: { [k: string]: string | null }) {
 
   return serverInstance.get(`/v1/${url}`).then((res) => res.data);
 }
+
+export async function addFavoriteProduct(productId: number) {
+  return serverInstance
+    .post("/v1/favorite_product/", { productId })
+    .then((res) => res.data);
+}

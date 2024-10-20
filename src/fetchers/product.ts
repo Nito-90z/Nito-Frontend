@@ -25,3 +25,9 @@ export async function getProductsFetcher({
 
   return clientInstance.get(`/api/${url}`).then((res) => res.data);
 }
+
+export async function addFavoriteProductFetcher(productId: number) {
+  return clientInstance
+    .post("/api/favorite-product", { productId })
+    .then((res) => res.data);
+}

@@ -20,6 +20,7 @@ export default function Products() {
       getNextPageParam: (lastPage) => lastPage.cursor,
       select: (data) => data.pages,
       placeholderData: keepPreviousData,
+      refetchOnWindowFocus: false,
     });
   const products: Product[] = data?.map((page) => page.results).flat() || [];
 

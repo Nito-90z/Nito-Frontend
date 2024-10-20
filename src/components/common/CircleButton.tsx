@@ -8,12 +8,14 @@ type Props = {
   size: CircleButtonSize;
   className?: string;
   children: React.ReactNode;
+  onClick?: () => void;
 };
 
 export default function CircleButton({
   size,
   className = "",
   children,
+  onClick,
 }: Props) {
   return (
     <button
@@ -22,6 +24,7 @@ export default function CircleButton({
         className,
         getCircleButtonSizeStyle(size)
       )}
+      onClick={onClick}
     >
       {children}
     </button>
