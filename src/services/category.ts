@@ -1,4 +1,4 @@
-import { authInstance } from "@/libs/instance.authorization";
+import { serverInstance } from "@/libs/instance.server";
 
 export async function getCategory(
   cursor: string | null,
@@ -6,7 +6,7 @@ export async function getCategory(
 ) {
   const cursor_query = cursor ? `cursor=${cursor}&` : "";
 
-  return authInstance
+  return serverInstance
     .get(`/v1/category/?${cursor_query}page_size=${page_size}`)
     .then((res) => res.data);
 }

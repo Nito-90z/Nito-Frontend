@@ -1,4 +1,4 @@
-import { queryInstance } from "@/libs/instance";
+import { clientInstance } from "@/libs/instance.client";
 
 export async function getCategoryFetcher(
   cursor: string | null,
@@ -6,7 +6,7 @@ export async function getCategoryFetcher(
 ) {
   const cursor_query = cursor ? `cursor=${cursor}&` : "";
 
-  return queryInstance
+  return clientInstance
     .get(`/api/category?${cursor_query}page_size=${page_size}`)
     .then((res) => res.data);
 }

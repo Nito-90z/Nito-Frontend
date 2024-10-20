@@ -12,8 +12,8 @@ export type CategoryPage = {
 export type ProductQuery = {
   page_size: number;
   category_id: number | null;
-  is_lowest_price_ever: boolean;
-  is_out_of_stock: boolean;
+  is_lowest_price_ever: boolean | null;
+  is_out_of_stock: boolean | null;
   ordering: "present_price" | "-discount_rate" | null;
   search: string | null;
 };

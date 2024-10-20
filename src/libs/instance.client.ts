@@ -12,9 +12,11 @@ clientInstance.interceptors.request.use(
     const accessToken = getCookie("accessToken");
 
     if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${accessToken}`;
-    }
+      const newConfig = config;
+      newConfig.headers.Authorization = `Bearer ${accessToken}`;
 
+      return newConfig;
+    }
     return config;
   }
 );

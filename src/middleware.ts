@@ -2,19 +2,22 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const { nextUrl, cookies } = request;
-  const accessToken = cookies.get("accessToken");
+  const accessToken = cookies.get("accessToken")?.value;
 
   if (!accessToken) {
+    if (
+      nextUrl.pathname.startsWith("/signin") ||
+      nextUrl.pathname.startsWith("/api/user")
+    ) {
+      return NextResponse.next();
+    }
+
     // 인증되지 않은 사용자의 api 요청인 경우 401 코드로 반환
     if (nextUrl.pathname.startsWith("/api")) {
       return NextResponse.json(
         { message: "Authentication Error" },
         { status: 401 }
       );
-    }
-
-    if (nextUrl.pathname.startsWith("/signin")) {
-      return NextResponse.next();
     }
 
     const { pathname, search, origin, basePath } = nextUrl;
@@ -36,5 +39,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/product-list", "/search", "/mypage", '/signin'],
+  matcher: ["/", "/product-list", "/search", "/mypage", "/signin"],
 };
