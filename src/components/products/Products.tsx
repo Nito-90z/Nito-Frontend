@@ -8,8 +8,10 @@ import ProductList from "./ProductList";
 import { Product } from "@/models/product";
 import CategoryDefault from "../subHeader/CategoryDefault";
 import Skeleton from "./Skeleton";
+import { useRef } from "react";
 
 export default function Products() {
+  const topRef = useRef<HTMLDivElement>(null);
   const productQuery = useProductQueryStore.use.productQuery();
   const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
     useInfiniteQuery({
@@ -27,7 +29,8 @@ export default function Products() {
   if (isLoading) return <Skeleton />;
   return (
     <>
-      <CategoryDefault count={data ? data[0].count : 0} />
+      <div ref={topRef} />
+      <CategoryDefault count={data ? data[0].count : 0} topRef={topRef}/>
       {products.length === 0 ? (
         <NullProductList />
       ) : (

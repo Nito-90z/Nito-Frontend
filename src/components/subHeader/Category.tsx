@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import MoreUpIcon from "../common/icons/MoreUpIcon";
 import MoreDownIcon from "../common/icons/MoreDownIcon";
@@ -8,7 +8,11 @@ import { CategoryItem } from "@/models/product";
 import { useProductQueryStore } from "@/stores/productQuery";
 import { useInView } from "react-intersection-observer";
 
-export default function Category() {
+export default function Category({
+  topRef,
+}: {
+  topRef: RefObject<HTMLDivElement>;
+}) {
   const {
     data: categories,
     hasNextPage,
@@ -31,6 +35,9 @@ export default function Category() {
     setProductQuery("category_id", id);
     setIsOpen(false);
     setCategory(value);
+    if (topRef) {
+      topRef.current?.scrollIntoView();
+    }
   };
 
   useEffect(() => {
