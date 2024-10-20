@@ -27,10 +27,7 @@ export default function Products() {
   if (isLoading) return <Skeleton />;
   return (
     <>
-      <CategoryDefault
-        className="sticky top-0"
-        count={data ? data[0].count : 0}
-      />
+      <CategoryDefault count={data ? data[0].count : 0} />
       {products.length === 0 ? (
         <NullProductList />
       ) : (

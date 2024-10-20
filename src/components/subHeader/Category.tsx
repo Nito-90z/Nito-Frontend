@@ -25,13 +25,12 @@ export default function Category() {
   const { ref, inView } = useInView({ threshold: 0 });
   const productQuery = useProductQueryStore.use.productQuery();
   const setProductQuery = useProductQueryStore.use.setProductQuery();
-  const selectedOption = categories
-    ?.flat()
-    .find((category) => category.id === productQuery.category_id);
+  const [category, setCategory] = useState("All");
 
-  const handleSelect = (id: number | null) => {
+  const handleSelect = (id: number | null, value: string) => {
     setProductQuery("category_id", id);
     setIsOpen(false);
+    setCategory(value);
   };
 
   useEffect(() => {
@@ -48,7 +47,7 @@ export default function Category() {
           isOpen && "border-b-transparent"
         )}
       >
-        <span>{selectedOption?.enTitle || "Category"}</span>
+        <span>{category}</span>
         <span>{isOpen ? <MoreUpIcon /> : <MoreDownIcon />}</span>
       </button>
       {isOpen && (
@@ -59,7 +58,7 @@ export default function Category() {
                 <li key={id}>
                   <button
                     className="text-start px-4 py-[10px] w-full text-sm text-gray disabled:bg-neutral-100"
-                    onClick={() => handleSelect(id)}
+                    onClick={() => handleSelect(id, enTitle)}
                     disabled={id === productQuery.category_id}
                   >
                     {enTitle}
