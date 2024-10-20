@@ -12,6 +12,7 @@ import ProductImage from "./wishList/ProductImage";
 import CheckBox from "../common/CheckBox";
 import { FavoriteProductInfo, Product } from "@/models/product";
 import AlarmOffIcon from "../common/icons/AlarmOffIcon";
+import { useRouter } from "next/navigation";
 
 type Props = {
   product: Product | FavoriteProductInfo;
@@ -40,6 +41,7 @@ export default function ProductItem({
     isStopSelling,
     isLowestPriceEver,
   } = product;
+  const router = useRouter();
   const isUnavailable = isOutOfStock || isStopSelling;
   const isFavoritePage = !("isFavorite" in product);
   const isSelected = selected?.includes(id);
@@ -48,7 +50,7 @@ export default function ProductItem({
     if (isEditing) {
       onSelect && onSelect(id);
     } else {
-      // 상세 페이지로 이동
+      router.push(`/product-list/product/${id}`);
     }
   };
   return (
