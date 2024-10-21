@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useRef } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import { twMerge } from "tailwind-merge";
-import { useNicknameCheck } from "@/hooks/user";
+import { useNicknameCheck } from "@/hooks/auth";
 import axios from "axios";
 import {
   NICKNAME_PATTERN,

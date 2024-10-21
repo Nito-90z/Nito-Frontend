@@ -13,6 +13,7 @@ import CheckBox from "../common/CheckBox";
 import { FavoriteProductInfo, Product } from "@/models/product";
 import AlarmOffIcon from "../common/icons/AlarmOffIcon";
 import { useRouter } from "next/navigation";
+import { MouseEvent } from "react";
 
 type Props = {
   product: Product | FavoriteProductInfo;
@@ -52,6 +53,10 @@ export default function ProductItem({
     } else {
       router.push(`/product-list/product/${id}`);
     }
+  };
+  const handleAddFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+    addFavorite(id);
+    e.stopPropagation();
   };
   return (
     <li
@@ -101,7 +106,7 @@ export default function ProductItem({
             <CircleButton
               size="sm"
               className="bg-dark-gray"
-              onClick={() => addFavorite(id)}
+              onClick={handleAddFavorite}
             >
               <PlusIcon size="sm" />
             </CircleButton>

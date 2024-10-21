@@ -1,5 +1,10 @@
 import { clientInstance } from "@/libs/instance.client";
-import { DetailProduct, ProductPrice, ProductQuery } from "@/models/product";
+import {
+  DetailProduct,
+  Product,
+  ProductPrice,
+  ProductQuery,
+} from "@/models/product";
 
 export async function getProductsFetcher({
   cursor,
@@ -45,5 +50,13 @@ export async function getProductPriceFetcher(
 ): Promise<ProductPrice> {
   return clientInstance
     .get(`/api/product/${productId}/price_info`)
+    .then((res) => res.data);
+}
+
+export async function getRelatedProductsFetcher(
+  productId: number
+): Promise<Product[]> {
+  return clientInstance
+    .get(`/api/product/${productId}/related_product_list`)
     .then((res) => res.data);
 }

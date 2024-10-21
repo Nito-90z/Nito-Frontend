@@ -11,7 +11,6 @@ import SearchBrandIcon from "../common/icons/SearchBrandIcon";
 import ProductBrandIcon from "../common/icons/ProductBrandIcon";
 import HeartBrandIcon from "../common/icons/HeartBrandIcon";
 import NavBarMenu from "./NavBarMenu";
-import { useRouter } from "next/navigation";
 
 const LEFT_MENUS = [
   {
@@ -48,8 +47,6 @@ const RIGHT_MENUS = [
 ];
 
 export default function NavBar() {
-  const router = useRouter();
-
   return (
     <nav className="bottom-0 left-0 z-40 w-full h-16 bg-white border-t border-border border-gray-200 flex items-center justify-around">
       {LEFT_MENUS.map((menu) => (

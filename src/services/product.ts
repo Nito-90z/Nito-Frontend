@@ -32,3 +32,9 @@ export async function getProductPrice(productId: number) {
     .get(`/v1/product/${productId}/price_info/`)
     .then((res) => res.data);
 }
+
+export async function getRelatedProducts(productId: number) {
+  return serverInstance
+    .get(`/v1/product/${productId}/related_product_list/`)
+    .then((res) => res.data);
+}

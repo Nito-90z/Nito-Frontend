@@ -3,6 +3,7 @@ import Description from "@/components/productDetail/Description";
 import { Suspense } from "react";
 import Skeleton from "@/components/productDetail/Skeleton";
 import DetailPrice from "@/components/productDetail/DetailPrice";
+import RelatedProducts from "@/components/productDetail/RelatedProducts";
 
 type Props = {
   params: {
@@ -17,6 +18,7 @@ export default function ProductDetailPage({ params: { id } }: Props) {
       <Suspense fallback={<Skeleton />}>
         <Description id={id} />
         <DetailPrice id={id} />
+        <RelatedProducts id={id} />
       </Suspense>
     </section>
   );

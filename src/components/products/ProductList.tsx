@@ -6,10 +6,8 @@ import { FavoriteProduct, Product } from "@/models/product";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Spinner from "../common/Spinner";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useProductQueryStore } from "@/stores/productQuery";
-import { addFavoriteProductFetcher } from "@/fetchers/product";
 import Toast from "../common/Toast";
+import { useAddFavorite } from "@/hooks/product";
 
 type Props = {
   className?: string;
@@ -34,17 +32,13 @@ export default function ProductList({
 }: Props) {
   const { ref, inView } = useInView({ threshold: 0 });
   const [showToast, setShowToast] = useState(false);
-  const queryClient = useQueryClient();
-  const productQuery = useProductQueryStore.use.productQuery();
-  const { mutate } = useMutation({
-    mutationFn: ({ id }: { id: number }) => addFavoriteProductFetcher(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products", productQuery] });
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
-    },
-  });
+  const { mutateAsync } = useAddFavorite();
 
+  const handleAddFavorite = async (id: number) => {
+    await mutateAsync({ id });
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage && fetchNextPage();
@@ -71,7 +65,7 @@ export default function ProductList({
               isEditing={isEditing}
               selected={selected}
               onSelect={onSelect}
-              addFavorite={(id: number) => mutate({ id })}
+              addFavorite={handleAddFavorite}
             />
           );
         })}

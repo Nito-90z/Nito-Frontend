@@ -1,5 +1,6 @@
 "use client";
 
+import { MouseEvent } from "react";
 import { twMerge } from "tailwind-merge";
 
 export type CircleButtonSize = "sm" | "md" | "lg";
@@ -8,7 +9,7 @@ type Props = {
   size: CircleButtonSize;
   className?: string;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (() => void) | ((e: MouseEvent<HTMLButtonElement>) => void);
 };
 
 export default function CircleButton({
