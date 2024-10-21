@@ -14,7 +14,9 @@ export default async function ProductListPage() {
     queryKey: ["category"],
     queryFn: ({ pageParam }) => getCategory(pageParam, 20),
     initialPageParam: null,
-    staleTime: 10 * 60 * 1000,
+    staleTime: 60 * 60 * 1000,
+    getNextPageParam: (lastPage) => lastPage.cursor,
+    pages: 3,
   });
   return (
     <section className="h-full overflow-y-auto">

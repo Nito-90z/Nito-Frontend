@@ -24,19 +24,19 @@ export default function Category({
     getNextPageParam: (lastPage) => lastPage.cursor,
     select: (data) => data.pages.map((page) => page.results),
     staleTime: 60 * 60 * 1000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
   const [isOpen, setIsOpen] = useState(false);
   const { ref, inView } = useInView({ threshold: 0 });
   const productQuery = useProductQueryStore.use.productQuery();
   const setProductQuery = useProductQueryStore.use.setProductQuery();
-  const [category, setCategory] = useState("All");
 
-  const handleSelect = (id: number | null, value: string) => {
+  const handleSelect = (id: number | null) => {
     setProductQuery("category_id", id);
     setIsOpen(false);
-    setCategory(value);
     if (topRef) {
-      topRef.current?.scrollIntoView();
+      topRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -54,7 +54,9 @@ export default function Category({
           isOpen && "border-b-transparent"
         )}
       >
-        <span>{category}</span>
+        <span>
+          {findSelectedCategory(categories, productQuery.category_id)}
+        </span>
         <span>{isOpen ? <MoreUpIcon /> : <MoreDownIcon />}</span>
       </button>
       {isOpen && (
@@ -65,7 +67,7 @@ export default function Category({
                 <li key={id}>
                   <button
                     className="text-start px-4 py-[10px] w-full text-sm text-gray disabled:bg-neutral-100"
-                    onClick={() => handleSelect(id, enTitle)}
+                    onClick={() => handleSelect(id)}
                     disabled={id === productQuery.category_id}
                   >
                     {enTitle}
@@ -78,4 +80,15 @@ export default function Category({
       )}
     </div>
   );
+}
+
+function findSelectedCategory(
+  categoryResults: CategoryItem[][] | undefined,
+  id: number | null
+) {
+  if (!categoryResults || !id) return "All";
+
+  const categories = categoryResults.flat();
+  const category = categories.find((category) => category.id === id);
+  return category?.enTitle;
 }
