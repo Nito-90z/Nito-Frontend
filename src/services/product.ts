@@ -20,3 +20,9 @@ export async function addFavoriteProduct(productId: number) {
     .post("/v1/favorite_product/", { productId })
     .then((res) => res.data);
 }
+
+export async function getProduct(productId: number) {
+  return serverInstance
+    .get(`/v1/product/${productId}/`)
+    .then((res) => res.data);
+}

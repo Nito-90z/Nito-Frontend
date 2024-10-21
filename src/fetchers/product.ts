@@ -1,5 +1,5 @@
 import { clientInstance } from "@/libs/instance.client";
-import { ProductQuery } from "@/models/product";
+import { DetailProduct, ProductQuery } from "@/models/product";
 
 export async function getProductsFetcher({
   cursor,
@@ -29,5 +29,13 @@ export async function getProductsFetcher({
 export async function addFavoriteProductFetcher(productId: number) {
   return clientInstance
     .post("/api/favorite-product", { productId })
+    .then((res) => res.data);
+}
+
+export async function getProductFetcher(
+  productId: number
+): Promise<DetailProduct> {
+  return clientInstance
+    .get(`/api/product/${productId}`)
     .then((res) => res.data);
 }

@@ -29,10 +29,16 @@ export type Product = {
   isStopSelling: boolean; // 판매 중지 상품 여부
   price: string; // 원가 (소수점 2자리까지 허용)
   code: string; // 아마존 상품 코드
-  crawlingUpdatedAt: string | null; // 최근 크롤링 일자 (nullable 가능성)
+  crawlingUpdatedAt: Date | null; // 최근 크롤링 일자 (nullable 가능성)
   isFavorite: boolean; // 찜한 상품 여부
   affiliateUrl: string; // 아마존 어필리에이트 URL
-  presentPriceUpdatedAt: string; // 현재가 업데이트 일자
+  presentPriceUpdatedAt: Date; // 현재가 업데이트 일자
+};
+
+export type DetailProduct = Product & {
+  favoriteId: number | null;
+  isAlarm: boolean;
+  optionStatus: boolean;
 };
 
 export type FavoriteProductInfo = Omit<
