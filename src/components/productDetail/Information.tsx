@@ -1,7 +1,7 @@
 import { DetailProduct } from "@/models/product";
 import Badge from "../common/Badge";
 import { convertDollarToWon } from "@/utils/currency-converter";
-import { parseDate } from "@/utils/date";
+import { parseDateFromNow } from "@/utils/date";
 import Button from "../common/Button";
 
 export default function Information({ product }: { product: DetailProduct }) {
@@ -47,9 +47,13 @@ export default function Information({ product }: { product: DetailProduct }) {
         <p className="mb-1 text-black font-bold">아마존 가격</p>
         <p className="text-text">
           {crawlingUpdatedAt && (
-            <span>{`마지막 업데이트: ${parseDate(crawlingUpdatedAt)}, `}</span>
+            <span>{`마지막 업데이트: ${parseDateFromNow(
+              crawlingUpdatedAt
+            )}, `}</span>
           )}
-          <span>마지막 가격 변경: {parseDate(presentPriceUpdatedAt)}</span>
+          <span>
+            마지막 가격 변경: {parseDateFromNow(presentPriceUpdatedAt)}
+          </span>
         </p>
       </div>
       {optionStatus && (

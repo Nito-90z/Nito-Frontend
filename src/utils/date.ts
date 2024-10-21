@@ -5,6 +5,10 @@ import "dayjs/locale/ko";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
-export function parseDate(time: Date) {
+export function parseDateFromNow(time: Date) {
   return dayjs(time).fromNow();
+}
+
+export function parseDate(time: Date) {
+  return dayjs(time).format("YYYY/MM/DD");
 }

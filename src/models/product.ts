@@ -56,3 +56,14 @@ export type FavoriteProduct = {
   product: FavoriteProductInfo;
   isAlarm: boolean; // 알림 여부 (nullable, 선택적)
 };
+
+export type ProductPrice = {
+  id: number;
+  presentPrice: string | null;
+  lowPrice: string | null;
+  highPrice: string | null;
+  lowPriceUpdatedAt: Date;
+  highPriceUpdatedAt: Date;
+  presentPriceUpdatedAt: Date;
+  averagePrice: string;
+};
