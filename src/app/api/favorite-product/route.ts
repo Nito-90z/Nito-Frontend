@@ -8,7 +8,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Bad Request" }, { status: 400 });
   }
 
-  const data = await addFavoriteProduct(productId);
+  try {
+    const data = await addFavoriteProduct(productId);
 
-  return NextResponse.json(data);
+    return NextResponse.json(data);
+  } catch (error: any) {
+    const errorMessage =
+      error.status === 400
+        ? error.response.data.nonField[0]
+        : "Something went wrong";
+
+    return NextResponse.json(
+      { message: errorMessage },
+      { status: error.status || 500 } // 에러가 있다면 해당 코드, 없으면 500
+    );
+  }
 }
