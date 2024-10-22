@@ -12,11 +12,10 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // 인증되지 않은 사용자의 api 요청인 경우 401 코드로 반환
     if (nextUrl.pathname.startsWith("/api")) {
       return NextResponse.json(
         { message: "Authentication Error" },
-        { status: 401 }
+        { status: 444 }
       );
     }
 
@@ -39,5 +38,16 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/product-list", "/search", "/mypage", "/signin"],
+  matcher: [
+    "/",
+    "/product-list",
+    "/product-list/product/:path*",
+    "/search",
+    "/mypage",
+    "/signin",
+    "/api/category",
+    "/api/favorite-product",
+    "/api/product/:path*",
+    "/api/user/:path*",
+  ],
 };

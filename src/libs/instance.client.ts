@@ -3,6 +3,7 @@ import { getCookie } from "cookies-next";
 
 export const clientInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASEURL,
+  withCredentials: true,
   timeout: 5 * 1000,
   headers: { "Content-Type": "application/json" },
 });

@@ -1,6 +1,7 @@
 import { SignInData } from "@/fetchers/user";
 import { serverInstance } from "@/libs/instance.server";
 import { checkIosDevice } from "@/utils/device";
+import axios from "axios";
 import { cookies, headers } from "next/headers";
 
 export async function generateNickname() {
@@ -31,8 +32,10 @@ export async function refresh() {
   const cookieStore = cookies();
   const refreshToken = cookieStore.get("refreshToken")?.value;
 
-  return serverInstance
-    .post("/v1/user/refresh/", { refreshToken })
+  return axios
+    .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/user/refresh/`, {
+      refreshToken,
+    })
     .then((res) => res.data);
 }
 
@@ -54,5 +57,7 @@ export async function login() {
     refreshToken,
   };
 
-  return serverInstance.post("/v1/user/login/", body).then((res) => res.data);
+  return axios
+    .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/user/login/`, body)
+    .then((res) => res.data);
 }
