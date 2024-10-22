@@ -2,7 +2,7 @@ import { DetailProduct } from "@/models/product";
 import Badge from "../common/Badge";
 import { convertDollarToWon } from "@/utils/currency-converter";
 import { parseDateFromNow } from "@/utils/date";
-import Button from "../common/Button";
+import Link from "next/link";
 
 export default function Information({ product }: { product: DetailProduct }) {
   const {
@@ -14,6 +14,7 @@ export default function Information({ product }: { product: DetailProduct }) {
     crawlingUpdatedAt,
     presentPriceUpdatedAt,
     optionStatus,
+    affiliateUrl,
   } = product;
   return (
     <div className="flex flex-col gap-3 py-4">
@@ -22,7 +23,7 @@ export default function Information({ product }: { product: DetailProduct }) {
         <div className="flex gap-[6px]">
           {isLowestPriceEver && <Badge direction="up">역대최저가</Badge>}
           {!!discountRate && (
-            <Badge direction="up" icon>
+            <Badge direction="down" icon>
               {discountRate}%
             </Badge>
           )}
@@ -57,9 +58,13 @@ export default function Information({ product }: { product: DetailProduct }) {
         </p>
       </div>
       {optionStatus && (
-        <Button className="bg-white border border-brand text-brand">
+        <Link
+          href={affiliateUrl}
+          target="_blank"
+          className="text-center py-[14px] bg-white border border-brand text-brand font-bold leading-7"
+        >
           더 많은 옵션 보러가기
-        </Button>
+        </Link>
       )}
     </div>
   );

@@ -33,7 +33,7 @@ export default function RelatedProductItem({ product }: { product: Product }) {
           src={image}
           alt={`${title} image`}
           size="md"
-          className="h-[120px] object-cover"
+          className="w-[120px] h-[120px] object-cover"
         />
         <CircleButton
           size="sm"

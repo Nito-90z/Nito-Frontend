@@ -8,6 +8,7 @@ type Props = {
   src: string | null;
   alt: string;
   size?: "sm" | "md" | "lg";
+  priority?: boolean;
   className?: string;
 };
 
@@ -15,6 +16,7 @@ export default function ProductImage({
   src,
   alt,
   size = "sm",
+  priority,
   className,
 }: Props) {
   const [isImageError, setIsImageError] = useState(false);
@@ -24,6 +26,7 @@ export default function ProductImage({
     <NullProductImage className={className} />
   ) : (
     <Image
+      priority={priority}
       src={src || ""}
       alt={alt}
       width={sizes}

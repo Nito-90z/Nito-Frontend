@@ -16,10 +16,11 @@ export default function Description({ id }: { id: string }) {
   return (
     <div className="p-4">
       <ProductImage
+        priority
         src={product.image}
         alt={`${product.title} image`}
         size="lg"
-        className="h-[295px] object-contain"
+        className="w-full h-[295px] object-contain"
       />
       <Information product={product} />
     </div>
