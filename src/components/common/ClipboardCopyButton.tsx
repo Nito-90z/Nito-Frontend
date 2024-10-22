@@ -3,14 +3,16 @@
 import { useToastStore } from "@/stores/toast";
 
 type Props = {
-  copyText: string;
+  copyText: string | null;
   children: React.ReactNode;
 };
 
 export default function ClipboardCopyButton({ copyText, children }: Props) {
   const setToast = useToastStore.use.setToast();
 
-  const handleCopy = async (text: string) => {
+  const handleCopy = async (text: string | null) => {
+    if (!text) return;
+
     if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(text);

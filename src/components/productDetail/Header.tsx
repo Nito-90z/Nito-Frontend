@@ -8,6 +8,12 @@ import ClipboardCopyButton from "../common/ClipboardCopyButton";
 export default function Header() {
   const router = useRouter();
 
+  const getUrl = () => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+    return window.location.href;
+  };
   return (
     <header className="sticky top-0 flex justify-center px-4 py-[16.5px] bg-white border-b border-border z-50">
       <button
@@ -18,7 +24,7 @@ export default function Header() {
       </button>
       <h1 className="text-xl font-bold leading-[29px]">상품 상세</h1>
       <div className="absolute top-1/2 right-4 -translate-y-1/2 w-[22px] h-[22px]">
-        <ClipboardCopyButton copyText={window.location.href}>
+        <ClipboardCopyButton copyText={getUrl()}>
           <ShareIcon />
         </ClipboardCopyButton>
       </div>
