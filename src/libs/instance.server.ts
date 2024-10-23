@@ -8,16 +8,19 @@ export const serverInstance = axios.create({
   timeout: 10 * 1000,
   headers: { "Content-Type": "application/json" },
 });
+
 serverInstance.interceptors.request.use((config) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
   if (accessToken) {
     const newConfig = config;
     newConfig.headers.Authorization = `Bearer ${accessToken}`;
+
     return newConfig;
   }
   return config;
 });
+
 serverInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -31,6 +34,7 @@ serverInstance.interceptors.response.use(
           cookieStore.set("accessToken", accessToken);
           cookieStore.set("refreshToken", refreshToken);
           originRequest.headers.Authorization = `Bearer ${accessToken}`;
+
           return axios(originRequest);
         } catch (error) {
           return Promise.reject(error);

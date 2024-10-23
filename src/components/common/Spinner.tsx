@@ -4,8 +4,9 @@ import { MoonLoader } from "react-spinners";
 
 type Props = {
   color?: string;
+  size?: number;
 };
 
-export default function Spinner({ color = "#FC5660" }: Props) {
-  return <MoonLoader size={32} color={color} speedMultiplier={0.8} />;
+export default function Spinner({ color = "#FC5660", size }: Props) {
+  return <MoonLoader color={color} size={size} speedMultiplier={0.8} />;
 }

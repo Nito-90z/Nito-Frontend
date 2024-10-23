@@ -8,7 +8,7 @@ import Agreement from "./Agreement";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { generateNicknameFetcher } from "@/fetchers/user";
 import axios from "axios";
-import { useSignIn } from "@/hooks/user";
+import { useSignIn } from "@/hooks/auth";
 import { AgreementType } from "@/models/user";
 
 const INITIAL_AGREEMENT = {

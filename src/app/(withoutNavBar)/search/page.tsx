@@ -40,10 +40,7 @@ const PRODUCTS: Product[] = [
     id: 1,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Wireless Earbuds",
-      koTitle: "무선 이어폰",
-    },
+    title: "무선 이어폰",
     isOutOfStock: true,
     presentPrice: "751.99",
     price: "79.99",
@@ -60,10 +57,7 @@ const PRODUCTS: Product[] = [
     id: 2,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Smart Watch",
-      koTitle: "스마트 시계",
-    },
+    title: "스마트 시계",
     isOutOfStock: false,
     presentPrice: "199.99",
     price: "249.99",
@@ -80,10 +74,7 @@ const PRODUCTS: Product[] = [
     id: 3,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Laptop Sleeve",
-      koTitle: "노트북 슬리브",
-    },
+    title: "노트북 슬리브",
     isOutOfStock: false,
     presentPrice: "19.99",
     price: "29.99",
@@ -100,10 +91,7 @@ const PRODUCTS: Product[] = [
     id: 4,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Gaming Keyboard",
-      koTitle: "게이밍 키보드",
-    },
+    title: "게이밍 키보드",
     isOutOfStock: false,
     presentPrice: "89.99",
     price: "129.99",
@@ -120,10 +108,7 @@ const PRODUCTS: Product[] = [
     id: 5,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Portable Charger",
-      koTitle: "휴대용 충전기",
-    },
+    title: "휴대용 충전기",
     isOutOfStock: false,
     presentPrice: "39.99",
     price: "49.99",
@@ -140,10 +125,7 @@ const PRODUCTS: Product[] = [
     id: 6,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Wireless Earbuds",
-      koTitle: "무선 이어폰",
-    },
+    title: "무선 이어폰",
     isOutOfStock: true,
     presentPrice: "751.99",
     price: "79.99",
@@ -160,10 +142,7 @@ const PRODUCTS: Product[] = [
     id: 7,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Smart Watch",
-      koTitle: "스마트 시계",
-    },
+    title: "스마트 시계",
     isOutOfStock: false,
     presentPrice: "199.99",
     price: "249.99",
@@ -180,10 +159,7 @@ const PRODUCTS: Product[] = [
     id: 8,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Laptop Sleeve",
-      koTitle: "노트북 슬리브",
-    },
+    title: "노트북 슬리브",
     isOutOfStock: false,
     presentPrice: "19.99",
     price: "29.99",
@@ -200,10 +176,7 @@ const PRODUCTS: Product[] = [
     id: 9,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Gaming Keyboard",
-      koTitle: "게이밍 키보드",
-    },
+    title: "게이밍 키보드",
     isOutOfStock: false,
     presentPrice: "89.99",
     price: "129.99",
@@ -220,10 +193,7 @@ const PRODUCTS: Product[] = [
     id: 10,
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
-    title: {
-      enTitle: "Portable Charger",
-      koTitle: "휴대용 충전기",
-    },
+    title: "휴대용 충전기",
     isOutOfStock: false,
     presentPrice: "39.99",
     price: "49.99",

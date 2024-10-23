@@ -29,6 +29,7 @@ export async function signInFetcher(body: SignInData) {
     })
     .then((res) => res.data);
 }
+
 export async function updateUserInfoFetcher(data: any) {
   return clientInstance.patch('/api/user/me', { data }).then((res) => res.data);
 }
