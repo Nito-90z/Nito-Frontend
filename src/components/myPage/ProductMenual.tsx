@@ -46,8 +46,7 @@ export default function ProductMenual() {
             3
           </div>
           <p className='text-base font-bold text-dark-gray'>
-            앱 리스트에서 NITO를 클릭하면 상품 추가가 완료 돼
-            <br />요!
+            앱 리스트에서 NITO를 클릭하면 상품 추가가 완료 돼요!
           </p>
         </div>
         

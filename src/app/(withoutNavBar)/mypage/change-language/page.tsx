@@ -46,7 +46,6 @@ export default function ChangeLanguagePage() {
           Korean(KR)
         </Button>
       </div>
-      <PriceDiscount />
     </div>
   );
 }

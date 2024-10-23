@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Button from '../common/Button';
 import MoreRightIcon from '../common/icons/MoreRight';
 
@@ -10,9 +11,12 @@ export default function UserSetting() {
 
       <div className='flex items-center justify-between px-4 py-4'>
         <span className=' pt-1 text-base text-dark-gray'>언어 변경</span>
-        <Button className='w-10 h-6 bg-white'>
-          <MoreRightIcon />
-        </Button>
+        <Link href="/mypage/change-language">
+          <Button className='w-10 h-6 bg-white'>
+            <MoreRightIcon />
+          </Button>
+        </Link>
+
       </div>
 
       <div className='flex items-center justify-between px-4 py-4'>

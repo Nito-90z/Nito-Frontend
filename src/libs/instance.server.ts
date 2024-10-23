@@ -12,7 +12,6 @@ export const serverInstance = axios.create({
 serverInstance.interceptors.request.use((config) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
-
   if (accessToken) {
     const newConfig = config;
     newConfig.headers.Authorization = `Bearer ${accessToken}`;
@@ -32,7 +31,6 @@ serverInstance.interceptors.response.use(
         try {
           const originRequest = error.config as InternalAxiosRequestConfig;
           const { accessToken, refreshToken } = await refresh();
-
           cookieStore.set("accessToken", accessToken);
           cookieStore.set("refreshToken", refreshToken);
           originRequest.headers.Authorization = `Bearer ${accessToken}`;

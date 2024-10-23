@@ -17,7 +17,7 @@ export async function nicknameValidationCheck(nickname: string) {
 export async function signIn(
   body: SignInData & {
     device: {
-      os: "ios" | "android";
+      os: 'ios' | 'android';
       uid: string;
       token: string;
     };
@@ -60,4 +60,18 @@ export async function login() {
   return axios
     .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/user/login/`, body)
     .then((res) => res.data);
+}
+
+export async function getUserInfo() {
+  return serverInstance.get(`/v1/user/me/`).then((res) => res.data);
+}
+export async function updateUserInfo(data: any) {
+  return serverInstance.patch('/v1/user/me/', data).then((res) => res.data);
+}
+
+export async function changeNickname() {
+  return serverInstance.put('/v1/user/me/').then((res) => res.data);
+}
+export async function withdrawUser(body: { reason: string }) {
+  await serverInstance.post('/v1/user/me/withdrawal/', { body });
 }

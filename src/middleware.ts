@@ -1,5 +1,4 @@
 import { NextResponse, NextRequest } from "next/server";
-
 export async function middleware(request: NextRequest) {
   const { nextUrl, cookies } = request;
   const accessToken = cookies.get("accessToken")?.value;
@@ -36,10 +35,8 @@ export async function middleware(request: NextRequest) {
   if (nextUrl.pathname.startsWith("/signin")) {
     return NextResponse.redirect(nextUrl.origin);
   }
-
   return NextResponse.next();
 }
-
 export const config = {
   matcher: [
     "/",
