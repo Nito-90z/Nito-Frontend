@@ -1,6 +1,7 @@
 import { usePathname } from "next/navigation";
 import Button from "../common/Button";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 type Props = {
   menu: {
@@ -10,19 +11,17 @@ type Props = {
     onIcon: React.ReactNode;
     offIcon: React.ReactNode;
   };
-  onClick: () => void;
 };
 
 export default function NavBarMenu({
   menu: { title, path, onIcon, offIcon },
-  onClick,
 }: Props) {
   const pathname = usePathname();
 
   return (
-    <Button
+    <Link
+      href={path}
       type="button"
-      onClick={onClick}
       className={twMerge(
         "flex flex-col items-center justify-center gap-[2px] bg-transparent w-fit",
         path === pathname ? "text-brand font-bold" : "text-text"
@@ -30,6 +29,6 @@ export default function NavBarMenu({
     >
       {pathname === path ? onIcon : offIcon}
       <span className="text-xs">{title}</span>
-    </Button>
+    </Link>
   );
 }

@@ -1,11 +1,11 @@
-import { queryInstance } from "@/libs/instance";
+import { clientInstance } from "@/libs/instance.client";
 
 export async function generateNicknameFetcher() {
-  return queryInstance.get("/api/user/nickname").then((res) => res.data);
+  return clientInstance.get("/api/user/nickname").then((res) => res.data);
 }
 
 export async function nicknameValidationCheckFetcher(nickname: string) {
-  return queryInstance
+  return clientInstance
     .get(`/api/user/validate?nickname=${nickname}`)
     .then((res) => res.data);
 }
@@ -23,7 +23,7 @@ export type SignInData = {
 };
 
 export async function signInFetcher(body: SignInData) {
-  return queryInstance
+  return clientInstance
     .post("/api/user/register", {
       body,
     })

@@ -7,3 +7,7 @@ export const NICKNAME_VALID_MESSAGE = "사용 가능한 닉네임이에요";
 // regex
 export const NICKNAME_PATTERN = /^[a-zA-Z0-9]{6,16}$/;
 export const IOS_PATTERN = /iPhone|iPad|iPod/i;
+
+// product-ordering
+export const PRESENT_PRICE = "present_price";
+export const DISCOUNT_RATE = "-discount_rate";
