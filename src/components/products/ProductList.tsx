@@ -72,8 +72,8 @@ export default function ProductList({
       </ul>
       <div ref={ref} />
       {isFetching && (
-        <div className="flex justify-center items-center mb-6">
-          <Spinner size={24} />
+        <div className="flex justify-center items-center py-3 bg-platinum">
+          <p className="text-gray">조회중...</p>
         </div>
       )}
     </div>

@@ -9,19 +9,23 @@ import CircleButton from "../common/CircleButton";
 import PlusIcon from "../common/icons/PlusIcon";
 import { useAddFavorite } from "@/hooks/product";
 import { MouseEvent } from "react";
+import { useToastStore } from "@/stores/toast";
 
 export default function RelatedProductItem({ product }: { product: Product }) {
   const { id, image, title, presentPrice, isLowestPriceEver, discountRate } =
     product;
   const router = useRouter();
-  const { mutate } = useAddFavorite();
+  const { mutateAsync } = useAddFavorite();
+  const setToast = useToastStore.use.setToast();
 
   const handleClick = () => {
     router.push(`/product-list/product/${id}`);
   };
-  const handleAddFavorite = (e: MouseEvent<HTMLButtonElement>) => {
-    mutate({ id });
+  const handleAddFavorite = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    await mutateAsync({ id });
+    setToast("상품을 추가했어요");
+    setTimeout(() => setToast(null), 5000);
   };
   return (
     <div

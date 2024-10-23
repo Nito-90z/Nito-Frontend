@@ -13,10 +13,12 @@ import Link from "next/link";
 import CircleButton from "../common/CircleButton";
 import PlusIcon from "../common/icons/PlusIcon";
 import { useAddFavorite } from "@/hooks/product";
+import { useToastStore } from "@/stores/toast";
 
 export default function DetailDataFetcher({ id }: { id: string }) {
   const productId = Number(id);
-  const { mutate } = useAddFavorite();
+  const { mutateAsync } = useAddFavorite();
+  const setToast = useToastStore.use.setToast();
   const [product, prices, products] = useSuspenseQueries({
     queries: [
       {
@@ -34,6 +36,11 @@ export default function DetailDataFetcher({ id }: { id: string }) {
     ],
   });
 
+  const handleAddFavorite = async () => {
+    await mutateAsync({ id: productId });
+    setToast("상품을 추가했어요");
+    setTimeout(() => setToast(null), 5000);
+  };
   return (
     <>
       <Description product={product.data} />
@@ -50,7 +57,7 @@ export default function DetailDataFetcher({ id }: { id: string }) {
         <CircleButton
           size="lg"
           className="bg-dark-gray"
-          onClick={() => mutate({ id: productId })}
+          onClick={handleAddFavorite}
         >
           <PlusIcon size="lg" />
         </CircleButton>

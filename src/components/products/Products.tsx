@@ -30,7 +30,7 @@ export default function Products() {
   return (
     <>
       <div ref={topRef} />
-      <CategoryDefault count={data ? data[0].count : 0} topRef={topRef}/>
+      <CategoryDefault count={data ? data[0].count : 0} topRef={topRef} />
       {products.length === 0 ? (
         <NullProductList />
       ) : (
