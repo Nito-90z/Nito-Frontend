@@ -7,28 +7,30 @@ import NullProductImage from "./NullProductImage";
 type Props = {
   src: string | null;
   alt: string;
-  width?: number;
-  height?: number;
+  size?: "sm" | "md" | "lg";
+  priority?: boolean;
   className?: string;
 };
 
 export default function ProductImage({
   src,
   alt,
-  width,
-  height,
+  size = "sm",
+  priority,
   className,
 }: Props) {
   const [isImageError, setIsImageError] = useState(false);
+  const sizes = size === "sm" ? 80 : size === "md" ? 120 : 430;
 
   return isImageError ? (
     <NullProductImage className={className} />
   ) : (
     <Image
+      priority={priority}
       src={src || ""}
       alt={alt}
-      width={width || 80}
-      height={height || 80}
+      width={sizes}
+      height={sizes}
       className={className}
       onError={() => setIsImageError(true)}
     />

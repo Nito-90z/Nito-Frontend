@@ -1,4 +1,4 @@
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   text: string;
@@ -8,15 +8,15 @@ type Props = {
 };
 
 export default function Toast({
-  text = 'Toast',
-  bgColor = 'bg-dark-gray',
-  textColor = 'text-white',
-  position = '',
+  text = "Toast",
+  bgColor = "bg-dark-gray",
+  textColor = "text-white",
+  position = "",
 }: Props) {
   return (
     <div
       className={twMerge(
-        'w-[343px] h-[52px] py-1 px-2 rounded-sm justify-center text-center items-center whitespace-pre-line',
+        "w-[343px] h-[52px] py-1 px-2 rounded-sm justify-center text-center items-center whitespace-pre-line z-50",
         position,
         bgColor,
         textColor

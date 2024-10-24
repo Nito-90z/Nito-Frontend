@@ -10,7 +10,7 @@ export default function ModalPortal({
     return null;
   }
 
-  const modal = document.getElementById("portal") as HTMLElement;
+  const modal = document.getElementById("modal") as HTMLElement;
 
   return createPortal(children, modal);
 }

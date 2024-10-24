@@ -14,10 +14,7 @@ const PRODUCTS: FavoriteProduct[] = [
     id: 1,
     product: {
       id: 101,
-      title: {
-        enTitle: "Wireless Headphones",
-        koTitle: "무선 헤드폰",
-      },
+      title: "무선 헤드폰",
       image:
         "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
       presentPrice: "99.99",
@@ -32,10 +29,7 @@ const PRODUCTS: FavoriteProduct[] = [
     id: 2,
     product: {
       id: 102,
-      title: {
-        enTitle: "Smartphone",
-        koTitle: "스마트폰",
-      },
+      title: "스마트폰",
       image:
         "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
       presentPrice: "599.99",
@@ -50,10 +44,7 @@ const PRODUCTS: FavoriteProduct[] = [
     id: 3,
     product: {
       id: 103,
-      title: {
-        enTitle: "Bluetooth Speaker",
-        koTitle: "블루투스 스피커",
-      },
+      title: "블루투스 스피커",
       image: null,
       presentPrice: "49.99",
       isLowestPriceEver: true,
@@ -67,10 +58,7 @@ const PRODUCTS: FavoriteProduct[] = [
     id: 4,
     product: {
       id: 104,
-      title: {
-        enTitle: "Gaming Mouse",
-        koTitle: "게이밍 마우스",
-      },
+      title: "게이밍 마우스",
       image:
         "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hY3xlbnwwfHwwfHx8MA%3D%3D",
       presentPrice: "29.99",
@@ -85,10 +73,7 @@ const PRODUCTS: FavoriteProduct[] = [
     id: 5,
     product: {
       id: 105,
-      title: {
-        enTitle: "4K Monitor",
-        koTitle: "4K 모니터",
-      },
+      title: "4K 모니터",
       image: null,
       presentPrice: "399.99",
       isLowestPriceEver: true,

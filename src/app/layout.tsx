@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "../css/index.css";
 import QueryProvider from "@/contexts/QueryContext";
 import ModalProvider from "@/contexts/ModalContext";
+import ToastProvider from "@/contexts/ToastContext";
 
 export const metadata: Metadata = {
   title: "Nito",
@@ -28,10 +29,13 @@ export default function RootLayout({
       >
         <QueryProvider>
           <ModalProvider>
-            <main className="relative flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
-              {children}
-              <div id="portal" />
-            </main>
+            <ToastProvider>
+              <main className="relative flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
+                {children}
+                <div id="modal" />
+                <div id="toast" />
+              </main>
+            </ToastProvider>
           </ModalProvider>
         </QueryProvider>
       </body>

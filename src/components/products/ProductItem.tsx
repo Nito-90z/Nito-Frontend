@@ -11,6 +11,9 @@ import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
 import ProductImage from "./wishList/ProductImage";
 import CheckBox from "../common/CheckBox";
 import { FavoriteProductInfo, Product } from "@/models/product";
+import AlarmOffIcon from "../common/icons/AlarmOffIcon";
+import { useRouter } from "next/navigation";
+import { MouseEvent } from "react";
 
 type Props = {
   product: Product | FavoriteProductInfo;
@@ -18,6 +21,7 @@ type Props = {
   isEditing?: boolean;
   selected?: number[];
   onSelect?: (id: number) => void;
+  addFavorite: (id: number) => void;
 };
 
 export default function ProductItem({
@@ -26,6 +30,7 @@ export default function ProductItem({
   isEditing,
   selected,
   onSelect,
+  addFavorite,
 }: Props) {
   const {
     id,
@@ -37,18 +42,22 @@ export default function ProductItem({
     isStopSelling,
     isLowestPriceEver,
   } = product;
+  const router = useRouter();
   const isUnavailable = isOutOfStock || isStopSelling;
-  const isFavorite = !("isFavorite" in product) || product.isFavorite;
+  const isFavoritePage = !("isFavorite" in product);
   const isSelected = selected?.includes(id);
 
   const handleClick = () => {
     if (isEditing) {
       onSelect && onSelect(id);
     } else {
-      // 상세 페이지로 이동
+      router.push(`/product-list/product/${id}`);
     }
   };
-
+  const handleAddFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+    addFavorite(id);
+    e.stopPropagation();
+  };
   return (
     <li
       className={twMerge(
@@ -68,12 +77,10 @@ export default function ProductItem({
           <CheckBox size="lg" checked={isSelected} className="border-black" />
         </div>
       )}
-      <div className="relative">
+      <div className="relative shrink-0 w-20 h-20">
         <ProductImage
           src={image ?? ""}
-          alt={`${title.koTitle} product image`}
-          width={80}
-          height={80}
+          alt={`${title} product image`}
           className={twMerge(
             "object-cover aspect-square rounded",
             isUnavailable && "brightness-50"
@@ -93,10 +100,14 @@ export default function ProductItem({
               isUnavailable && "opacity-50"
             )}
           >
-            {title.koTitle}
+            {title}
           </p>
-          {!isFavorite ? (
-            <CircleButton size="sm" className="bg-dark-gray">
+          {!isFavoritePage ? (
+            <CircleButton
+              size="sm"
+              className="bg-dark-gray"
+              onClick={handleAddFavorite}
+            >
               <PlusIcon size="sm" />
             </CircleButton>
           ) : isUnavailable ? (
@@ -109,7 +120,7 @@ export default function ProductItem({
             </CircleButton>
           ) : (
             <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
-              <AlarmIcon size="sm" />
+              {isAlarm ? <AlarmIcon size="sm" /> : <AlarmOffIcon size="sm" />}
             </CircleButton>
           )}
         </div>
@@ -134,9 +145,11 @@ export default function ProductItem({
             <span className="text-sm text-[#767676]">
               {convertDollarToWon(presentPrice)}
             </span>
-            <Badge size="sm" direction="down" icon>
-              {discountRate}%
-            </Badge>
+            {!!discountRate && (
+              <Badge size="sm" direction="down" icon>
+                {discountRate}%
+              </Badge>
+            )}
           </div>
         </div>
       </div>

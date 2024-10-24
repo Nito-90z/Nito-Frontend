@@ -1,6 +1,17 @@
-import Image from 'next/image';
-import moreUpIcon from '../../../../public/images/more-right.svg';
+import Image from "next/image";
+import moreRightIcon from "../../../../public/images/more-right.svg";
+import { twMerge } from "tailwind-merge";
 
-export default function MoreRightIcon() {
-  return <Image src={moreUpIcon} alt='more up' width={24} height={24} />;
+type Props = {
+  className?: string;
+};
+
+export default function MoreRightIcon({ className }: Props) {
+  return (
+    <Image
+      src={moreRightIcon}
+      alt="more up"
+      className={twMerge("w-6 h-6", className)}
+    />
+  );
 }
