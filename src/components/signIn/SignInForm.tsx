@@ -5,7 +5,7 @@ import NicknameForm from "./NicknameForm";
 import Button from "../common/Button";
 import CloseIcon from "../common/icons/CloseIcon";
 import Agreement from "./Agreement";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { generateNicknameFetcher } from "@/fetchers/user";
 import axios from "axios";
 import { useSignIn } from "@/hooks/auth";
@@ -31,12 +31,12 @@ const INITIAL_ERROR_COMMNET = {
 };
 
 export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
-  const { data } = useSuspenseQuery<{ nickname: string }>({
+  const { data } = useQuery<{ nickname: string }>({
     queryKey: ["nickname"],
     queryFn: generateNicknameFetcher,
     staleTime: 60 * 1000,
   });
-  const [nickname, setNickname] = useState(data.nickname);
+  const [nickname, setNickname] = useState(data?.nickname || "");
   const [nicknameComment, setNicknameComment] = useState(INITIAL_ERROR_COMMNET);
   const [agreement, setAgreement] = useState<AgreementType>(INITIAL_AGREEMENT);
   const isAllAgree = Object.values(agreement).every((v) => v === true);
