@@ -38,3 +38,22 @@ export async function getRelatedProducts(productId: number) {
     .get(`/v1/product/${productId}/related_product_list/`)
     .then((res) => res.data);
 }
+
+export async function getFavoriteProducts(query: {
+  [k: string]: string | null;
+}) {
+  const queryParams = new URLSearchParams();
+
+  Object.entries(query).forEach(([key, value]) => {
+    if (value) {
+      queryParams.append(key, String(value));
+    }
+  });
+
+  const queryString = queryParams.toString();
+  const url = queryString
+    ? `favorite_product/?${queryString}`
+    : "favorite_product/";
+
+  return serverInstance.get(`/v1/${url}`).then((res) => res.data);
+}

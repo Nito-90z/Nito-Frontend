@@ -1,6 +1,7 @@
 import { clientInstance } from "@/libs/instance.client";
 import {
   DetailProduct,
+  FavoriteProductQuery,
   Product,
   ProductPrice,
   ProductQuery,
@@ -59,4 +60,31 @@ export async function getRelatedProductsFetcher(
   return clientInstance
     .get(`/api/product/${productId}/related_product_list`)
     .then((res) => res.data);
+}
+
+export async function getFavoriteProductsFetcher({
+  cursor,
+  query,
+}: {
+  cursor: string | null;
+  query: FavoriteProductQuery;
+}) {
+  const queryParams = new URLSearchParams();
+
+  if (cursor) {
+    queryParams.append("cursor", String(cursor));
+  }
+
+  Object.entries(query).forEach(([key, value]) => {
+    if (value !== null) {
+      queryParams.append(key, String(value));
+    }
+  });
+
+  const queryString = queryParams.toString();
+  const url = queryString
+    ? `favorite-product?${queryString}`
+    : "favorite-product";
+
+  return clientInstance.get(`/api/${url}`).then((res) => res.data);
 }

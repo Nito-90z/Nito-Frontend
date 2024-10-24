@@ -9,12 +9,14 @@ export type CategoryPage = {
   results: CategoryItem[];
 };
 
+export type Ordering = "present_price" | "-discount_rate" | null;
+
 export type ProductQuery = {
   page_size: number;
   category_id: number | null;
   is_lowest_price_ever: boolean | null;
   is_out_of_stock: boolean | null;
-  ordering: "present_price" | "-discount_rate" | null;
+  ordering: Ordering;
   search: string | null;
 };
 
@@ -39,6 +41,11 @@ export type DetailProduct = Product & {
   favoriteId: number | null;
   isAlarm: boolean;
   optionStatus: boolean;
+};
+
+export type FavoriteProductQuery = {
+  page_size: number;
+  ordering: Ordering;
 };
 
 export type FavoriteProductInfo = Omit<

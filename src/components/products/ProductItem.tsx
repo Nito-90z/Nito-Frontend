@@ -8,7 +8,7 @@ import RestockAlarmIcon from "../common/icons/RestockAlarmIcon";
 import AlarmIcon from "../common/icons/AlarmIcon";
 import PlusIcon from "../common/icons/PlusIcon";
 import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
-import ProductImage from "./wishList/ProductImage";
+import ProductImage from "./ProductImage";
 import CheckBox from "../common/CheckBox";
 import { FavoriteProductInfo, Product } from "@/models/product";
 import AlarmOffIcon from "../common/icons/AlarmOffIcon";

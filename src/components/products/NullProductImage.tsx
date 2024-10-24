@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import NullProductImageIcon from "../../common/icons/NullProductImageIcon";
+import NullProductImageIcon from "../common/icons/NullProductImageIcon";
 
 export default function NullProductImage({
   className,

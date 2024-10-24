@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/models/product";
-import ProductImage from "../products/wishList/ProductImage";
+import ProductImage from "../products/ProductImage";
 import { convertDollarToWon } from "@/utils/currency-converter";
 import Badge from "../common/Badge";
 import { useRouter } from "next/navigation";

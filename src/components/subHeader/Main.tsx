@@ -3,13 +3,29 @@
 import { twMerge } from "tailwind-merge";
 import Button from "../common/Button";
 import HeaderAlarmIcon from "../common/icons/HeaderAlarmIcon";
+import { FavoriteProductQuery, Ordering } from "@/models/product";
+import { DISCOUNT_RATE, PRESENT_PRICE } from "@/constants";
 
 type Props = {
   count: number;
+  query: FavoriteProductQuery;
   onEditing: () => void;
+  onChangeOrdering: (value: Ordering) => void;
 };
 
-export default function Main({ count, onEditing }: Props) {
+export default function Main({
+  count,
+  query,
+  onEditing,
+  onChangeOrdering,
+}: Props) {
+  const handleOrdering = (value: Ordering) => {
+    if (query.ordering === value) {
+      onChangeOrdering(null);
+    } else {
+      onChangeOrdering(value);
+    }
+  };
   return (
     <div className="sticky top-0 bg-white z-50">
       <header className="w-full p-4 pt-5 flex items-center justify-between">
@@ -24,19 +40,25 @@ export default function Main({ count, onEditing }: Props) {
       </header>
       <div className="w-full pb-2 px-4 flex items-center justify-between">
         <div className="flex items-center gap-2 text-light-gray text-sm">
-          <Button
-            onClick={() => {}}
-            className="w-fit h-fit text-light-gray bg-transparent"
+          <button
+            onClick={() => handleOrdering(DISCOUNT_RATE)}
+            className={twMerge(
+              "pr-2 rounded",
+              query.ordering === DISCOUNT_RATE && "text-dark-gray"
+            )}
           >
             할인율순
-          </Button>
+          </button>
           |
-          <Button
-            onClick={() => {}}
-            className="w-fit h-fit text-light-gray bg-transparent"
+          <button
+            onClick={() => handleOrdering(PRESENT_PRICE)}
+            className={twMerge(
+              "pl-2 rounded",
+              query.ordering === PRESENT_PRICE && "text-dark-gray"
+            )}
           >
             낮은 가격순
-          </Button>
+          </button>
         </div>
         <Button
           disabled={count === 0}
