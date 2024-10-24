@@ -16,7 +16,7 @@ export default function Intro() {
     staleTime: Infinity, // 데이터를 한 번만 가져오도록 설정
     refetchOnWindowFocus: false,
   });
-  console.log(userData)
+
   const onPencilClick = () => {
     setShowChangeName(true);
   };

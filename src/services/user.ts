@@ -1,11 +1,11 @@
-import { SignInData } from "@/fetchers/user";
-import { serverInstance } from "@/libs/instance.server";
-import { checkIosDevice } from "@/utils/device";
-import axios from "axios";
-import { cookies, headers } from "next/headers";
+import { SignInData } from '@/fetchers/user';
+import { serverInstance } from '@/libs/instance.server';
+import { checkIosDevice } from '@/utils/device';
+import axios from 'axios';
+import { cookies, headers } from 'next/headers';
 
 export async function generateNickname() {
-  return serverInstance.get("/v1/user/nickname/").then((res) => res.data);
+  return serverInstance.get('/v1/user/nickname/').then((res) => res.data);
 }
 
 export async function nicknameValidationCheck(nickname: string) {
@@ -24,13 +24,13 @@ export async function signIn(
   }
 ) {
   return serverInstance
-    .post("/v1/user/register/", body)
+    .post('/v1/user/register/', body)
     .then((res) => res.data);
 }
 
 export async function refresh() {
   const cookieStore = cookies();
-  const refreshToken = cookieStore.get("refreshToken")?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
 
   return axios
     .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/user/refresh/`, {
@@ -42,15 +42,15 @@ export async function refresh() {
 export async function login() {
   const headersList = headers();
   const cookieStore = cookies();
-  const refreshToken = cookieStore.get("refreshToken")?.value;
-  const uid = cookieStore.get("uid")?.value;
-  const token = cookieStore.get("token")?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+  const uid = cookieStore.get('uid')?.value;
+  const token = cookieStore.get('token')?.value;
 
   const body = {
     device: {
-      os: checkIosDevice(headersList.get("user-agent") || "")
-        ? "ios"
-        : "android",
+      os: checkIosDevice(headersList.get('user-agent') || '')
+        ? 'ios'
+        : 'android',
       uid,
       token,
     },
@@ -65,13 +65,10 @@ export async function login() {
 export async function getUserInfo() {
   return serverInstance.get(`/v1/user/me/`).then((res) => res.data);
 }
-export async function updateUserInfo(data: any) {
-  return serverInstance.patch('/v1/user/me/', data).then((res) => res.data);
+export async function updateUserInfo() {
+  return serverInstance.patch('/v1/user/me/').then((res) => res.data);
 }
 
-export async function changeNickname() {
-  return serverInstance.put('/v1/user/me/').then((res) => res.data);
-}
 export async function withdrawUser(body: { reason: string }) {
-  await serverInstance.post('/v1/user/me/withdrawal/', { body });
+  await serverInstance.post('/v1/user/me/withdraw/', { body });
 }

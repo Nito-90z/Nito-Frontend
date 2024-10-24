@@ -30,8 +30,8 @@ export async function signInFetcher(body: SignInData) {
     .then((res) => res.data);
 }
 
-export async function updateUserInfoFetcher(data: any) {
-  return clientInstance.patch('/api/user/me', { data }).then((res) => res.data);
+export async function updateUserInfoFetcher() {
+  return clientInstance.patch('/api/user/me').then((res) => res.data);
 }
 
 export type UserData = {
@@ -57,7 +57,7 @@ export async function getUserFetcher(): Promise<UserData> {
 
 // 회원 탈퇴
 export async function withdrawUserFetcher(body: { reason: string }) {
-  await clientInstance.post('/v1/user/me/withdrawal', { body });
+  await clientInstance.post('/v1/user/me/withdraw', { body });
 }
 
 // 닉네임 변경
