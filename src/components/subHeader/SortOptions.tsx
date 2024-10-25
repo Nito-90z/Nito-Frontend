@@ -37,7 +37,7 @@ export default function SortOptions({ count, className }: Props) {
       <div className="flex flex-col gap-3 text-sm">
         <div className="flex justify-between items-center text-gray-text">
           <p>전체({count})</p>
-          <div className="items-center">
+          <div>
             <button
               onClick={() => handleOrdering(DISCOUNT_RATE)}
               className={twMerge(

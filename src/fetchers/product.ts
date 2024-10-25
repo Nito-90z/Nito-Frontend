@@ -88,3 +88,12 @@ export async function getFavoriteProductsFetcher({
 
   return clientInstance.get(`/api/${url}`).then((res) => res.data);
 }
+
+export async function deleteFavoriteProductsFetcher(ids: number[]) {
+  return clientInstance
+    .delete("/api/favorite-product", {
+      params: { ids },
+      paramsSerializer: (params) => new URLSearchParams(params).toString(),
+    })
+    .then((res) => res.data);
+}

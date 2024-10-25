@@ -39,7 +39,7 @@ export default function Main({
         </div>
       </header>
       <div className="w-full pb-2 px-4 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-light-gray text-sm">
+        <div className="text-light-gray text-sm">
           <button
             onClick={() => handleOrdering(DISCOUNT_RATE)}
             className={twMerge(

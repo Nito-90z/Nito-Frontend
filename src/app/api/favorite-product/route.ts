@@ -1,4 +1,8 @@
-import { addFavoriteProduct, getFavoriteProducts } from "@/services/product";
+import {
+  addFavoriteProduct,
+  deleteFavoriteProducts,
+  getFavoriteProducts,
+} from "@/services/product";
 import { NextRequest, NextResponse } from "next/server";
 
 const QUERY_KEYS = ["cursor", "page_size", "ordering"];
@@ -30,6 +34,33 @@ export async function POST(request: NextRequest) {
     const errorMessage =
       error.status === 400
         ? error.response.data.nonField[0]
+        : "Something went wrong";
+
+    return NextResponse.json(
+      { message: errorMessage },
+      { status: error.status || 500 } // 에러가 있다면 해당 코드, 없으면 500
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const ids = searchParams.get("ids");
+
+  if (!ids) {
+    return NextResponse.json({ message: "Bad Request" }, { status: 400 });
+  }
+
+  const idsArray = ids.split(",").map(Number);
+
+  try {
+    await deleteFavoriteProducts(idsArray);
+
+    return NextResponse.json({ message: "Deleted!" }, { status: 200 });
+  } catch (error: any) {
+    const errorMessage =
+      error.status === 404
+        ? error.response.data.detail
         : "Something went wrong";
 
     return NextResponse.json(

@@ -55,11 +55,13 @@ export default function ProductList({
       >
         {products.map((item) => {
           const product = "product" in item ? item.product : item;
+          const favoriteId = "id" in item ? item.id : null;
           const isAlarm = "isAlarm" in item && item.isAlarm;
 
           return (
             <ProductItem
               key={product.id}
+              favoriteId={favoriteId}
               product={product}
               isAlarm={isAlarm}
               isEditing={isEditing}

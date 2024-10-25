@@ -57,3 +57,12 @@ export async function getFavoriteProducts(query: {
 
   return serverInstance.get(`/v1/${url}`).then((res) => res.data);
 }
+
+export async function deleteFavoriteProducts(ids: number[]) {
+  serverInstance
+    .delete("/v1/favorite_product/delete_multiple/", {
+      params: { ids },
+      paramsSerializer: (params) => new URLSearchParams(params).toString(),
+    })
+    .catch(() => new Response("Not Found!", { status: 404 }));
+}

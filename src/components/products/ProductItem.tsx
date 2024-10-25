@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 
 type Props = {
+  favoriteId: number | null;
   product: Product | FavoriteProductInfo;
   isAlarm: boolean;
   isEditing?: boolean;
@@ -25,6 +26,7 @@ type Props = {
 };
 
 export default function ProductItem({
+  favoriteId,
   product,
   isAlarm,
   isEditing,
@@ -45,11 +47,11 @@ export default function ProductItem({
   const router = useRouter();
   const isUnavailable = isOutOfStock || isStopSelling;
   const isFavoritePage = !("isFavorite" in product);
-  const isSelected = selected?.includes(id);
+  const isSelected = selected?.includes(favoriteId || -1);
 
   const handleClick = () => {
-    if (isEditing) {
-      onSelect && onSelect(id);
+    if (isEditing && favoriteId) {
+      onSelect && onSelect(favoriteId);
     } else {
       router.push(`/product-list/product/${id}`);
     }
