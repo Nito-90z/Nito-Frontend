@@ -1,4 +1,4 @@
-import ProductImage from "../products/wishList/ProductImage";
+import ProductImage from "../products/ProductImage";
 import Information from "./Information";
 import { DetailProduct } from "@/models/product";
 

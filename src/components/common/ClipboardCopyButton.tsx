@@ -16,11 +16,10 @@ export default function ClipboardCopyButton({ copyText, children }: Props) {
     if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(text);
-        setToast("클립보드에 복사되었습니다.");
-        setTimeout(() => setToast(null), 5000);
+        setToast("클립보드에 복사되었습니다.", 5000);
       } catch (error) {
         console.log(error);
-        setToast("복사를 다시 시도해주세요.");
+        setToast("복사를 다시 시도해주세요.", 5000);
       }
     }
   };

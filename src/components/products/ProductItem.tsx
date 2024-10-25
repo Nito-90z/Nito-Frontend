@@ -8,7 +8,7 @@ import RestockAlarmIcon from "../common/icons/RestockAlarmIcon";
 import AlarmIcon from "../common/icons/AlarmIcon";
 import PlusIcon from "../common/icons/PlusIcon";
 import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
-import ProductImage from "./wishList/ProductImage";
+import ProductImage from "./ProductImage";
 import CheckBox from "../common/CheckBox";
 import { FavoriteProductInfo, Product } from "@/models/product";
 import AlarmOffIcon from "../common/icons/AlarmOffIcon";
@@ -16,21 +16,25 @@ import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 
 type Props = {
+  favoriteId: number | null;
   product: Product | FavoriteProductInfo;
   isAlarm: boolean;
   isEditing?: boolean;
   selected?: number[];
   onSelect?: (id: number) => void;
-  addFavorite: (id: number) => void;
+  addFavorite?: (id: number) => void;
+  setIsAlarm?: (id: number, isAlarm: boolean) => void;
 };
 
 export default function ProductItem({
+  favoriteId,
   product,
   isAlarm,
   isEditing,
   selected,
   onSelect,
   addFavorite,
+  setIsAlarm,
 }: Props) {
   const {
     id,
@@ -45,17 +49,21 @@ export default function ProductItem({
   const router = useRouter();
   const isUnavailable = isOutOfStock || isStopSelling;
   const isFavoritePage = !("isFavorite" in product);
-  const isSelected = selected?.includes(id);
+  const isSelected = selected?.includes(favoriteId || -1);
 
   const handleClick = () => {
-    if (isEditing) {
-      onSelect && onSelect(id);
+    if (isEditing && favoriteId) {
+      onSelect && onSelect(favoriteId);
     } else {
       router.push(`/product-list/product/${id}`);
     }
   };
   const handleAddFavorite = (e: MouseEvent<HTMLButtonElement>) => {
-    addFavorite(id);
+    addFavorite && addFavorite(id);
+    e.stopPropagation();
+  };
+  const handleSetIsAlarm = (e: MouseEvent<HTMLButtonElement>) => {
+    setIsAlarm && setIsAlarm(favoriteId!, isAlarm);
     e.stopPropagation();
   };
   return (
@@ -111,7 +119,11 @@ export default function ProductItem({
               <PlusIcon size="sm" />
             </CircleButton>
           ) : isUnavailable ? (
-            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+            <CircleButton
+              size="sm"
+              className={isAlarm ? "" : "bg-gray"}
+              onClick={handleSetIsAlarm}
+            >
               {isAlarm ? (
                 <RestockAlarmIcon size="sm" />
               ) : (
@@ -119,7 +131,11 @@ export default function ProductItem({
               )}
             </CircleButton>
           ) : (
-            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+            <CircleButton
+              size="sm"
+              className={isAlarm ? "" : "bg-gray"}
+              onClick={handleSetIsAlarm}
+            >
               {isAlarm ? <AlarmIcon size="sm" /> : <AlarmOffIcon size="sm" />}
             </CircleButton>
           )}

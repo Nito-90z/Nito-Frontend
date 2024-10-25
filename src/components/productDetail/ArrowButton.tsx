@@ -1,5 +1,4 @@
 import { MouseEventHandler } from "react";
-import MoreIcon from "../common/icons/MoreIcon";
 import MoreRightIcon from "../common/icons/MoreRight";
 import { twMerge } from "tailwind-merge";
 

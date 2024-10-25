@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import createSelectors from "./selectors";
+import { Ordering } from "@/models/product";
 
 type QueryState = {
   productQuery: {
@@ -7,7 +8,7 @@ type QueryState = {
     category_id: number | null;
     is_lowest_price_ever: boolean | null;
     is_out_of_stock: boolean | null;
-    ordering: "present_price" | "-discount_rate" | null;
+    ordering: Ordering;
     search: string | null;
   };
   setProductQuery: (

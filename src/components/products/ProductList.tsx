@@ -2,14 +2,18 @@
 
 import { twMerge } from "tailwind-merge";
 import ProductItem from "./ProductItem";
-import { FavoriteProduct, Product } from "@/models/product";
+import {
+  FavoriteProduct,
+  FavoriteProductQuery,
+  Product,
+} from "@/models/product";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import Spinner from "../common/Spinner";
 import { useAddFavorite } from "@/hooks/product";
-import { useToastStore } from "@/stores/toast";
+import useFavoriteProduct from "@/hooks/favoriteProduct";
 
 type Props = {
+  query?: FavoriteProductQuery;
   className?: string;
   products: (Product | FavoriteProduct)[];
   isEditing?: boolean;
@@ -21,6 +25,7 @@ type Props = {
 };
 
 export default function ProductList({
+  query,
   className,
   products,
   isEditing,
@@ -32,12 +37,15 @@ export default function ProductList({
 }: Props) {
   const { ref, inView } = useInView({ threshold: 0 });
   const { mutateAsync } = useAddFavorite();
-  const setToast = useToastStore.use.setToast();
+  const { setFavoriteProductAlarm } = useFavoriteProduct(
+    query || { page_size: 20, ordering: null }
+  );
 
   const handleAddFavorite = async (id: number) => {
     await mutateAsync({ id });
-    setToast("상품을 추가했어요");
-    setTimeout(() => setToast(null), 5000);
+  };
+  const handleIsAlarm = (id: number, isAlarm: boolean) => {
+    setFavoriteProductAlarm({ id, isAlarm });
   };
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -55,17 +63,20 @@ export default function ProductList({
       >
         {products.map((item) => {
           const product = "product" in item ? item.product : item;
+          const favoriteId = "id" in item ? item.id : null;
           const isAlarm = "isAlarm" in item && item.isAlarm;
 
           return (
             <ProductItem
               key={product.id}
+              favoriteId={favoriteId}
               product={product}
               isAlarm={isAlarm}
               isEditing={isEditing}
               selected={selected}
               onSelect={onSelect}
               addFavorite={handleAddFavorite}
+              setIsAlarm={handleIsAlarm}
             />
           );
         })}
