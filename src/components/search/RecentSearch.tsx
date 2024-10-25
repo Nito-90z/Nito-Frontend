@@ -1,5 +1,8 @@
 import RecentSearchItem from './RecentSearchItem';
 import Button from '../common/Button';
+import { useEffect } from 'react';
+import { useModalStore } from '@/stores/modal';
+import RecentSearchDeleteModal from './RecentSearchDeleteModal';
 
 type Props = {
   recentSearches: string[];
@@ -12,6 +15,16 @@ export default function RecentSearch({
   onDelete,
   onClear,
 }: Props) {
+  const setModal = useModalStore.use.setModal();
+
+  const handleDeleteAll = () => {
+    setModal(<RecentSearchDeleteModal onClear={onClear} />);
+  };
+  useEffect(() => {
+    if (recentSearches.length === 0) return;
+
+    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+  }, [recentSearches]);
   return (
     <div className="flex h-full max-h-[calc(100%-82px)] flex-col gap-2 pb-4">
       <div className="flex items-center justify-between px-4">
@@ -19,7 +32,7 @@ export default function RecentSearch({
         {recentSearches.length !== 0 && (
           <Button
             className="h-fit w-fit bg-transparent text-sm text-dark-gray"
-            onClick={onClear}
+            onClick={handleDeleteAll}
           >
             전체삭제
           </Button>

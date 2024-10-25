@@ -1,4 +1,4 @@
-import CompleteSignInModal from '@/components/common/CompleteSignInModal';
+import CompleteSignInModal from '@/components/signIn/CompleteSignInModal';
 import { nicknameValidationCheckFetcher, signInFetcher } from '@/fetchers/user';
 import { AgreementType } from '@/models/user';
 import { useModalStore } from '@/stores/modal';

@@ -32,7 +32,6 @@ export default function SearchBar({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
-            autoFocus
             onBlur={() => setIsSearchBarFocus(false)}
             onFocus={() => setIsSearchBarFocus(true)}
             className="rounded-sm bg-platinum pl-4 pr-9 font-normal placeholder:font-normal placeholder:text-gray"

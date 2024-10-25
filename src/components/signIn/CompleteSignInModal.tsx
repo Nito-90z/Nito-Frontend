@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import Button from './Button';
+import Button from '../common/Button';
 import { useModalStore } from '@/stores/modal';
 
 export default function CompleteSignInModal() {

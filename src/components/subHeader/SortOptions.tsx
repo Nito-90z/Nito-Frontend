@@ -4,7 +4,7 @@ import { useProductQueryStore } from '@/stores/productQuery';
 import { DISCOUNT_RATE, PRESENT_PRICE } from '@/constants';
 
 type Props = {
-  count?: number;
+  count: number;
   className?: string;
 };
 export default function SortOptions({ count, className }: Props) {
