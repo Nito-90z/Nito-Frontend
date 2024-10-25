@@ -9,7 +9,7 @@ export type CategoryPage = {
   results: CategoryItem[];
 };
 
-export type Ordering = "present_price" | "-discount_rate" | null;
+export type Ordering = 'present_price' | '-discount_rate' | null;
 
 export type ProductQuery = {
   page_size: number;
@@ -50,12 +50,12 @@ export type FavoriteProductQuery = {
 
 export type FavoriteProductInfo = Omit<
   Product,
-  | "price"
-  | "code"
-  | "crawlingUpdatedAt"
-  | "isFavorite"
-  | "affiliateUrl"
-  | "presentPriceUpdatedAt"
+  | 'price'
+  | 'code'
+  | 'crawlingUpdatedAt'
+  | 'isFavorite'
+  | 'affiliateUrl'
+  | 'presentPriceUpdatedAt'
 >;
 
 export type FavoriteProduct = {

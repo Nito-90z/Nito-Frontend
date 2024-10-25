@@ -14,11 +14,11 @@ export default function SelectHeader({
   onClick,
 }: Props) {
   return (
-    <header className='sticky top-0 w-full bg-white flex items-center justify-center px-4 py-[16.5px] border-b border-border z-50'>
-      <h1 className='text-xl font-bold text-black'>{mainText}</h1>
+    <header className="sticky top-0 z-50 flex w-full items-center justify-center border-b border-border bg-white px-4 py-[16.5px]">
+      <h1 className="text-xl font-bold text-black">{mainText}</h1>
       <Button
         onClick={onClick}
-        className='absolute right-4 h-8 w-12 bg-brand text-white font-bold px-2.5 rounded-full flex items-center justify-center'
+        className="absolute right-4 flex h-8 w-12 items-center justify-center rounded-full bg-brand px-2.5 font-bold text-white"
       >
         {buttonText}
       </Button>

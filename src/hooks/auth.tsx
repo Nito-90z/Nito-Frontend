@@ -1,10 +1,10 @@
-import CompleteSignInModal from "@/components/common/CompleteSignInModal";
-import { nicknameValidationCheckFetcher, signInFetcher } from "@/fetchers/user";
-import { AgreementType } from "@/models/user";
-import { useModalStore } from "@/stores/modal";
-import { useMutation } from "@tanstack/react-query";
-import { setCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
+import CompleteSignInModal from '@/components/common/CompleteSignInModal';
+import { nicknameValidationCheckFetcher, signInFetcher } from '@/fetchers/user';
+import { AgreementType } from '@/models/user';
+import { useModalStore } from '@/stores/modal';
+import { useMutation } from '@tanstack/react-query';
+import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 
 export function useNicknameCheck() {
   return useMutation({
@@ -26,16 +26,16 @@ export function useSignIn(callbackUrl: string) {
       agreement: AgreementType;
     }) =>
       signInFetcher({
-        lang: "ko",
+        lang: 'ko',
         isAlarm: false,
         nickname,
         agreement,
       }),
     onSuccess: (data) => {
       const { accessToken, refreshToken } = data;
-      setCookie("accessToken", accessToken);
-      setCookie("refreshToken", refreshToken);
-      router.push(callbackUrl ? callbackUrl : "/");
+      setCookie('accessToken', accessToken);
+      setCookie('refreshToken', refreshToken);
+      router.push(callbackUrl ? callbackUrl : '/');
       setModal(<CompleteSignInModal />);
     },
   });

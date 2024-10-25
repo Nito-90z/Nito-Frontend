@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import useMounted from "@/hooks/mount";
-import { Suspense } from "react";
+import useMounted from '@/hooks/mount';
+import { Suspense } from 'react';
 
 type Props = React.ComponentProps<typeof Suspense>;
 

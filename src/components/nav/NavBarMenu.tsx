@@ -1,7 +1,6 @@
-import { usePathname } from "next/navigation";
-import Button from "../common/Button";
-import { twMerge } from "tailwind-merge";
-import Link from "next/link";
+import { usePathname } from 'next/navigation';
+import { twMerge } from 'tailwind-merge';
+import Link from 'next/link';
 
 type Props = {
   menu: {
@@ -23,8 +22,8 @@ export default function NavBarMenu({
       href={path}
       type="button"
       className={twMerge(
-        "flex flex-col items-center justify-center gap-[2px] bg-transparent w-fit",
-        path === pathname ? "text-brand font-bold" : "text-text"
+        'flex w-fit flex-col items-center justify-center gap-[2px] bg-transparent',
+        path === pathname ? 'font-bold text-brand' : 'text-text',
       )}
     >
       {pathname === path ? onIcon : offIcon}

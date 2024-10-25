@@ -1,9 +1,9 @@
-import LogoIcon from "@/components/common/icons/LogoIcon";
-import Link from "next/link";
+import LogoIcon from '@/components/common/icons/LogoIcon';
+import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <section className="flex flex-col justify-around items-center gap-4 px-4 text-center w-full h-full">
+    <section className="flex h-full w-full flex-col items-center justify-around gap-4 px-4 text-center">
       <div />
       <div className="flex flex-col gap-8">
         <div className="flex flex-col items-center gap-3 text-brand">
@@ -17,7 +17,7 @@ export default function NotFound() {
             <LogoIcon />
           </Link>
         </div>
-        <div className="flex flex-col px-4 w-full">
+        <div className="flex w-full flex-col px-4">
           <h2 className="text-3xl font-bold text-brand">Not Found</h2>
           <p className="text-[#1E1E1E]">해당 페이지를 찾을 수 없습니다.</p>
         </div>
@@ -25,7 +25,7 @@ export default function NotFound() {
       <Link
         href="/product-list"
         replace
-        className="py-[14px] w-full font-bold bg-brand text-white"
+        className="w-full bg-brand py-[14px] font-bold text-white"
       >
         상품 보러가기
       </Link>

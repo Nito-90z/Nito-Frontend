@@ -1,5 +1,5 @@
-import Image from "next/image";
-import nullSearchResultIcon from "../../../../public/images/null-search.svg";
+import Image from 'next/image';
+import nullSearchResultIcon from '../../../../public/images/null-search.svg';
 
 export default function NullSearchResultIcon() {
   return (

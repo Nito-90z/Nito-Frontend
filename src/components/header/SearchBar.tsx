@@ -22,12 +22,12 @@ export default function SearchBar({
   const router = useRouter();
 
   return (
-    <header className='flex items-center gap-3 px-4 py-[9px] w-full bg-white'>
+    <header className="flex w-full items-center gap-3 bg-white px-4 py-[9px]">
       <button onClick={() => router.back()}>
         <MoreIcon />
       </button>
-      <form onSubmit={onSubmit} className='flex grow gap-3'>
-        <div className='relative grow'>
+      <form onSubmit={onSubmit} className="flex grow gap-3">
+        <div className="relative grow">
           <Input
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -35,20 +35,20 @@ export default function SearchBar({
             autoFocus
             onBlur={() => setIsSearchBarFocus(false)}
             onFocus={() => setIsSearchBarFocus(true)}
-            className='pl-4 pr-9 placeholder:text-gray placeholder:font-normal bg-platinum font-normal rounded-sm'
-            type='search'
+            className="rounded-sm bg-platinum pl-4 pr-9 font-normal placeholder:font-normal placeholder:text-gray"
+            type="search"
           />
           {value && (
             <button
-              type='button'
-              className='absolute top-0 bottom-0 right-3'
+              type="button"
+              className="absolute bottom-0 right-3 top-0"
               onClick={() => setValue('')}
             >
               <CloseIcon />
             </button>
           )}
         </div>
-        <button className='text-dark-gray whitespace-nowrap'>검색</button>
+        <button className="whitespace-nowrap text-dark-gray">검색</button>
       </form>
     </header>
   );

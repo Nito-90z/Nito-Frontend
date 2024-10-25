@@ -1,12 +1,12 @@
-import HeartIcon from "../../common/icons/HeartIcon";
+import HeartIcon from '../../common/icons/HeartIcon';
 
 export default function NullProductList() {
   return (
-    <div className="flex flex-col justify-center items-center text-center h-[calc(100%-102px)]">
-      <HeartIcon className="w-[71.24px] h-14" />
-      <div className="flex flex-col gap-[6px] mt-3">
+    <div className="flex h-[calc(100%-102px)] flex-col items-center justify-center text-center">
+      <HeartIcon className="h-14 w-[71.24px]" />
+      <div className="mt-3 flex flex-col gap-[6px]">
         <p className="text-text">아직 찜한 상품이 없어요</p>
-        <p className="text-[#8F8F8F] text-sm">
+        <p className="text-sm text-[#8F8F8F]">
           아래 +버튼을 눌러 최저가 알림 받고싶은 상품을
           <br />
           담아보세요!

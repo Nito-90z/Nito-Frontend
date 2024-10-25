@@ -1,5 +1,5 @@
-import { getRelatedProducts } from "@/services/product";
-import { NextRequest, NextResponse } from "next/server";
+import { getRelatedProducts } from '@/services/product';
+import { NextRequest, NextResponse } from 'next/server';
 
 type Context = {
   params: {
@@ -16,11 +16,11 @@ export async function GET(_: NextRequest, { params: { id } }: Context) {
     const errorMessage =
       error.status === 404
         ? error.response.data.detail
-        : "Something went wrong";
+        : 'Something went wrong';
 
     return NextResponse.json(
       { message: errorMessage },
-      { status: error.status || 500 } // 에러가 있다면 해당 코드, 없으면 500
+      { status: error.status || 500 },
     );
   }
 }

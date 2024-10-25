@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Toast2 from "@/components/common/Toast2";
-import ToastPortal from "@/components/common/ToastPortal";
-import { useToastStore } from "@/stores/toast";
+import Toast2 from '@/components/common/Toast2';
+import ToastPortal from '@/components/common/ToastPortal';
+import { useToastStore } from '@/stores/toast';
 
 type Props = {
   children: React.ReactNode;

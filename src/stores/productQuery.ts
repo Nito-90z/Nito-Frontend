@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import createSelectors from "./selectors";
-import { Ordering } from "@/models/product";
+import { create } from 'zustand';
+import createSelectors from './selectors';
+import { Ordering } from '@/models/product';
 
 type QueryState = {
   productQuery: {
@@ -13,13 +13,13 @@ type QueryState = {
   };
   setProductQuery: (
     name:
-      | "page_size"
-      | "category_id"
-      | "is_lowest_price_ever"
-      | "is_out_of_stock"
-      | "ordering"
-      | "search",
-    value: string | number | boolean | null
+      | 'page_size'
+      | 'category_id'
+      | 'is_lowest_price_ever'
+      | 'is_out_of_stock'
+      | 'ordering'
+      | 'search',
+    value: string | number | boolean | null,
   ) => void;
 };
 
