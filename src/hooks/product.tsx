@@ -13,12 +13,12 @@ export function useAddFavorite() {
     mutationFn: ({ id }: { id: number }) => addFavoriteProductFetcher(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products", productQuery] });
+      setToast("상품을 추가했어요", 5000);
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
         if (error.status === 400) {
-          setToast(error.response?.data.message);
-          setTimeout(() => setToast(null), 5000);
+          setToast(error.response?.data.message, 5000);
         }
       }
     },

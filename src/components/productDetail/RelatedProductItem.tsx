@@ -24,8 +24,7 @@ export default function RelatedProductItem({ product }: { product: Product }) {
   const handleAddFavorite = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     await mutateAsync({ id });
-    setToast("상품을 추가했어요");
-    setTimeout(() => setToast(null), 5000);
+    setToast("상품을 추가했어요", 5000);
   };
   return (
     <div

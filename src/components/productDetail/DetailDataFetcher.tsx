@@ -39,8 +39,7 @@ export default function DetailDataFetcher({ id }: { id: string }) {
 
   const handleAddFavorite = async () => {
     await mutateAsync({ id: productId });
-    setToast("상품을 추가했어요");
-    setTimeout(() => setToast(null), 5000);
+    setToast("상품을 추가했어요", 5000);
   };
 
   const isError = results.some((results) => results.isError);

@@ -10,7 +10,6 @@ import {
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useAddFavorite } from "@/hooks/product";
-import { useToastStore } from "@/stores/toast";
 import useFavoriteProduct from "@/hooks/favoriteProduct";
 
 type Props = {
@@ -41,12 +40,9 @@ export default function ProductList({
   const { setFavoriteProductAlarm } = useFavoriteProduct(
     query || { page_size: 20, ordering: null }
   );
-  const setToast = useToastStore.use.setToast();
 
   const handleAddFavorite = async (id: number) => {
     await mutateAsync({ id });
-    setToast("상품을 추가했어요");
-    setTimeout(() => setToast(null), 5000);
   };
   const handleIsAlarm = (id: number, isAlarm: boolean) => {
     setFavoriteProductAlarm({ id, isAlarm });

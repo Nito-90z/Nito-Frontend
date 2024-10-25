@@ -33,8 +33,7 @@ export default function useFavoriteProduct(query: FavoriteProductQuery) {
       deleteFavoriteProductsFetcher(ids),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["favorite_products", query] });
-      setToast("찜한 상품에서 삭제했어요!");
-      setTimeout(() => setToast(null), 3000);
+      setToast("찜한 상품에서 삭제했어요!", 3000);
     },
   });
 
@@ -43,8 +42,7 @@ export default function useFavoriteProduct(query: FavoriteProductQuery) {
       setFavoriteProductAlarmFetcher(id, isAlarm),
     onSuccess: (data: FavoriteProduct) => {
       queryClient.invalidateQueries({ queryKey: ["favorite_products", query] });
-      setToast(data.isAlarm ? "알람을 켰어요!" : "알람을 껐어요!");
-      setTimeout(() => setToast(null), 3000);
+      setToast(data.isAlarm ? "알람을 켰어요!" : "알람을 껐어요!", 3000);
     },
   });
 
