@@ -7,14 +7,13 @@ export default function RestockAlarmOffIcon({
 }: {
   size: CircleButtonSize;
 }) {
-  const { width, height } = getIconSizeStyle(size);
+  const className = getIconSizeStyle(size);
 
   return (
     <Image
       src={restockAlarmOffIcon}
       alt="restock alarm"
-      width={width}
-      height={height}
+      className={className}
     />
   );
 }
@@ -22,11 +21,11 @@ export default function RestockAlarmOffIcon({
 function getIconSizeStyle(size: CircleButtonSize) {
   switch (size) {
     case "sm":
-      return { width: 24, height: 24 };
+      return "w-6 h-6";
     case "md":
-      return { width: 28, height: 28 };
+      return "w-7 h-7";
     case "lg":
-      return { width: 32, height: 32 };
+      return "w-8 h-8";
     default:
       throw new Error(`Unsupported type size: ${size}`);
   }
