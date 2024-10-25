@@ -11,3 +11,7 @@ export const IOS_PATTERN = /iPhone|iPad|iPod/i;
 // product-ordering
 export const PRESENT_PRICE = 'present_price';
 export const DISCOUNT_RATE = '-discount_rate';
+
+// route handler
+export const BAD_REQUEST_ERROR_MESSAGE = 'Bad Request';
+export const DEFAULT_ERROR_MESSAGE = 'Something went wrong';

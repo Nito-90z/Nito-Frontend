@@ -1,3 +1,4 @@
+import { DEFAULT_ERROR_MESSAGE } from '@/constants';
 import { getProductPrice } from '@/services/product';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -14,9 +15,7 @@ export async function GET(_: NextRequest, { params: { id } }: Context) {
     return NextResponse.json(data);
   } catch (error: any) {
     const errorMessage =
-      error.status === 404
-        ? error.response.data.detail
-        : 'Something went wrong';
+      error.status === 404 ? error.response.data.detail : DEFAULT_ERROR_MESSAGE;
 
     return NextResponse.json(
       { message: errorMessage },

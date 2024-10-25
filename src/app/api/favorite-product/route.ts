@@ -1,3 +1,4 @@
+import { BAD_REQUEST_ERROR_MESSAGE, DEFAULT_ERROR_MESSAGE } from '@/constants';
 import {
   addFavoriteProduct,
   deleteFavoriteProducts,
@@ -24,7 +25,10 @@ export async function POST(request: NextRequest) {
   const { productId } = await request.json();
 
   if (!productId) {
-    return NextResponse.json({ message: 'Bad Request' }, { status: 400 });
+    return NextResponse.json(
+      { message: BAD_REQUEST_ERROR_MESSAGE },
+      { status: 400 },
+    );
   }
 
   try {
@@ -35,7 +39,7 @@ export async function POST(request: NextRequest) {
     const errorMessage =
       error.status === 400
         ? error.response.data.nonField[0]
-        : 'Something went wrong';
+        : DEFAULT_ERROR_MESSAGE;
 
     return NextResponse.json(
       { message: errorMessage },
@@ -49,7 +53,10 @@ export async function DELETE(request: NextRequest) {
   const ids = searchParams.get('ids');
 
   if (!ids) {
-    return NextResponse.json({ message: 'Bad Request' }, { status: 400 });
+    return NextResponse.json(
+      { message: BAD_REQUEST_ERROR_MESSAGE },
+      { status: 400 },
+    );
   }
 
   const idsArray = ids.split(',').map(Number);
@@ -60,9 +67,7 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: 'Deleted!' }, { status: 200 });
   } catch (error: any) {
     const errorMessage =
-      error.status === 404
-        ? error.response.data.detail
-        : 'Something went wrong';
+      error.status === 404 ? error.response.data.detail : DEFAULT_ERROR_MESSAGE;
 
     return NextResponse.json(
       { message: errorMessage },
@@ -75,7 +80,10 @@ export async function PUT(request: NextRequest) {
   const { productId, isAlarm } = await request.json();
 
   if (!productId || isAlarm == null) {
-    return NextResponse.json({ message: 'Bad Request' }, { status: 400 });
+    return NextResponse.json(
+      { message: BAD_REQUEST_ERROR_MESSAGE },
+      { status: 400 },
+    );
   }
 
   try {
@@ -84,9 +92,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(data);
   } catch (error: any) {
     const errorMessage =
-      error.status === 404
-        ? error.response.data.detail
-        : 'Something went wrong';
+      error.status === 404 ? error.response.data.detail : DEFAULT_ERROR_MESSAGE;
 
     return NextResponse.json(
       { message: errorMessage },
