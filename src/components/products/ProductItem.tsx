@@ -72,6 +72,7 @@ export default function ProductItem({
         'relative flex cursor-pointer items-start gap-3 border-b border-border py-4 last:border-none',
         isEditing && 'opacity-50',
         isSelected && 'opacity-100',
+        isOutOfStock && 'pointer-events-none',
       )}
       onClick={handleClick}
     >
