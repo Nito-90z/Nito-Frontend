@@ -12,25 +12,25 @@ export default function PriceDiscount() {
   };
 
   return (
-    <div className='absolute bottom-0 z-50 w-full rounded-t-2xl bg-white shadow-xl p-4'>
-      <div className='flex justify-center items-center gap-28'>
-        <div className='h-6 w-6' />
-        <h1 className='flex text-black font-bold '>가격할인 설정</h1>
-        <Button className='justify-center items-center flex h-8 w-8 bg-white'>
+    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl bg-white p-4 shadow-xl">
+      <div className="flex items-center justify-center gap-28">
+        <div className="h-6 w-6" />
+        <h1 className="flex font-bold text-black">가격할인 설정</h1>
+        <Button className="flex h-8 w-8 items-center justify-center bg-white">
           <CloseIcon />
         </Button>
       </div>
 
-      <p className='text-center text-sm text-gray-text pt-2 pb-4'>
+      <p className="pb-4 pt-2 text-center text-sm text-gray-text">
         평균 가격에서 몇 % 떨어질 때 알려드릴까요? <br />
         단, 역대 최저가일 경우에는 무조건 알려드려요!
       </p>
 
       {/* 할인율 선택 버튼 */}
-      <div className='flex justify-center gap-2.5 pb-4 w-80'>
+      <div className="flex w-80 justify-center gap-2.5 pb-4">
         <Button
           onClick={() => handleSelect('3%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '3%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'
@@ -40,7 +40,7 @@ export default function PriceDiscount() {
         </Button>
         <Button
           onClick={() => handleSelect('5%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '5%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'
@@ -50,7 +50,7 @@ export default function PriceDiscount() {
         </Button>
         <Button
           onClick={() => handleSelect('7%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '7%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'
@@ -60,7 +60,7 @@ export default function PriceDiscount() {
         </Button>
         <Button
           onClick={() => handleSelect('10%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '10%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'

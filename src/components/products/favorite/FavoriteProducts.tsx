@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import SelectHeader from "@/components/header/SelectHeader";
-import Main from "@/components/subHeader/Main";
-import { useState } from "react";
-import NullProductList from "./NullProductList";
-import ProductList from "../ProductList";
-import Button from "@/components/common/Button";
+import SelectHeader from '@/components/header/SelectHeader';
+import Main from '@/components/subHeader/Main';
+import { useState } from 'react';
+import NullProductList from './NullProductList';
+import ProductList from '../ProductList';
+import Button from '@/components/common/Button';
 import {
   FavoriteProduct,
   FavoriteProductQuery,
   Ordering,
-} from "@/models/product";
-import Skeleton from "../Skeleton";
-import useFavoriteProduct from "@/hooks/favoriteProduct";
+} from '@/models/product';
+import Skeleton from '../Skeleton';
+import useFavoriteProduct from '@/hooks/favoriteProduct';
 
 export default function FavoriteProducts() {
   const [isEditing, setIsEditing] = useState(false);
@@ -56,12 +56,12 @@ export default function FavoriteProducts() {
 
   if (isLoading) return <Skeleton />;
   return (
-    <section className="pb-4 h-full overflow-y-auto">
+    <section className="h-full overflow-y-auto pb-4">
       {isEditing ? (
         <SelectHeader
           mainText={
             selectedCount === 0
-              ? "상품 선택"
+              ? '상품 선택'
               : `${selectedCount}개의 상품 선택됨`
           }
           buttonText="완료"
@@ -90,7 +90,7 @@ export default function FavoriteProducts() {
         />
       )}
       {isEditing && (
-        <div className="z-50 absolute -bottom-16 p-5 left-0 w-full bg-white">
+        <div className="absolute -bottom-16 left-0 z-50 w-full bg-white p-5">
           <Button disabled={selectedCount === 0} onClick={handleDelete}>
             삭제
           </Button>

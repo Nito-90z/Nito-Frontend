@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import Badge from "../common/Badge";
-import { twMerge } from "tailwind-merge";
-import { convertDollarToWon } from "@/utils/currency-converter";
-import CircleButton from "../common/CircleButton";
-import RestockAlarmIcon from "../common/icons/RestockAlarmIcon";
-import AlarmIcon from "../common/icons/AlarmIcon";
-import PlusIcon from "../common/icons/PlusIcon";
-import RestockAlarmOffIcon from "../common/icons/RestockAlarmOffIcon";
-import ProductImage from "./ProductImage";
-import CheckBox from "../common/CheckBox";
-import { FavoriteProductInfo, Product } from "@/models/product";
-import AlarmOffIcon from "../common/icons/AlarmOffIcon";
-import { useRouter } from "next/navigation";
-import { MouseEvent } from "react";
+import Badge from '../common/Badge';
+import { twMerge } from 'tailwind-merge';
+import { convertDollarToWon } from '@/utils/currency-converter';
+import CircleButton from '../common/CircleButton';
+import RestockAlarmIcon from '../common/icons/RestockAlarmIcon';
+import AlarmIcon from '../common/icons/AlarmIcon';
+import PlusIcon from '../common/icons/PlusIcon';
+import RestockAlarmOffIcon from '../common/icons/RestockAlarmOffIcon';
+import ProductImage from './ProductImage';
+import CheckBox from '../common/CheckBox';
+import { FavoriteProductInfo, Product } from '@/models/product';
+import AlarmOffIcon from '../common/icons/AlarmOffIcon';
+import { useRouter } from 'next/navigation';
+import { MouseEvent } from 'react';
 
 type Props = {
   favoriteId: number | null;
@@ -48,7 +48,7 @@ export default function ProductItem({
   } = product;
   const router = useRouter();
   const isUnavailable = isOutOfStock || isStopSelling;
-  const isFavoritePage = !("isFavorite" in product);
+  const isFavoritePage = !('isFavorite' in product);
   const isSelected = selected?.includes(favoriteId || -1);
 
   const handleClick = () => {
@@ -69,43 +69,43 @@ export default function ProductItem({
   return (
     <li
       className={twMerge(
-        "relative flex items-start gap-3 py-4 border-b border-border cursor-pointer last:border-none",
-        isEditing && "opacity-50",
-        isSelected && "opacity-100"
+        'relative flex cursor-pointer items-start gap-3 border-b border-border py-4 last:border-none',
+        isEditing && 'opacity-50',
+        isSelected && 'opacity-100',
       )}
       onClick={handleClick}
     >
       {isEditing && (
         <div
           className={twMerge(
-            "absolute top-0 left-0 content-center pl-[26px] w-full h-full z-10 rounded",
-            isSelected && "bg-brand bg-opacity-20"
+            'absolute left-0 top-0 z-10 h-full w-full content-center rounded pl-[26px]',
+            isSelected && 'bg-brand bg-opacity-20',
           )}
         >
           <CheckBox size="lg" checked={isSelected} className="border-black" />
         </div>
       )}
-      <div className="relative shrink-0 w-20 h-20">
+      <div className="relative h-20 w-20 shrink-0">
         <ProductImage
-          src={image ?? ""}
+          src={image ?? ''}
           alt={`${title} product image`}
           className={twMerge(
-            "object-cover aspect-square rounded",
-            isUnavailable && "brightness-50"
+            'aspect-square rounded object-cover',
+            isUnavailable && 'brightness-50',
           )}
         />
         {isUnavailable && (
-          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm text-white font-bold whitespace-nowrap">
-            {isStopSelling ? "판매중지" : "품절"}
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-sm font-bold text-white">
+            {isStopSelling ? '판매중지' : '품절'}
           </span>
         )}
       </div>
-      <div className="grow flex flex-col gap-5">
+      <div className="flex grow flex-col gap-5">
         <div className="flex justify-between">
           <p
             className={twMerge(
-              "line-clamp-2 mr-4 text-sm text-[#555555]",
-              isUnavailable && "opacity-50"
+              'mr-4 line-clamp-2 text-sm text-[#555555]',
+              isUnavailable && 'opacity-50',
             )}
           >
             {title}
@@ -121,7 +121,7 @@ export default function ProductItem({
           ) : isUnavailable ? (
             <CircleButton
               size="sm"
-              className={isAlarm ? "" : "bg-gray"}
+              className={isAlarm ? '' : 'bg-gray'}
               onClick={handleSetIsAlarm}
             >
               {isAlarm ? (
@@ -133,7 +133,7 @@ export default function ProductItem({
           ) : (
             <CircleButton
               size="sm"
-              className={isAlarm ? "" : "bg-gray"}
+              className={isAlarm ? '' : 'bg-gray'}
               onClick={handleSetIsAlarm}
             >
               {isAlarm ? <AlarmIcon size="sm" /> : <AlarmOffIcon size="sm" />}
@@ -142,18 +142,18 @@ export default function ProductItem({
         </div>
         <div
           className={twMerge(
-            "flex flex-col gap-1",
-            isUnavailable && "opacity-50"
+            'flex flex-col gap-1',
+            isUnavailable && 'opacity-50',
           )}
         >
           <div
             className={twMerge(
-              "flex justify-between",
-              !isLowestPriceEver && "justify-end"
+              'flex justify-between',
+              !isLowestPriceEver && 'justify-end',
             )}
           >
             {isLowestPriceEver && <Badge direction="up">역대최저가</Badge>}
-            <span className="text-sm text-black font-bold">
+            <span className="text-sm font-bold text-black">
               $ {presentPrice}
             </span>
           </div>

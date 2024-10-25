@@ -6,7 +6,7 @@ import SelectButton from '@/components/myPage/SelectButton';
 export default function UseNitopage() {
   return (
     <>
-      <SubHeader text='니토 사용법' />
+      <SubHeader text="니토 사용법" />
       <SelectButton />
       <PriceSetting />
       <ProductMenual />

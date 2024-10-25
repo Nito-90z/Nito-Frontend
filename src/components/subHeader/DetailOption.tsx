@@ -20,7 +20,7 @@ export default function DetailOption() {
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (option: { label: any; price: any; soldOut: any; }) => {
+  const handleSelect = (option: { label: any; price: any; soldOut: any }) => {
     if (!option.soldOut) {
       setSelectedOption(`${option.label} - ${option.price}`);
       setIsOpen(false);
@@ -28,10 +28,10 @@ export default function DetailOption() {
   };
 
   return (
-    <div className='relative inline-block w-full'>
+    <div className="relative inline-block w-full">
       <button
         onClick={toggleDropdown}
-        className={`flex w-full items-center justify-between px-4 py-3 border border-border rounded-sm bg-white text-sm focus:outline-none ${
+        className={`flex w-full items-center justify-between rounded-sm border border-border bg-white px-4 py-3 text-sm focus:outline-none ${
           isOpen ? 'border-b-0' : ''
         }`}
       >
@@ -40,13 +40,13 @@ export default function DetailOption() {
       </button>
 
       {isOpen && (
-        <div className='w-full rounded-sm bg-white border-t-0 border border-border max-h-60 absolute overflow-auto'>
+        <div className="absolute max-h-60 w-full overflow-auto rounded-sm border border-t-0 border-border bg-white">
           {options.map((option, index) => (
             <div
               key={index}
               onClick={() => handleSelect(option)}
-              className={`px-4 py-2 text-sm cursor-pointer ${
-                option.soldOut ? 'text-gray cursor-not-allowed' : 'text-black'
+              className={`cursor-pointer px-4 py-2 text-sm ${
+                option.soldOut ? 'cursor-not-allowed text-gray' : 'text-black'
               }`}
             >
               <div
@@ -61,7 +61,7 @@ export default function DetailOption() {
                   option.soldOut ? 'text-gray-400' : 'text-black'
                 } mt-1`}
               >
-                <span className='font-bold'>{option.price}원</span>
+                <span className="font-bold">{option.price}원</span>
               </div>
             </div>
           ))}

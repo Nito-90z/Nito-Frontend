@@ -1,14 +1,14 @@
-import { ChangeEvent, FormEvent, useRef } from "react";
-import Input from "../common/Input";
-import Button from "../common/Button";
-import { twMerge } from "tailwind-merge";
-import { useNicknameCheck } from "@/hooks/auth";
-import axios from "axios";
+import { ChangeEvent, FormEvent, useRef } from 'react';
+import Input from '../common/Input';
+import Button from '../common/Button';
+import { twMerge } from 'tailwind-merge';
+import { useNicknameCheck } from '@/hooks/auth';
+import axios from 'axios';
 import {
   NICKNAME_PATTERN,
   NICKNAME_VALID_MESSAGE,
   NICKNAME_VALIDATION_ERROR_MESSAGE,
-} from "@/constants";
+} from '@/constants';
 
 type Props = {
   nickname: string;
@@ -28,25 +28,25 @@ export default function NicknameForm({
 
   const handleBlur = () => {
     if (!isValidateNickname(nickname)) {
-      onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, "text-brand");
+      onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, 'text-brand');
     }
   };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!isValidateNickname(nickname)) {
-      onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, "text-brand");
+      onCommentChange(NICKNAME_VALIDATION_ERROR_MESSAGE, 'text-brand');
       inputRef.current?.focus();
       return;
     }
 
     try {
       await mutateAsync({ nickname });
-      onCommentChange(NICKNAME_VALID_MESSAGE, "text-[#4850FF]");
+      onCommentChange(NICKNAME_VALID_MESSAGE, 'text-[#4850FF]');
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 400) {
-          onCommentChange(error.response.data.message, "text-brand");
+          onCommentChange(error.response.data.message, 'text-brand');
           inputRef.current?.focus();
         }
       }
@@ -62,7 +62,7 @@ export default function NicknameForm({
           ref={inputRef}
           type="text"
           id="nickname"
-          className="h-14 text-dark-gray font-normal border border-light-gray"
+          className="h-14 border border-light-gray font-normal text-dark-gray"
           placeholder="닉네임을 입력해주세요"
           value={nickname}
           onChange={onChange}
@@ -71,8 +71,8 @@ export default function NicknameForm({
         {/* 로딩 시간이 길어지는 경우 로딩 UI를 보여주는 것도 생각! */}
         <Button
           className={twMerge(
-            "relative px-4 w-[85px] bg-brand disabled:bg-light-gray whitespace-nowrap",
-            isPending && "disabled:bg-brand"
+            'relative w-[85px] whitespace-nowrap bg-brand px-4 disabled:bg-light-gray',
+            isPending && 'disabled:bg-brand',
           )}
           disabled={!nickname || isPending}
         >
@@ -80,7 +80,7 @@ export default function NicknameForm({
         </Button>
       </div>
       {commentMessage && (
-        <p className={twMerge("text-xs", commentMessage.color)}>
+        <p className={twMerge('text-xs', commentMessage.color)}>
           {commentMessage.value}
         </p>
       )}
@@ -89,7 +89,7 @@ export default function NicknameForm({
 }
 
 function isValidateNickname(nickname: string) {
-  if (nickname.trim() === "") return false;
+  if (nickname.trim() === '') return false;
 
   return NICKNAME_PATTERN.test(nickname.trim());
 }

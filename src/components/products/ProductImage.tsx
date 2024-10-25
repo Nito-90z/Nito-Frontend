@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
-import NullProductImage from "./NullProductImage";
+import Image from 'next/image';
+import { useState } from 'react';
+import NullProductImage from './NullProductImage';
 
 type Props = {
   src: string | null;
   alt: string;
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
   priority?: boolean;
   className?: string;
 };
@@ -15,19 +15,19 @@ type Props = {
 export default function ProductImage({
   src,
   alt,
-  size = "sm",
+  size = 'sm',
   priority,
   className,
 }: Props) {
   const [isImageError, setIsImageError] = useState(false);
-  const sizes = size === "sm" ? 80 : size === "md" ? 120 : 430;
+  const sizes = size === 'sm' ? 80 : size === 'md' ? 120 : 430;
 
   return isImageError ? (
     <NullProductImage className={className} />
   ) : (
     <Image
       priority={priority}
-      src={src || ""}
+      src={src || ''}
       alt={alt}
       width={sizes}
       height={sizes}

@@ -1,4 +1,4 @@
-import NavBar from "@/components/nav/NavBar";
+import NavBar from '@/components/nav/NavBar';
 
 export default function WithHeaderLayout({
   children,
@@ -7,7 +7,7 @@ export default function WithHeaderLayout({
 }>) {
   return (
     <>
-      <div className="relative grow max-h-[calc(100%-64px)]">{children}</div>
+      <div className="relative max-h-[calc(100%-64px)] grow">{children}</div>
       <NavBar />
     </>
   );

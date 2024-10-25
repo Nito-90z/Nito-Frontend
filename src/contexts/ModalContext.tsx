@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import ModalPortal from "@/components/common/ModalPortal";
-import Modal from "@/components/common/Modal";
-import { useModalStore } from "@/stores/modal";
+import ModalPortal from '@/components/common/ModalPortal';
+import Modal from '@/components/common/Modal';
+import { useModalStore } from '@/stores/modal';
 
 type Props = {
   children: React.ReactNode;

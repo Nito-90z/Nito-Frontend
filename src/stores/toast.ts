@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import createSelectors from "./selectors";
+import { create } from 'zustand';
+import createSelectors from './selectors';
 
 type ToastState = {
   text: string | null;

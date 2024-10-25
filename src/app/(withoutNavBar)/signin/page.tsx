@@ -1,10 +1,10 @@
-import SignInForm from "@/components/signIn/SignInForm";
-import { generateNickname } from "@/services/user";
+import SignInForm from '@/components/signIn/SignInForm';
+import { generateNickname } from '@/services/user';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 
 type Props = {
   searchParams: {
@@ -18,12 +18,12 @@ export default async function SignInPage({
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["nickname"],
+    queryKey: ['nickname'],
     queryFn: generateNickname,
     staleTime: 60 * 1000,
   });
   return (
-    <section className="pt-4 px-4 h-full">
+    <section className="h-full px-4 pt-4">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SignInForm callbackUrl={callbackUrl} />
       </HydrationBoundary>

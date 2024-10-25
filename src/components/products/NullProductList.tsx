@@ -1,8 +1,8 @@
-import NullProductIcon from "../common/icons/NullProductIcon";
+import NullProductIcon from '../common/icons/NullProductIcon';
 
 export default function NullProductList() {
   return (
-    <div className="flex flex-col justify-center items-center text-center max-h-[calc(100%-232px)] h-full text-text">
+    <div className="flex h-full max-h-[calc(100%-232px)] flex-col items-center justify-center text-center text-text">
       <NullProductIcon />
       <div className="mt-3">
         <p>

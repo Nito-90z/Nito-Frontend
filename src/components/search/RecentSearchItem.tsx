@@ -1,5 +1,5 @@
-import Button from "../common/Button";
-import CloseIcon from "../common/icons/CloseIcon";
+import Button from '../common/Button';
+import CloseIcon from '../common/icons/CloseIcon';
 
 type Props = {
   id: number;
@@ -11,10 +11,10 @@ export default function RecentSearchItem({ id, keyword, onDelete }: Props) {
   return (
     <li className="py-2">
       <Button
-        className="flex justify-between items-center bg-transparent h-fit"
+        className="flex h-fit items-center justify-between bg-transparent"
         onClick={() => onDelete(id)}
       >
-        <span className="text-dark-gray leading-7">{keyword}</span>
+        <span className="leading-7 text-dark-gray">{keyword}</span>
         <CloseIcon />
       </Button>
     </li>

@@ -1,6 +1,6 @@
-import ProductImage from "../products/ProductImage";
-import Information from "./Information";
-import { DetailProduct } from "@/models/product";
+import ProductImage from '../products/ProductImage';
+import Information from './Information';
+import { DetailProduct } from '@/models/product';
 
 export default function Description({ product }: { product: DetailProduct }) {
   return (
@@ -10,7 +10,7 @@ export default function Description({ product }: { product: DetailProduct }) {
         src={product.image}
         alt={`${product.title} image`}
         size="lg"
-        className="w-full h-[295px] object-contain"
+        className="h-[295px] w-full object-contain"
       />
       <Information product={product} />
     </div>

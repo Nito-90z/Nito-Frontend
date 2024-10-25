@@ -1,4 +1,4 @@
-import { serverInstance } from "@/libs/instance.server";
+import { serverInstance } from '@/libs/instance.server';
 
 export async function getProducts(query: { [k: string]: string | null }) {
   const queryParams = new URLSearchParams();
@@ -10,14 +10,14 @@ export async function getProducts(query: { [k: string]: string | null }) {
   });
 
   const queryString = queryParams.toString();
-  const url = queryString ? `product/?${queryString}` : "product/";
+  const url = queryString ? `product/?${queryString}` : 'product/';
 
   return serverInstance.get(`/v1/${url}`).then((res) => res.data);
 }
 
 export async function addFavoriteProduct(productId: number) {
   return serverInstance
-    .post("/v1/favorite_product/", { productId })
+    .post('/v1/favorite_product/', { productId })
     .then((res) => res.data);
 }
 
@@ -53,23 +53,23 @@ export async function getFavoriteProducts(query: {
   const queryString = queryParams.toString();
   const url = queryString
     ? `favorite_product/?${queryString}`
-    : "favorite_product/";
+    : 'favorite_product/';
 
   return serverInstance.get(`/v1/${url}`).then((res) => res.data);
 }
 
 export async function deleteFavoriteProducts(ids: number[]) {
   serverInstance
-    .delete("/v1/favorite_product/delete_multiple/", {
+    .delete('/v1/favorite_product/delete_multiple/', {
       params: { ids },
       paramsSerializer: (params) => new URLSearchParams(params).toString(),
     })
-    .catch(() => new Response("Not Found!", { status: 404 }));
+    .catch(() => new Response('Not Found!', { status: 404 }));
 }
 
 export async function setFavoriteProductAlarm(
   productId: number,
-  isAlarm: boolean
+  isAlarm: boolean,
 ) {
   return serverInstance
     .put(`/v1/favorite_product/${productId}/`, { isAlarm: !isAlarm })

@@ -1,7 +1,7 @@
-import { clientInstance } from "@/libs/instance.client";
+import { clientInstance } from '@/libs/instance.client';
 
 export async function generateNicknameFetcher() {
-  return clientInstance.get("/api/user/nickname").then((res) => res.data);
+  return clientInstance.get('/api/user/nickname').then((res) => res.data);
 }
 
 export async function nicknameValidationCheckFetcher(nickname: string) {
@@ -11,7 +11,7 @@ export async function nicknameValidationCheckFetcher(nickname: string) {
 }
 
 export type SignInData = {
-  lang: "en" | "ko";
+  lang: 'en' | 'ko';
   isAlarm: boolean;
   nickname: string;
   agreement: {
@@ -24,7 +24,7 @@ export type SignInData = {
 
 export async function signInFetcher(body: SignInData) {
   return clientInstance
-    .post("/api/user/register", {
+    .post('/api/user/register', {
       body,
     })
     .then((res) => res.data);

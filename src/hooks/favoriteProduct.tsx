@@ -2,15 +2,15 @@ import {
   deleteFavoriteProductsFetcher,
   getFavoriteProductsFetcher,
   setFavoriteProductAlarmFetcher,
-} from "@/fetchers/product";
-import { FavoriteProduct, FavoriteProductQuery } from "@/models/product";
-import { useToastStore } from "@/stores/toast";
+} from '@/fetchers/product';
+import { FavoriteProduct, FavoriteProductQuery } from '@/models/product';
+import { useToastStore } from '@/stores/toast';
 import {
   keepPreviousData,
   useInfiniteQuery,
   useMutation,
   useQueryClient,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 
 export default function useFavoriteProduct(query: FavoriteProductQuery) {
   const queryClient = useQueryClient();
@@ -18,7 +18,7 @@ export default function useFavoriteProduct(query: FavoriteProductQuery) {
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
     useInfiniteQuery({
-      queryKey: ["favorite_products", query],
+      queryKey: ['favorite_products', query],
       queryFn: ({ pageParam }) =>
         getFavoriteProductsFetcher({ cursor: pageParam, query }),
       initialPageParam: null,
@@ -32,8 +32,8 @@ export default function useFavoriteProduct(query: FavoriteProductQuery) {
     mutationFn: ({ ids }: { ids: number[] }) =>
       deleteFavoriteProductsFetcher(ids),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["favorite_products", query] });
-      setToast("찜한 상품에서 삭제했어요!", 3000);
+      queryClient.invalidateQueries({ queryKey: ['favorite_products', query] });
+      setToast('찜한 상품에서 삭제했어요!', 3000);
     },
   });
 
@@ -41,8 +41,8 @@ export default function useFavoriteProduct(query: FavoriteProductQuery) {
     mutationFn: ({ id, isAlarm }: { id: number; isAlarm: boolean }) =>
       setFavoriteProductAlarmFetcher(id, isAlarm),
     onSuccess: (data: FavoriteProduct) => {
-      queryClient.invalidateQueries({ queryKey: ["favorite_products", query] });
-      setToast(data.isAlarm ? "알람을 켰어요!" : "알람을 껐어요!", 3000);
+      queryClient.invalidateQueries({ queryKey: ['favorite_products', query] });
+      setToast(data.isAlarm ? '알람을 켰어요!' : '알람을 껐어요!', 3000);
     },
   });
 

@@ -13,9 +13,9 @@ export default function Modal({ children, onClose }: Props) {
   return (
     <section
       onClick={handleBgClick}
-      className="absolute top-0 left-0 flex justify-center items-center w-full h-full bg-[#1A1A1A] bg-opacity-20 z-[9999]"
+      className="absolute left-0 top-0 z-[9999] flex h-full w-full items-center justify-center bg-[#1A1A1A] bg-opacity-20"
     >
-      <div className="mx-4 w-full bg-white rounded-lg">{children}</div>
+      <div className="mx-4 w-full rounded-lg bg-white">{children}</div>
     </section>
   );
 }

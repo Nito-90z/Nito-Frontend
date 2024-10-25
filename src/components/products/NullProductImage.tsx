@@ -1,5 +1,5 @@
-import { twMerge } from "tailwind-merge";
-import NullProductImageIcon from "../common/icons/NullProductImageIcon";
+import { twMerge } from 'tailwind-merge';
+import NullProductImageIcon from '../common/icons/NullProductImageIcon';
 
 export default function NullProductImage({
   className,
@@ -9,12 +9,12 @@ export default function NullProductImage({
   return (
     <div
       className={twMerge(
-        "flex flex-col justify-center items-center gap-[6px] w-20 h-20 rounded bg-border",
-        className
+        'flex h-20 w-20 flex-col items-center justify-center gap-[6px] rounded bg-border',
+        className,
       )}
     >
       <NullProductImageIcon />
-      <p className="text-xs text-[#8F8F8F] font-bold">이미지 준비중</p>
+      <p className="text-xs font-bold text-[#8F8F8F]">이미지 준비중</p>
     </div>
   );
 }

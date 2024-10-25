@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { twMerge } from "tailwind-merge";
-import ProductItem from "./ProductItem";
+import { twMerge } from 'tailwind-merge';
+import ProductItem from './ProductItem';
 import {
   FavoriteProduct,
   FavoriteProductQuery,
   Product,
-} from "@/models/product";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { useAddFavorite } from "@/hooks/product";
-import useFavoriteProduct from "@/hooks/favoriteProduct";
+} from '@/models/product';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useAddFavorite } from '@/hooks/product';
+import useFavoriteProduct from '@/hooks/favoriteProduct';
 
 type Props = {
   query?: FavoriteProductQuery;
@@ -38,7 +38,7 @@ export default function ProductList({
   const { ref, inView } = useInView({ threshold: 0 });
   const { mutateAsync } = useAddFavorite();
   const { setFavoriteProductAlarm } = useFavoriteProduct(
-    query || { page_size: 20, ordering: null }
+    query || { page_size: 20, ordering: null },
   );
 
   const handleAddFavorite = async (id: number) => {
@@ -56,15 +56,15 @@ export default function ProductList({
     <div>
       <ul
         className={twMerge(
-          "flex flex-col gap-3 p-4",
-          isEditing ? "max-h-[calc(100%-62px)]" : "max-h-[calc(100%-102px)]",
-          className
+          'flex flex-col gap-3 p-4',
+          isEditing ? 'max-h-[calc(100%-62px)]' : 'max-h-[calc(100%-102px)]',
+          className,
         )}
       >
         {products.map((item) => {
-          const product = "product" in item ? item.product : item;
-          const favoriteId = "id" in item ? item.id : null;
-          const isAlarm = "isAlarm" in item && item.isAlarm;
+          const product = 'product' in item ? item.product : item;
+          const favoriteId = 'id' in item ? item.id : null;
+          const isAlarm = 'isAlarm' in item && item.isAlarm;
 
           return (
             <ProductItem
@@ -83,7 +83,7 @@ export default function ProductList({
       </ul>
       <div ref={ref} />
       {isFetching && (
-        <div className="flex justify-center items-center py-3 bg-platinum">
+        <div className="flex items-center justify-center bg-platinum py-3">
           <p className="text-gray">조회중...</p>
         </div>
       )}

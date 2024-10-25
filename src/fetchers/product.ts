@@ -1,11 +1,11 @@
-import { clientInstance } from "@/libs/instance.client";
+import { clientInstance } from '@/libs/instance.client';
 import {
   DetailProduct,
   FavoriteProductQuery,
   Product,
   ProductPrice,
   ProductQuery,
-} from "@/models/product";
+} from '@/models/product';
 
 export async function getProductsFetcher({
   cursor,
@@ -17,7 +17,7 @@ export async function getProductsFetcher({
   const queryParams = new URLSearchParams();
 
   if (cursor) {
-    queryParams.append("cursor", String(cursor));
+    queryParams.append('cursor', String(cursor));
   }
 
   Object.entries(query).forEach(([key, value]) => {
@@ -27,19 +27,19 @@ export async function getProductsFetcher({
   });
 
   const queryString = queryParams.toString();
-  const url = queryString ? `product?${queryString}` : "product";
+  const url = queryString ? `product?${queryString}` : 'product';
 
   return clientInstance.get(`/api/${url}`).then((res) => res.data);
 }
 
 export async function addFavoriteProductFetcher(productId: number) {
   return clientInstance
-    .post("/api/favorite-product", { productId })
+    .post('/api/favorite-product', { productId })
     .then((res) => res.data);
 }
 
 export async function getProductFetcher(
-  productId: number
+  productId: number,
 ): Promise<DetailProduct> {
   return clientInstance
     .get(`/api/product/${productId}`)
@@ -47,7 +47,7 @@ export async function getProductFetcher(
 }
 
 export async function getProductPriceFetcher(
-  productId: number
+  productId: number,
 ): Promise<ProductPrice> {
   return clientInstance
     .get(`/api/product/${productId}/price_info`)
@@ -55,7 +55,7 @@ export async function getProductPriceFetcher(
 }
 
 export async function getRelatedProductsFetcher(
-  productId: number
+  productId: number,
 ): Promise<Product[]> {
   return clientInstance
     .get(`/api/product/${productId}/related_product_list`)
@@ -72,7 +72,7 @@ export async function getFavoriteProductsFetcher({
   const queryParams = new URLSearchParams();
 
   if (cursor) {
-    queryParams.append("cursor", String(cursor));
+    queryParams.append('cursor', String(cursor));
   }
 
   Object.entries(query).forEach(([key, value]) => {
@@ -84,14 +84,14 @@ export async function getFavoriteProductsFetcher({
   const queryString = queryParams.toString();
   const url = queryString
     ? `favorite-product?${queryString}`
-    : "favorite-product";
+    : 'favorite-product';
 
   return clientInstance.get(`/api/${url}`).then((res) => res.data);
 }
 
 export async function deleteFavoriteProductsFetcher(ids: number[]) {
   return clientInstance
-    .delete("/api/favorite-product", {
+    .delete('/api/favorite-product', {
       params: { ids },
       paramsSerializer: (params) => new URLSearchParams(params).toString(),
     })
@@ -100,9 +100,9 @@ export async function deleteFavoriteProductsFetcher(ids: number[]) {
 
 export async function setFavoriteProductAlarmFetcher(
   productId: number,
-  isAlarm: boolean
+  isAlarm: boolean,
 ) {
   return clientInstance
-    .put("/api/favorite-product", { productId, isAlarm })
+    .put('/api/favorite-product', { productId, isAlarm })
     .then((res) => res.data);
 }

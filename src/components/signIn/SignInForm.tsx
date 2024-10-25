@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useEffect, useState } from "react";
-import NicknameForm from "./NicknameForm";
-import Button from "../common/Button";
-import CloseIcon from "../common/icons/CloseIcon";
-import Agreement from "./Agreement";
-import { useQuery } from "@tanstack/react-query";
-import { generateNicknameFetcher } from "@/fetchers/user";
-import axios from "axios";
-import { useSignIn } from "@/hooks/auth";
-import { AgreementType } from "@/models/user";
+import { ChangeEvent, useEffect, useState } from 'react';
+import NicknameForm from './NicknameForm';
+import Button from '../common/Button';
+import CloseIcon from '../common/icons/CloseIcon';
+import Agreement from './Agreement';
+import { useQuery } from '@tanstack/react-query';
+import { generateNicknameFetcher } from '@/fetchers/user';
+import axios from 'axios';
+import { useSignIn } from '@/hooks/auth';
+import { AgreementType } from '@/models/user';
 
 const INITIAL_AGREEMENT = {
   isOverAge14: false,
@@ -26,24 +26,24 @@ const ALL_AGREEMENTS = {
 };
 
 const INITIAL_ERROR_COMMNET = {
-  value: "",
-  color: "",
+  value: '',
+  color: '',
 };
 
 export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
   const { data } = useQuery<{ nickname: string }>({
-    queryKey: ["nickname"],
+    queryKey: ['nickname'],
     queryFn: generateNicknameFetcher,
     staleTime: 60 * 1000,
   });
-  const [nickname, setNickname] = useState(data?.nickname || "");
+  const [nickname, setNickname] = useState(data?.nickname || '');
   const [nicknameComment, setNicknameComment] = useState(INITIAL_ERROR_COMMNET);
   const [agreement, setAgreement] = useState<AgreementType>(INITIAL_AGREEMENT);
   const isAllAgree = Object.values(agreement).every((v) => v === true);
   const isValidate =
     agreement.isOverAge14 &&
     agreement.isServiceAccept &&
-    nickname.trim() !== "";
+    nickname.trim() !== '';
   const { mutateAsync } = useSignIn(callbackUrl);
 
   const handleNicknameComment = (value: string, color: string) => {
@@ -70,7 +70,7 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
         if (error.response?.status === 400) {
           setNicknameComment({
             value: error.response.data.message,
-            color: "text-brand",
+            color: 'text-brand',
           });
         }
       }
@@ -81,9 +81,9 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
     setNicknameComment(INITIAL_ERROR_COMMNET);
   }, [nickname]);
   return (
-    <div className="flex flex-col h-full">
-      <div className="grow flex flex-col gap-6">
-        <Button className="self-end p-1 w-fit h-fit bg-transparent">
+    <div className="flex h-full flex-col">
+      <div className="flex grow flex-col gap-6">
+        <Button className="h-fit w-fit self-end bg-transparent p-1">
           <CloseIcon />
         </Button>
         <NicknameForm

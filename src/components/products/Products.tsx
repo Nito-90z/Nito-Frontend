@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { getProductsFetcher } from "@/fetchers/product";
-import { useProductQueryStore } from "@/stores/productQuery";
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import NullProductList from "./NullProductList";
-import ProductList from "./ProductList";
-import { Product } from "@/models/product";
-import CategoryDefault from "../subHeader/CategoryDefault";
-import Skeleton from "./Skeleton";
-import { useRef } from "react";
+import { getProductsFetcher } from '@/fetchers/product';
+import { useProductQueryStore } from '@/stores/productQuery';
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
+import NullProductList from './NullProductList';
+import ProductList from './ProductList';
+import { Product } from '@/models/product';
+import CategoryDefault from '../subHeader/CategoryDefault';
+import Skeleton from './Skeleton';
+import { useRef } from 'react';
 
 export default function Products() {
   const topRef = useRef<HTMLDivElement>(null);
   const productQuery = useProductQueryStore.use.productQuery();
   const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
     useInfiniteQuery({
-      queryKey: ["products", productQuery],
+      queryKey: ['products', productQuery],
       queryFn: ({ pageParam }) =>
         getProductsFetcher({ cursor: pageParam, query: productQuery }),
       initialPageParam: null,

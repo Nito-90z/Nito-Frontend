@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { twMerge } from "tailwind-merge";
-import Button from "../common/Button";
-import HeaderAlarmIcon from "../common/icons/HeaderAlarmIcon";
-import { FavoriteProductQuery, Ordering } from "@/models/product";
-import { DISCOUNT_RATE, PRESENT_PRICE } from "@/constants";
+import { twMerge } from 'tailwind-merge';
+import Button from '../common/Button';
+import HeaderAlarmIcon from '../common/icons/HeaderAlarmIcon';
+import { FavoriteProductQuery, Ordering } from '@/models/product';
+import { DISCOUNT_RATE, PRESENT_PRICE } from '@/constants';
 
 type Props = {
   count: number;
@@ -27,9 +27,9 @@ export default function Main({
     }
   };
   return (
-    <div className="sticky top-0 bg-white z-50">
-      <header className="w-full p-4 pt-5 flex items-center justify-between">
-        <h1 className="text-[26px] leading-[38px] font-bold text-black">
+    <div className="sticky top-0 z-50 bg-white">
+      <header className="flex w-full items-center justify-between p-4 pt-5">
+        <h1 className="text-[26px] font-bold leading-[38px] text-black">
           찜한 상품{count !== 0 && `(${count})`}
         </h1>
         <div className="flex items-center">
@@ -38,13 +38,13 @@ export default function Main({
           </button>
         </div>
       </header>
-      <div className="w-full pb-2 px-4 flex items-center justify-between">
-        <div className="text-light-gray text-sm">
+      <div className="flex w-full items-center justify-between px-4 pb-2">
+        <div className="text-sm text-light-gray">
           <button
             onClick={() => handleOrdering(DISCOUNT_RATE)}
             className={twMerge(
-              "pr-2 rounded",
-              query.ordering === DISCOUNT_RATE && "text-dark-gray"
+              'rounded pr-2',
+              query.ordering === DISCOUNT_RATE && 'text-dark-gray',
             )}
           >
             할인율순
@@ -53,8 +53,8 @@ export default function Main({
           <button
             onClick={() => handleOrdering(PRESENT_PRICE)}
             className={twMerge(
-              "pl-2 rounded",
-              query.ordering === PRESENT_PRICE && "text-dark-gray"
+              'rounded pl-2',
+              query.ordering === PRESENT_PRICE && 'text-dark-gray',
             )}
           >
             낮은 가격순
@@ -63,8 +63,8 @@ export default function Main({
         <Button
           disabled={count === 0}
           className={twMerge(
-            "text-sm text-dark-gray bg-transparent w-fit h-fit disabled:bg-transparent",
-            count === 0 && "text-light-gray"
+            'h-fit w-fit bg-transparent text-sm text-dark-gray disabled:bg-transparent',
+            count === 0 && 'text-light-gray',
           )}
           onClick={onEditing}
         >
