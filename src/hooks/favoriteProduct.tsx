@@ -1,8 +1,10 @@
 import {
   deleteFavoriteProductsFetcher,
   getFavoriteProductsFetcher,
+  setFavoriteProductAlarmFetcher,
 } from "@/fetchers/product";
-import { FavoriteProductQuery } from "@/models/product";
+import { FavoriteProduct, FavoriteProductQuery } from "@/models/product";
+import { useToastStore } from "@/stores/toast";
 import {
   keepPreviousData,
   useInfiniteQuery,
@@ -12,6 +14,8 @@ import {
 
 export default function useFavoriteProduct(query: FavoriteProductQuery) {
   const queryClient = useQueryClient();
+  const setToast = useToastStore.use.setToast();
+
   const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
     useInfiniteQuery({
       queryKey: ["favorite_products", query],
@@ -24,11 +28,23 @@ export default function useFavoriteProduct(query: FavoriteProductQuery) {
       refetchOnWindowFocus: false,
     });
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: deleteFavoriteProduct } = useMutation({
     mutationFn: ({ ids }: { ids: number[] }) =>
       deleteFavoriteProductsFetcher(ids),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["favorite_products", query] });
+      setToast("찜한 상품에서 삭제했어요!");
+      setTimeout(() => setToast(null), 3000);
+    },
+  });
+
+  const { mutate: setFavoriteProductAlarm } = useMutation({
+    mutationFn: ({ id, isAlarm }: { id: number; isAlarm: boolean }) =>
+      setFavoriteProductAlarmFetcher(id, isAlarm),
+    onSuccess: (data: FavoriteProduct) => {
+      queryClient.invalidateQueries({ queryKey: ["favorite_products", query] });
+      setToast(data.isAlarm ? "알람을 켰어요!" : "알람을 껐어요!");
+      setTimeout(() => setToast(null), 3000);
     },
   });
 
@@ -38,6 +54,7 @@ export default function useFavoriteProduct(query: FavoriteProductQuery) {
     fetchNextPage,
     hasNextPage,
     isFetching,
-    mutateAsync,
+    deleteFavoriteProduct,
+    setFavoriteProductAlarm,
   };
 }

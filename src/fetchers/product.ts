@@ -97,3 +97,12 @@ export async function deleteFavoriteProductsFetcher(ids: number[]) {
     })
     .then((res) => res.data);
 }
+
+export async function setFavoriteProductAlarmFetcher(
+  productId: number,
+  isAlarm: boolean
+) {
+  return clientInstance
+    .put("/api/favorite-product", { productId, isAlarm })
+    .then((res) => res.data);
+}

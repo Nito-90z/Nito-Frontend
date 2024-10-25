@@ -22,7 +22,8 @@ type Props = {
   isEditing?: boolean;
   selected?: number[];
   onSelect?: (id: number) => void;
-  addFavorite: (id: number) => void;
+  addFavorite?: (id: number) => void;
+  setIsAlarm?: (id: number, isAlarm: boolean) => void;
 };
 
 export default function ProductItem({
@@ -33,6 +34,7 @@ export default function ProductItem({
   selected,
   onSelect,
   addFavorite,
+  setIsAlarm,
 }: Props) {
   const {
     id,
@@ -57,7 +59,11 @@ export default function ProductItem({
     }
   };
   const handleAddFavorite = (e: MouseEvent<HTMLButtonElement>) => {
-    addFavorite(id);
+    addFavorite && addFavorite(id);
+    e.stopPropagation();
+  };
+  const handleSetIsAlarm = (e: MouseEvent<HTMLButtonElement>) => {
+    setIsAlarm && setIsAlarm(favoriteId!, isAlarm);
     e.stopPropagation();
   };
   return (
@@ -113,7 +119,11 @@ export default function ProductItem({
               <PlusIcon size="sm" />
             </CircleButton>
           ) : isUnavailable ? (
-            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+            <CircleButton
+              size="sm"
+              className={isAlarm ? "" : "bg-gray"}
+              onClick={handleSetIsAlarm}
+            >
               {isAlarm ? (
                 <RestockAlarmIcon size="sm" />
               ) : (
@@ -121,7 +131,11 @@ export default function ProductItem({
               )}
             </CircleButton>
           ) : (
-            <CircleButton size="sm" className={isAlarm ? "" : "bg-gray"}>
+            <CircleButton
+              size="sm"
+              className={isAlarm ? "" : "bg-gray"}
+              onClick={handleSetIsAlarm}
+            >
               {isAlarm ? <AlarmIcon size="sm" /> : <AlarmOffIcon size="sm" />}
             </CircleButton>
           )}

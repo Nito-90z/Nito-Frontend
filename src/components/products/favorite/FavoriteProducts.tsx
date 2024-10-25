@@ -27,7 +27,7 @@ export default function FavoriteProducts() {
     fetchNextPage,
     hasNextPage,
     isFetching,
-    mutateAsync,
+    deleteFavoriteProduct,
   } = useFavoriteProduct(query);
   const selectedCount = selected.length;
   const products: FavoriteProduct[] =
@@ -47,9 +47,8 @@ export default function FavoriteProducts() {
   const handleDelete = async () => {
     if (selectedCount === 0) return;
 
-    await mutateAsync({ ids: selected });
+    await deleteFavoriteProduct({ ids: selected });
     setSelected([]);
-    setIsEditing(false);
   };
   const handleOrdering = (value: Ordering) => {
     setQuery((prev) => ({ ...prev, ordering: value }));
@@ -80,6 +79,7 @@ export default function FavoriteProducts() {
         <NullProductList />
       ) : (
         <ProductList
+          query={query}
           products={products}
           isEditing={isEditing}
           selected={selected}

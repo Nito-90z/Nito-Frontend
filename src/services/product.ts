@@ -66,3 +66,12 @@ export async function deleteFavoriteProducts(ids: number[]) {
     })
     .catch(() => new Response("Not Found!", { status: 404 }));
 }
+
+export async function setFavoriteProductAlarm(
+  productId: number,
+  isAlarm: boolean
+) {
+  return serverInstance
+    .put(`/v1/favorite_product/${productId}/`, { isAlarm: !isAlarm })
+    .then((res) => res.data);
+}

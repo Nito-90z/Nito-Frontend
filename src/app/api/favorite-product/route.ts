@@ -2,6 +2,7 @@ import {
   addFavoriteProduct,
   deleteFavoriteProducts,
   getFavoriteProducts,
+  setFavoriteProductAlarm,
 } from "@/services/product";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -57,6 +58,30 @@ export async function DELETE(request: NextRequest) {
     await deleteFavoriteProducts(idsArray);
 
     return NextResponse.json({ message: "Deleted!" }, { status: 200 });
+  } catch (error: any) {
+    const errorMessage =
+      error.status === 404
+        ? error.response.data.detail
+        : "Something went wrong";
+
+    return NextResponse.json(
+      { message: errorMessage },
+      { status: error.status || 500 } // 에러가 있다면 해당 코드, 없으면 500
+    );
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  const { productId, isAlarm } = await request.json();
+
+  if (!productId || isAlarm == null) {
+    return NextResponse.json({ message: "Bad Request" }, { status: 400 });
+  }
+
+  try {
+    const data = await setFavoriteProductAlarm(productId, isAlarm);
+
+    return NextResponse.json(data);
   } catch (error: any) {
     const errorMessage =
       error.status === 404
