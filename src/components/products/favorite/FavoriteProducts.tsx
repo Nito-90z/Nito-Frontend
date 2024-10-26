@@ -62,7 +62,10 @@ export default function FavoriteProducts() {
           onClick={handleEditing}
         />
       ) : (
-        <Main count={products.length} onEditing={() => setIsEditing(true)} />
+        <Main
+          count={(data && data[0]?.count) || 0}
+          onEditing={() => setIsEditing(true)}
+        />
       )}
       {products.length === 0 ? (
         <NullProductList />

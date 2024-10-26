@@ -3,7 +3,7 @@ import {
   getFavoriteProductsFetcher,
   setFavoriteProductAlarmFetcher,
 } from '@/fetchers/product';
-import { FavoriteProduct, FavoriteProductQuery } from '@/models/product';
+import { FavoriteProduct } from '@/models/product';
 import { useFavoriteQueryStore } from '@/stores/favoriteQuery';
 import { useToastStore } from '@/stores/toast';
 import {
@@ -13,7 +13,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
-export default function useFavoriteProduct() {
+export default function useFavoriteProduct(queryKey?: string[]) {
   const queryClient = useQueryClient();
   const setToast = useToastStore.use.setToast();
   const favoriteQuery = useFavoriteQueryStore.use.favoriteQuery();
@@ -35,7 +35,7 @@ export default function useFavoriteProduct() {
       deleteFavoriteProductsFetcher(ids),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['favorite_products', favoriteQuery],
+        queryKey: queryKey || ['favorite_products', favoriteQuery],
       });
       setToast('찜한 상품에서 삭제했어요!', 3000);
     },
@@ -46,7 +46,7 @@ export default function useFavoriteProduct() {
       setFavoriteProductAlarmFetcher(id, isAlarm),
     onSuccess: (data: FavoriteProduct) => {
       queryClient.invalidateQueries({
-        queryKey: ['favorite_products', favoriteQuery],
+        queryKey: queryKey || ['favorite_products', favoriteQuery],
       });
       setToast(data.isAlarm ? '알람을 켰어요!' : '알람을 껐어요!', 3000);
     },
