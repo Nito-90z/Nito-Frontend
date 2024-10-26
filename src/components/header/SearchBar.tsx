@@ -1,29 +1,41 @@
-import { FocusEvent, FormEvent, useRef } from 'react';
+import { FocusEvent, FormEvent, RefObject } from 'react';
 import MoreIcon from '../common/icons/MoreIcon';
 import Input from '../common/Input';
 import CloseIcon from '../common/icons/CloseIcon';
 import { useRouter } from 'next/navigation';
 
 type Props = {
+  inputRef: RefObject<HTMLInputElement>;
   value: string;
   setValue: (value: string) => void;
-  onSubmit: () => void;
+  onSubmit: (value: string) => void;
   setIsSearchBarFocus: (value: boolean) => void;
 };
 
 export default function SearchBar({
+  inputRef,
   value,
   setValue,
   onSubmit,
   setIsSearchBarFocus,
 }: Props) {
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
 
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    if (e.relatedTarget && e.relatedTarget.tagName === 'BUTTON') return;
+
+    setIsSearchBarFocus(false);
+  };
+  const handleDeleteClick = () => {
+    setValue('');
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit();
+    onSubmit(value);
     if (inputRef && inputRef.current) {
       inputRef.current.blur();
     }
@@ -40,7 +52,7 @@ export default function SearchBar({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="상품명 검색"
-            onBlur={() => setIsSearchBarFocus(false)}
+            onBlur={handleBlur}
             onFocus={() => setIsSearchBarFocus(true)}
             className="rounded-sm bg-platinum pl-4 pr-9 font-normal placeholder:font-normal placeholder:text-gray"
             type="search"
@@ -49,15 +61,16 @@ export default function SearchBar({
             <button
               type="button"
               className="absolute bottom-0 right-3 top-0"
-              onClick={() => setValue('')}
+              onClick={handleDeleteClick}
             >
               <CloseIcon />
             </button>
           )}
         </div>
         <button
-          className="whitespace-nowrap text-dark-gray disabled:text-gray"
+          className="whitespace-nowrap px-1 text-dark-gray disabled:text-gray"
           disabled={!value}
+          onClick={() => setIsSearchBarFocus(false)}
         >
           검색
         </button>

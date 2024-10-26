@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SearchBar from '../header/SearchBar';
 import { twMerge } from 'tailwind-merge';
 import RecentSearch from './RecentSearch';
@@ -33,6 +33,7 @@ const SEARCH_RESULTS = [
 ];
 
 export default function SearchForm() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [keyword, setKeyword] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [isSearchBarFocus, setIsSearchBarFocus] = useState(false);
@@ -41,13 +42,25 @@ export default function SearchForm() {
 
   const handleRecentSearchesDelete = (id: number) => {
     setRecentSearches((prev) => prev.filter((_, index) => id !== index));
+    setIsSearchBarFocus(false);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
   const handleRecentSearchesClear = () => {
     setRecentSearches([]);
     localStorage.setItem('recentSearches', JSON.stringify([]));
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
-  const handleSubmit = () => {
-    const word = keyword.trim();
+  const handleRecentSearchClick = (value: string) => {
+    setKeyword(value);
+    handleSubmit(value);
+    setIsSearchBarFocus(false);
+  };
+  const handleSubmit = (value: string) => {
+    const word = value.trim();
     if (word === '') return;
 
     setRecentSearches((prev) => {
@@ -76,6 +89,7 @@ export default function SearchForm() {
       )}
     >
       <SearchBar
+        inputRef={inputRef}
         value={keyword}
         setValue={setKeyword}
         onSubmit={handleSubmit}
@@ -87,6 +101,7 @@ export default function SearchForm() {
         ) : (
           <RecentSearch
             recentSearches={recentSearches}
+            setKeyword={handleRecentSearchClick}
             onDelete={handleRecentSearchesDelete}
             onClear={handleRecentSearchesClear}
           />

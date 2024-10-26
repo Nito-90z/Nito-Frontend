@@ -1,17 +1,20 @@
 import RecentSearchItem from './RecentSearchItem';
 import Button from '../common/Button';
-import { MouseEvent, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useModalStore } from '@/stores/modal';
 import RecentSearchDeleteModal from './RecentSearchDeleteModal';
+import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
   recentSearches: string[];
+  setKeyword: (value: string) => void;
   onDelete: (id: number) => void;
   onClear: () => void;
 };
 
 export default function RecentSearch({
   recentSearches,
+  setKeyword,
   onDelete,
   onClear,
 }: Props) {
@@ -44,12 +47,13 @@ export default function RecentSearch({
           <p className="text-dark-gray">최근 검색어가 없어요</p>
         </div>
       ) : (
-        <ul className="h-full overflow-y-auto px-4">
+        <ul className="h-full overflow-y-auto">
           {recentSearches.map((keyword, index) => (
             <RecentSearchItem
-              key={index}
+              key={uuidv4()}
               id={index}
               keyword={keyword}
+              setKeyword={setKeyword}
               onDelete={onDelete}
             />
           ))}
