@@ -8,6 +8,8 @@ export default function NullSearchResultIcon() {
       alt="No search result"
       width={80}
       height={80}
+      priority
+      style={{ width: '80px', height: '80px' }}
     />
   );
 }

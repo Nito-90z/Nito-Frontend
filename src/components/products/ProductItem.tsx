@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
 
 type Props = {
+  priority: boolean;
   favoriteId: number | null;
   product: Product | FavoriteProductInfo;
   isAlarm: boolean;
@@ -27,6 +28,7 @@ type Props = {
 };
 
 export default function ProductItem({
+  priority,
   favoriteId,
   product,
   isAlarm,
@@ -88,6 +90,7 @@ export default function ProductItem({
       )}
       <div className="relative h-20 w-20 shrink-0">
         <ProductImage
+          priority={priority}
           src={image ?? ''}
           alt={`${title} product image`}
           className={twMerge(

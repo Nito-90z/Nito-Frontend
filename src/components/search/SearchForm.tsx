@@ -72,7 +72,6 @@ export default function SearchForm() {
     setProductQuery('search', word);
   };
 
-  // 초기에 데이터가 비어있는 동안에 어떻게 보여줄지. 수정
   useEffect(() => {
     resetProductQuery();
     setProductQuery('search', '_initial_no_results');

@@ -61,7 +61,7 @@ export default function ProductList({
           className,
         )}
       >
-        {products.map((item) => {
+        {products.map((item, index) => {
           const product = 'product' in item ? item.product : item;
           const favoriteId = 'id' in item ? item.id : null;
           const isAlarm = 'isAlarm' in item && item.isAlarm;
@@ -69,6 +69,7 @@ export default function ProductList({
           return (
             <ProductItem
               key={product.id}
+              priority={index < 10}
               favoriteId={favoriteId}
               product={product}
               isAlarm={isAlarm}
