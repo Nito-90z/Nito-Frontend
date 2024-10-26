@@ -1,18 +1,16 @@
 import { addFavoriteProductFetcher } from '@/fetchers/product';
-import { useProductQueryStore } from '@/stores/productQuery';
 import { useToastStore } from '@/stores/toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-export function useAddFavorite() {
+export function useAddFavorite(queryKey?: string[]) {
   const queryClient = useQueryClient();
-  const productQuery = useProductQueryStore.use.productQuery();
   const setToast = useToastStore.use.setToast();
 
   return useMutation({
     mutationFn: ({ id }: { id: number }) => addFavoriteProductFetcher(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products', productQuery] });
+      queryKey && queryClient.invalidateQueries({ queryKey });
       setToast('상품을 추가했어요', 5000);
     },
     onError: (error) => {

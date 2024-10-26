@@ -3,27 +3,24 @@
 import { twMerge } from 'tailwind-merge';
 import Button from '../common/Button';
 import HeaderAlarmIcon from '../common/icons/HeaderAlarmIcon';
-import { FavoriteProductQuery, Ordering } from '@/models/product';
+import { Ordering } from '@/models/product';
 import { DISCOUNT_RATE, PRESENT_PRICE } from '@/constants';
+import { useFavoriteQueryStore } from '@/stores/favoriteQuery';
 
 type Props = {
   count: number;
-  query: FavoriteProductQuery;
   onEditing: () => void;
-  onChangeOrdering: (value: Ordering) => void;
 };
 
-export default function Main({
-  count,
-  query,
-  onEditing,
-  onChangeOrdering,
-}: Props) {
+export default function Main({ count, onEditing }: Props) {
+  const favoriteQuery = useFavoriteQueryStore.use.favoriteQuery();
+  const setFavoriteQuery = useFavoriteQueryStore.use.setFavoriteQuery();
+
   const handleOrdering = (value: Ordering) => {
-    if (query.ordering === value) {
-      onChangeOrdering(null);
+    if (favoriteQuery.ordering === value) {
+      setFavoriteQuery('ordering', null);
     } else {
-      onChangeOrdering(value);
+      setFavoriteQuery('ordering', value);
     }
   };
   return (
@@ -44,7 +41,7 @@ export default function Main({
             onClick={() => handleOrdering(DISCOUNT_RATE)}
             className={twMerge(
               'rounded pr-2',
-              query.ordering === DISCOUNT_RATE && 'text-dark-gray',
+              favoriteQuery.ordering === DISCOUNT_RATE && 'text-dark-gray',
             )}
           >
             할인율순
@@ -54,7 +51,7 @@ export default function Main({
             onClick={() => handleOrdering(PRESENT_PRICE)}
             className={twMerge(
               'rounded pl-2',
-              query.ordering === PRESENT_PRICE && 'text-dark-gray',
+              favoriteQuery.ordering === PRESENT_PRICE && 'text-dark-gray',
             )}
           >
             낮은 가격순
