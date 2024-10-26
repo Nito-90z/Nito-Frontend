@@ -1,6 +1,6 @@
 import RecentSearchItem from './RecentSearchItem';
 import Button from '../common/Button';
-import { useEffect } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { useModalStore } from '@/stores/modal';
 import RecentSearchDeleteModal from './RecentSearchDeleteModal';
 
@@ -20,13 +20,14 @@ export default function RecentSearch({
   const handleDeleteAll = () => {
     setModal(<RecentSearchDeleteModal onClear={onClear} />);
   };
+
   useEffect(() => {
     if (recentSearches.length === 0) return;
 
     localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
   }, [recentSearches]);
   return (
-    <div className="flex h-full max-h-[calc(100%-82px)] flex-col gap-2 pb-4">
+    <div className="absolute top-[82px] z-10 flex h-full max-h-[calc(100%-82px)] w-full flex-col gap-2 bg-white pb-4">
       <div className="flex items-center justify-between px-4">
         <p className="font-bold text-dark-gray">최근 검색어</p>
         {recentSearches.length !== 0 && (

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '../header/SearchBar';
 import { twMerge } from 'tailwind-merge';
 import RecentSearch from './RecentSearch';
@@ -35,7 +35,7 @@ const SEARCH_RESULTS = [
 export default function SearchForm() {
   const [keyword, setKeyword] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
-  const [isSearchBarFocus, setIsSearchBarFocus] = useState(true);
+  const [isSearchBarFocus, setIsSearchBarFocus] = useState(false);
   const resetProductQuery = useProductQueryStore.use.resetProductQuery();
   const setProductQuery = useProductQueryStore.use.setProductQuery();
 
@@ -46,9 +46,7 @@ export default function SearchForm() {
     setRecentSearches([]);
     localStorage.setItem('recentSearches', JSON.stringify([]));
   };
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     const word = keyword.trim();
     if (word === '') return;
 
@@ -59,12 +57,12 @@ export default function SearchForm() {
       return [word, ...prev];
     });
     setProductQuery('search', word);
-    setIsSearchBarFocus(false);
   };
 
   // 초기에 데이터가 비어있는 동안에 어떻게 보여줄지. 수정
   useEffect(() => {
     resetProductQuery();
+    setProductQuery('search', '_initial_no_results');
     const recentSearches = localStorage.getItem('recentSearches') || '[]';
     setRecentSearches(JSON.parse(recentSearches));
 
@@ -78,23 +76,22 @@ export default function SearchForm() {
       )}
     >
       <SearchBar
-        placeholder="상품명 검색"
         value={keyword}
         setValue={setKeyword}
         onSubmit={handleSubmit}
         setIsSearchBarFocus={setIsSearchBarFocus}
       />
-      {!keyword ? (
-        <RecentSearch
-          recentSearches={recentSearches}
-          onDelete={handleRecentSearchesDelete}
-          onClear={handleRecentSearchesClear}
-        />
-      ) : isSearchBarFocus ? (
-        <AutoKeywords results={SEARCH_RESULTS} />
-      ) : (
-        <SearchProducts />
-      )}
+      {isSearchBarFocus &&
+        (keyword ? (
+          <AutoKeywords results={SEARCH_RESULTS} />
+        ) : (
+          <RecentSearch
+            recentSearches={recentSearches}
+            onDelete={handleRecentSearchesDelete}
+            onClear={handleRecentSearchesClear}
+          />
+        ))}
+      <SearchProducts />
     </section>
   );
 }
