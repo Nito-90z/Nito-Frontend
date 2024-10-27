@@ -69,7 +69,7 @@ export default function ProductList({
           return (
             <ProductItem
               key={product.id}
-              priority={index < 10}
+              priority={index < 15 && !!product.image}
               favoriteId={favoriteId}
               product={product}
               isAlarm={isAlarm}
