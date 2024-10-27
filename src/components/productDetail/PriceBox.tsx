@@ -1,3 +1,4 @@
+import { useExchangeRate } from '@/contexts/ExchangeRateContext';
 import { ProductPrice } from '@/models/product';
 import { convertDollarToWon } from '@/utils/currency-converter';
 import { parseDate } from '@/utils/date';
@@ -35,6 +36,7 @@ export default function PriceBox({ prices }: { prices: ProductPrice }) {
       value: highPrice,
     },
   ];
+  const { usdToKrw } = useExchangeRate();
   return (
     <ul className="grid grid-cols-2 bg-bar">
       {priceList.map(({ title, date, value }) => (
@@ -49,7 +51,7 @@ export default function PriceBox({ prices }: { prices: ProductPrice }) {
           <div className="self-end text-end">
             <p className="font-bold leading-7 text-dark-gray">${value || 0}</p>
             <p className="text-xs leading-[18px] text-text">
-              {convertDollarToWon(value || '0')}
+              {convertDollarToWon(value || '0', usdToKrw)}
             </p>
           </div>
         </li>

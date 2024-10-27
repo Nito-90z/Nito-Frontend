@@ -10,6 +10,7 @@ import PlusIcon from '../common/icons/PlusIcon';
 import { useAddFavorite } from '@/hooks/product';
 import { MouseEvent } from 'react';
 import { useToastStore } from '@/stores/toast';
+import { useExchangeRate } from '@/contexts/ExchangeRateContext';
 
 export default function RelatedProductItem({ product }: { product: Product }) {
   const { id, image, title, presentPrice, isLowestPriceEver, discountRate } =
@@ -17,6 +18,7 @@ export default function RelatedProductItem({ product }: { product: Product }) {
   const router = useRouter();
   const { mutateAsync } = useAddFavorite();
   const setToast = useToastStore.use.setToast();
+  const { usdToKrw } = useExchangeRate();
 
   const handleClick = () => {
     router.push(`/product-list/product/${id}`);
@@ -50,7 +52,9 @@ export default function RelatedProductItem({ product }: { product: Product }) {
         <h3 className="line-clamp-2 text-text">{title}</h3>
         <div>
           <p className="font-bold text-black">$ {presentPrice}</p>
-          <p className="text-secondary">{convertDollarToWon(presentPrice)}</p>
+          <p className="text-secondary">
+            {convertDollarToWon(presentPrice, usdToKrw)}
+          </p>
         </div>
         <div className="flex gap-[6px]">
           {isLowestPriceEver && <Badge direction="up">역대최저가</Badge>}

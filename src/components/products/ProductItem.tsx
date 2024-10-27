@@ -14,6 +14,7 @@ import { FavoriteProductInfo, Product } from '@/models/product';
 import AlarmOffIcon from '../common/icons/AlarmOffIcon';
 import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
+import { useExchangeRate } from '@/contexts/ExchangeRateContext';
 
 type Props = {
   favoriteId: number | null;
@@ -47,6 +48,7 @@ export default function ProductItem({
     isLowestPriceEver,
   } = product;
   const router = useRouter();
+  const { usdToKrw } = useExchangeRate();
   const isUnavailable = isOutOfStock || isStopSelling;
   const isFavoritePage = !('isFavorite' in product);
   const isSelected = selected?.includes(favoriteId || -1);
@@ -159,7 +161,7 @@ export default function ProductItem({
           </div>
           <div className="flex justify-end gap-[6px]">
             <span className="text-sm text-[#767676]">
-              {convertDollarToWon(presentPrice)}
+              {convertDollarToWon(presentPrice, usdToKrw)}
             </span>
             {!!discountRate && (
               <Badge size="sm" direction="down" icon>

@@ -12,3 +12,7 @@ export function parseDateFromNow(time: Date) {
 export function parseDate(time: Date) {
   return dayjs(time).format('YYYY/MM/DD');
 }
+
+export function parseExchangeDate(time: Date) {
+  return dayjs(time).format('YY/MM/DD A HH시mm분');
+}

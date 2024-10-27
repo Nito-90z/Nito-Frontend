@@ -4,6 +4,7 @@ import '../css/index.css';
 import QueryProvider from '@/contexts/QueryContext';
 import ModalProvider from '@/contexts/ModalContext';
 import ToastProvider from '@/contexts/ToastContext';
+import { ExchangeRateProvider } from '@/contexts/ExchangeRateContext';
 
 export const metadata: Metadata = {
   title: 'Nito',
@@ -28,15 +29,17 @@ export default function RootLayout({
         className={`${pretendard.variable} h-dvh w-screen content-center bg-[#ECECEC] font-pretendard`}
       >
         <QueryProvider>
-          <ModalProvider>
-            <ToastProvider>
-              <main className="relative mx-auto flex h-full max-h-dvh w-full min-w-[360px] max-w-[430px] flex-col bg-white">
-                {children}
-                <div id="modal" />
-                <div id="toast" />
-              </main>
-            </ToastProvider>
-          </ModalProvider>
+          <ExchangeRateProvider>
+            <ModalProvider>
+              <ToastProvider>
+                <main className="relative mx-auto flex h-full max-h-dvh w-full min-w-[360px] max-w-[430px] flex-col bg-white">
+                  {children}
+                  <div id="modal" />
+                  <div id="toast" />
+                </main>
+              </ToastProvider>
+            </ModalProvider>
+          </ExchangeRateProvider>
         </QueryProvider>
       </body>
     </html>
