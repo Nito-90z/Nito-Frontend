@@ -7,6 +7,7 @@ import RecentSearch from './RecentSearch';
 import AutoKeywords from './AutoKeywords';
 import { useProductQueryStore } from '@/stores/productQuery';
 import SearchProducts from './SearchProducts';
+import { useRecentSearchStore } from '@/stores/recentSearch';
 
 // 검색어 자동 완성
 const SEARCH_RESULTS = [
@@ -35,21 +36,22 @@ const SEARCH_RESULTS = [
 export default function SearchForm() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [keyword, setKeyword] = useState('');
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [isSearchBarFocus, setIsSearchBarFocus] = useState(false);
   const resetProductQuery = useProductQueryStore.use.resetProductQuery();
   const setProductQuery = useProductQueryStore.use.setProductQuery();
+  const addRecentSearch = useRecentSearchStore.use.add();
+  const deleteRecentSearch = useRecentSearchStore.use.delete();
+  const clearRecentSearch = useRecentSearchStore.use.clear();
 
-  const handleRecentSearchesDelete = (id: number) => {
-    setRecentSearches((prev) => prev.filter((_, index) => id !== index));
+  const handleRecentSearchesDelete = (value: string) => {
+    deleteRecentSearch(value);
     setIsSearchBarFocus(false);
     if (inputRef.current) {
       inputRef.current.focus();
     }
   };
   const handleRecentSearchesClear = () => {
-    setRecentSearches([]);
-    localStorage.setItem('recentSearches', JSON.stringify([]));
+    clearRecentSearch();
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -63,20 +65,13 @@ export default function SearchForm() {
     const word = value.trim();
     if (word === '') return;
 
-    setRecentSearches((prev) => {
-      if (prev.includes(word)) {
-        return [word, ...prev.filter((k) => k !== word)];
-      }
-      return [word, ...prev];
-    });
+    addRecentSearch(value);
     setProductQuery('search', word);
   };
 
   useEffect(() => {
     resetProductQuery();
     setProductQuery('search', '_initial_no_results');
-    const recentSearches = localStorage.getItem('recentSearches') || '[]';
-    setRecentSearches(JSON.parse(recentSearches));
 
     return () => resetProductQuery();
   }, []);
@@ -99,7 +94,6 @@ export default function SearchForm() {
           <AutoKeywords results={SEARCH_RESULTS} />
         ) : (
           <RecentSearch
-            recentSearches={recentSearches}
             setKeyword={handleRecentSearchClick}
             onDelete={handleRecentSearchesDelete}
             onClear={handleRecentSearchesClear}

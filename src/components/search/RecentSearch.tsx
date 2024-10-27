@@ -1,34 +1,23 @@
 import RecentSearchItem from './RecentSearchItem';
 import Button from '../common/Button';
-import { useEffect } from 'react';
 import { useModalStore } from '@/stores/modal';
 import RecentSearchDeleteModal from './RecentSearchDeleteModal';
 import { v4 as uuidv4 } from 'uuid';
+import { useRecentSearchStore } from '@/stores/recentSearch';
 
 type Props = {
-  recentSearches: string[];
   setKeyword: (value: string) => void;
-  onDelete: (id: number) => void;
+  onDelete: (value: string) => void;
   onClear: () => void;
 };
 
-export default function RecentSearch({
-  recentSearches,
-  setKeyword,
-  onDelete,
-  onClear,
-}: Props) {
+export default function RecentSearch({ setKeyword, onDelete, onClear }: Props) {
   const setModal = useModalStore.use.setModal();
+  const recentSearches = useRecentSearchStore.use.recentSearches();
 
   const handleDeleteAll = () => {
     setModal(<RecentSearchDeleteModal onClear={onClear} />);
   };
-
-  useEffect(() => {
-    if (recentSearches.length === 0) return;
-
-    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
-  }, [recentSearches]);
   return (
     <div className="absolute top-[82px] z-10 flex h-full max-h-[calc(100%-82px)] w-full flex-col gap-2 bg-white pb-4">
       <div className="flex items-center justify-between px-4">
@@ -48,10 +37,9 @@ export default function RecentSearch({
         </div>
       ) : (
         <ul className="h-full overflow-y-auto">
-          {recentSearches.map((keyword, index) => (
+          {recentSearches.map((keyword) => (
             <RecentSearchItem
               key={uuidv4()}
-              id={index}
               keyword={keyword}
               setKeyword={setKeyword}
               onDelete={onDelete}

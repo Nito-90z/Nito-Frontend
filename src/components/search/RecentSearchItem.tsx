@@ -1,14 +1,12 @@
 import CloseIcon from '../common/icons/CloseIcon';
 
 type Props = {
-  id: number;
   keyword: string;
   setKeyword: (value: string) => void;
-  onDelete: (id: number) => void;
+  onDelete: (value: string) => void;
 };
 
 export default function RecentSearchItem({
-  id,
   keyword,
   setKeyword,
   onDelete,
@@ -21,7 +19,7 @@ export default function RecentSearchItem({
       >
         {keyword}
       </button>
-      <button className="py-2" onClick={() => onDelete(id)}>
+      <button className="py-2" onClick={() => onDelete(keyword)}>
         <CloseIcon />
       </button>
     </li>
