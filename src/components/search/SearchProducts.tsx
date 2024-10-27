@@ -24,7 +24,6 @@ export default function SearchProducts() {
           fetchNextPage={fetchNextPage}
           hasNextPage={hasNextPage}
           isFetching={isFetching}
-          className="max-h-none"
         />
       )}
     </div>

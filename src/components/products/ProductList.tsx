@@ -14,19 +14,17 @@ import useFavoriteProduct from '@/hooks/favoriteProduct';
 
 type Props = {
   query?: FavoriteProductQuery;
-  className?: string;
   products: (Product | FavoriteProduct)[];
   isEditing?: boolean;
   selected?: number[];
   onSelect?: (id: number) => void;
-  fetchNextPage?: () => void;
-  hasNextPage?: boolean;
-  isFetching?: boolean;
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+  isFetching: boolean;
 };
 
 export default function ProductList({
   query,
-  className,
   products,
   isEditing,
   selected,
@@ -58,7 +56,6 @@ export default function ProductList({
         className={twMerge(
           'flex flex-col gap-3 p-4',
           isEditing ? 'max-h-[calc(100%-62px)]' : 'max-h-[calc(100%-102px)]',
-          className,
         )}
       >
         {products.map((item, index) => {
