@@ -7,16 +7,16 @@ import Badge from '../common/Badge';
 import { useRouter } from 'next/navigation';
 import CircleButton from '../common/CircleButton';
 import PlusIcon from '../common/icons/PlusIcon';
-import { useAddFavorite } from '@/hooks/product';
 import { MouseEvent } from 'react';
 import { useToastStore } from '@/stores/toast';
 import { useExchangeRateStore } from '@/stores/exchange';
+import { useSetFavoriteProduct } from '@/hooks/favoriteProduct';
 
 export default function RelatedProductItem({ product }: { product: Product }) {
   const { id, image, title, presentPrice, isLowestPriceEver, discountRate } =
     product;
   const router = useRouter();
-  const { mutateAsync } = useAddFavorite();
+  const { addFavoriteProduct } = useSetFavoriteProduct();
   const setToast = useToastStore.use.setToast();
   const { usdToKrw } = useExchangeRateStore.use.exchangeRate();
 
@@ -25,7 +25,7 @@ export default function RelatedProductItem({ product }: { product: Product }) {
   };
   const handleAddFavorite = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    await mutateAsync({ id });
+    await addFavoriteProduct({ id });
     setToast('상품을 추가했어요', 5000);
   };
   return (

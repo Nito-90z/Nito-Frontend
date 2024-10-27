@@ -2,13 +2,12 @@ import { DetailProduct } from '@/models/product';
 import Link from 'next/link';
 import CircleButton from '../common/CircleButton';
 import PlusIcon from '../common/icons/PlusIcon';
-import { useAddFavorite } from '@/hooks/product';
 import { useToastStore } from '@/stores/toast';
 import RestockAlarmIcon from '../common/icons/RestockAlarmIcon';
 import RestockAlarmOffIcon from '../common/icons/RestockAlarmOffIcon';
 import AlarmIcon from '../common/icons/AlarmIcon';
 import AlarmOffIcon from '../common/icons/AlarmOffIcon';
-import useFavoriteProduct from '@/hooks/favoriteProduct';
+import { useSetFavoriteProduct } from '@/hooks/favoriteProduct';
 
 type Props = {
   id: string;
@@ -20,11 +19,12 @@ export default function Footer({ id, product }: Props) {
     product;
   const isUnavailable = isOutOfStock || isStopSelling;
   const setToast = useToastStore.use.setToast();
-  const { mutateAsync } = useAddFavorite(['product', id]);
-  const { setFavoriteProductAlarm } = useFavoriteProduct(['product', id]);
+  const { addFavoriteProduct, setFavoriteProductAlarm } = useSetFavoriteProduct(
+    ['product', id],
+  );
 
   const handleAddFavorite = async () => {
-    await mutateAsync({ id: Number(id) });
+    await addFavoriteProduct({ id: Number(id) });
     setToast('상품을 추가했어요', 5000);
   };
   const handleSetIsAlarm = () => {

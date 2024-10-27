@@ -5,8 +5,7 @@ import ProductItem from './ProductItem';
 import { FavoriteProduct, Product } from '@/models/product';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useAddFavorite } from '@/hooks/product';
-import useFavoriteProduct from '@/hooks/favoriteProduct';
+import { useSetFavoriteProduct } from '@/hooks/favoriteProduct';
 
 type Props = {
   className?: string;
@@ -30,11 +29,11 @@ export default function ProductList({
   isFetching,
 }: Props) {
   const { ref, inView } = useInView({ threshold: 0 });
-  const { mutateAsync } = useAddFavorite();
-  const { setFavoriteProductAlarm } = useFavoriteProduct();
+  const { addFavoriteProduct, setFavoriteProductAlarm } =
+    useSetFavoriteProduct();
 
   const handleAddFavorite = async (id: number) => {
-    await mutateAsync({ id });
+    await addFavoriteProduct({ id });
   };
   const handleIsAlarm = (id: number, isAlarm: boolean) => {
     setFavoriteProductAlarm({ id, isAlarm });

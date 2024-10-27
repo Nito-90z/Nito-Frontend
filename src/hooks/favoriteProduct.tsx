@@ -1,4 +1,5 @@
 import {
+  addFavoriteProductFetcher,
   deleteFavoriteProductsFetcher,
   getFavoriteProductsFetcher,
   setFavoriteProductAlarmFetcher,
@@ -12,10 +13,9 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
+import axios from 'axios';
 
-export default function useFavoriteProduct(queryKey?: string[]) {
-  const queryClient = useQueryClient();
-  const setToast = useToastStore.use.setToast();
+export function useFavoriteProduct() {
   const favoriteQuery = useFavoriteQueryStore.use.favoriteQuery();
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
@@ -29,6 +29,35 @@ export default function useFavoriteProduct(queryKey?: string[]) {
       placeholderData: keepPreviousData,
       refetchOnWindowFocus: false,
     });
+
+  return {
+    data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  };
+}
+
+export function useSetFavoriteProduct(queryKey?: string[]) {
+  const queryClient = useQueryClient();
+  const setToast = useToastStore.use.setToast();
+  const favoriteQuery = useFavoriteQueryStore.use.favoriteQuery();
+
+  const { mutateAsync: addFavoriteProduct } = useMutation({
+    mutationFn: ({ id }: { id: number }) => addFavoriteProductFetcher(id),
+    onSuccess: () => {
+      queryKey && queryClient.invalidateQueries({ queryKey });
+      setToast('상품을 추가했어요', 5000);
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        if (error.status === 400) {
+          setToast(error.response?.data.message, 5000);
+        }
+      }
+    },
+  });
 
   const { mutateAsync: deleteFavoriteProduct } = useMutation({
     mutationFn: ({ ids }: { ids: number[] }) =>
@@ -53,11 +82,7 @@ export default function useFavoriteProduct(queryKey?: string[]) {
   });
 
   return {
-    data,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
+    addFavoriteProduct,
     deleteFavoriteProduct,
     setFavoriteProductAlarm,
   };

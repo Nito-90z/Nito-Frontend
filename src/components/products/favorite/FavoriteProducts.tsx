@@ -8,21 +8,19 @@ import ProductList from '../ProductList';
 import Button from '@/components/common/Button';
 import { FavoriteProduct } from '@/models/product';
 import Skeleton from '../Skeleton';
-import useFavoriteProduct from '@/hooks/favoriteProduct';
+import {
+  useFavoriteProduct,
+  useSetFavoriteProduct,
+} from '@/hooks/favoriteProduct';
 import { useFavoriteQueryStore } from '@/stores/favoriteQuery';
 
 export default function FavoriteProducts() {
   const [isEditing, setIsEditing] = useState(false);
   const [selected, setSelected] = useState<number[]>([]);
   const resetFavoriteQuery = useFavoriteQueryStore.use.resetFavoriteQuery();
-  const {
-    data,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    deleteFavoriteProduct,
-  } = useFavoriteProduct();
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
+    useFavoriteProduct();
+  const { deleteFavoriteProduct } = useSetFavoriteProduct();
   const selectedCount = selected.length;
   const products: FavoriteProduct[] =
     data?.map((page) => page.results).flat() || [];
