@@ -1,5 +1,5 @@
-import { useExchangeRate } from '@/contexts/ExchangeRateContext';
 import { ProductPrice } from '@/models/product';
+import { useExchangeRateStore } from '@/stores/exchange';
 import { convertDollarToWon } from '@/utils/currency-converter';
 import { parseDate } from '@/utils/date';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,7 +36,7 @@ export default function PriceBox({ prices }: { prices: ProductPrice }) {
       value: highPrice,
     },
   ];
-  const { usdToKrw } = useExchangeRate();
+  const { usdToKrw } = useExchangeRateStore.use.exchangeRate();
   return (
     <ul className="grid grid-cols-2 bg-bar">
       {priceList.map(({ title, date, value }) => (

@@ -10,7 +10,7 @@ import PlusIcon from '../common/icons/PlusIcon';
 import { useAddFavorite } from '@/hooks/product';
 import { MouseEvent } from 'react';
 import { useToastStore } from '@/stores/toast';
-import { useExchangeRate } from '@/contexts/ExchangeRateContext';
+import { useExchangeRateStore } from '@/stores/exchange';
 
 export default function RelatedProductItem({ product }: { product: Product }) {
   const { id, image, title, presentPrice, isLowestPriceEver, discountRate } =
@@ -18,7 +18,7 @@ export default function RelatedProductItem({ product }: { product: Product }) {
   const router = useRouter();
   const { mutateAsync } = useAddFavorite();
   const setToast = useToastStore.use.setToast();
-  const { usdToKrw } = useExchangeRate();
+  const { usdToKrw } = useExchangeRateStore.use.exchangeRate();
 
   const handleClick = () => {
     router.push(`/product-list/product/${id}`);

@@ -3,7 +3,7 @@ import Badge from '../common/Badge';
 import { convertDollarToWon } from '@/utils/currency-converter';
 import { parseDateFromNow, parseExchangeDate } from '@/utils/date';
 import Link from 'next/link';
-import { useExchangeRate } from '@/contexts/ExchangeRateContext';
+import { useExchangeRateStore } from '@/stores/exchange';
 
 export default function Information({ product }: { product: DetailProduct }) {
   const {
@@ -17,7 +17,7 @@ export default function Information({ product }: { product: DetailProduct }) {
     optionStatus,
     affiliateUrl,
   } = product;
-  const { usdToKrw, createdAt } = useExchangeRate();
+  const { usdToKrw, createdAt } = useExchangeRateStore.use.exchangeRate();
   return (
     <div className="flex flex-col gap-3 py-4">
       <h1 className="leading-7 text-dark-gray">{title}</h1>
