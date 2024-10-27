@@ -2,18 +2,12 @@
 
 import { twMerge } from 'tailwind-merge';
 import ProductItem from './ProductItem';
-import {
-  FavoriteProduct,
-  FavoriteProductQuery,
-  Product,
-} from '@/models/product';
+import { FavoriteProduct, Product } from '@/models/product';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useAddFavorite } from '@/hooks/product';
-import useFavoriteProduct from '@/hooks/favoriteProduct';
+import { useSetFavoriteProduct } from '@/hooks/favoriteProduct';
 
 type Props = {
-  query?: FavoriteProductQuery;
   className?: string;
   products: (Product | FavoriteProduct)[];
   isEditing?: boolean;
@@ -25,7 +19,6 @@ type Props = {
 };
 
 export default function ProductList({
-  query,
   className,
   products,
   isEditing,
@@ -36,13 +29,11 @@ export default function ProductList({
   isFetching,
 }: Props) {
   const { ref, inView } = useInView({ threshold: 0 });
-  const { mutateAsync } = useAddFavorite();
-  const { setFavoriteProductAlarm } = useFavoriteProduct(
-    query || { page_size: 20, ordering: null },
-  );
+  const { addFavoriteProduct, setFavoriteProductAlarm } =
+    useSetFavoriteProduct();
 
   const handleAddFavorite = async (id: number) => {
-    await mutateAsync({ id });
+    await addFavoriteProduct({ id });
   };
   const handleIsAlarm = (id: number, isAlarm: boolean) => {
     setFavoriteProductAlarm({ id, isAlarm });

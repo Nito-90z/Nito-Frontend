@@ -11,3 +11,6 @@ export const IOS_PATTERN = /iPhone|iPad|iPod/i;
 // product-ordering
 export const PRESENT_PRICE = 'present_price';
 export const DISCOUNT_RATE = '-discount_rate';
+
+// exchange
+export const EXCHANGE_RATE = '1350';

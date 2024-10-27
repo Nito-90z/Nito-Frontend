@@ -1,10 +1,13 @@
-const EXCHANGE_RATE = 1348.62;
+import { EXCHANGE_RATE } from '@/constants';
 
-export function convertDollarToWon(dollarAmount: string) {
+export function convertDollarToWon(
+  dollarAmount: string,
+  exchangeRate: string = EXCHANGE_RATE,
+) {
   const koreanUnits = ['조', '억', '만', ''];
   const unit = 10000;
   let answer = '';
-  let number = Number(dollarAmount) * EXCHANGE_RATE;
+  let number = Number(dollarAmount) * Number(exchangeRate);
 
   while (number > 0) {
     const mod = Math.trunc((number % unit) * 100) / 100;
