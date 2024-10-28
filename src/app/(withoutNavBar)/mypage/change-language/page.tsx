@@ -3,13 +3,11 @@
 import { SetStateAction, useState } from 'react';
 import Button from '@/components/common/Button';
 import SelectHeader from '@/components/header/SelectHeader';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 export default function ChangeLanguagePage() {
   const [selectedLanguage, setSelectedLanguage] = useState('');
-
-  const pathname = usePathname();
   const router = useRouter();
 
   const handleLanguageSelect = (language: SetStateAction<string>) => {
