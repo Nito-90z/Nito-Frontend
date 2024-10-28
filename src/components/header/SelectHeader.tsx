@@ -15,7 +15,6 @@ export default function SelectHeader({
     <header className='sticky top-0 w-full bg-white flex items-center justify-center px-4 py-[16.5px] border-b border-border z-50'>
       <h1 className='text-xl font-bold text-black'>{mainText}</h1>
       <Button
-        // onClick={onClick}
         className='absolute right-4 h-8 w-12 bg-brand text-white font-bold px-2.5 rounded-full flex items-center justify-center'
       >
         {buttonText}

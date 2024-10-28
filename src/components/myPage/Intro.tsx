@@ -23,30 +23,26 @@ export default function Intro() {
 
   const handleClose = () => {
     setShowChangeName(false);
-  }; 
+  };
 
   if (isLoading) {
     return null;
   }
   return (
     <>
-      <div className='pt-5 px-4 pb-4 border-b border-border'>
-        <div className='flex items-center gap-0'>
-          <span className='text-xl font-bold text-dark-gray'>
+      <div className="pt-5 px-4 pb-4 border-b border-border">
+        <div className="flex items-center gap-0">
+          <span className="text-xl font-bold text-dark-gray">
             안녕하세요, {userData?.nickname}님
           </span>
           <Button
-            type='button'
+            type="button"
             onClick={onPencilClick}
-            className='ml-2 w-7 h-7 flex items-center justify-center bg-border rounded-full'
+            className="ml-2 w-7 h-7 flex items-center justify-center bg-border rounded-full"
           >
             <PencilIcon />
           </Button>
         </div>
-        {/* <div className='pt-3'>
-          <p className='text-sm py-1 text-dark-gray'>로그인 한 계정</p>
-          <p className='text-base text-gray-text'>{userData?.social && userData?.social.email}</p>
-        </div> */}
       </div>
       {showChangeName && <ChangeName onClose={handleClose} />}
     </>

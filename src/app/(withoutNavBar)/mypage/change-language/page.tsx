@@ -3,7 +3,6 @@
 import { SetStateAction, useState } from "react";
 import Button from "@/components/common/Button";
 import SelectHeader from "@/components/header/SelectHeader";
-import PriceDiscount from "@/components/myPage/PriceDiscount";
 
 export default function ChangeLanguagePage() {
   const [selectedLanguage, setSelectedLanguage] = useState("");
@@ -14,7 +13,7 @@ export default function ChangeLanguagePage() {
 
   return (
     <div>
-      <SelectHeader mainText="언어 변경" buttonText="완료" onClick={() => {}} />
+      <SelectHeader mainText="언어 변경" buttonText="완료" />
       <div className="pt-8 pb-11 px-4">
         <p className="text-xl py-1 font-bold text-dark-gray">
           편리한 서비스 이용을 위해 <br />

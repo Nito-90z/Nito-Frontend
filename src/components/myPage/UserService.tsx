@@ -33,17 +33,21 @@ export default function UserService() {
         <span className='pt-1 text-base text-dark-gray items-center'>
           개인정보처리방침
         </span>
-        <Button className='w-10 h-6 bg-white'>
-          <MoreRightIcon />
-        </Button>
+        <Link href='/mypage/privacy-policy'>
+          <Button className='w-10 h-6 bg-white'>
+            <MoreRightIcon />
+          </Button>
+        </Link>
       </div>
       <div className='flex items-center justify-between px-4 py-4'>
         <span className='pt-1 text-base text-dark-gray items-center'>
           이용약관
         </span>
-        <Button className='w-10 h-6 bg-white'>
-          <MoreRightIcon />
-        </Button>
+        <Link href='/mypage/tos'>
+          <Button className='w-10 h-6 bg-white'>
+            <MoreRightIcon />
+          </Button>
+        </Link>
       </div>
       <div className='flex items-center justify-between px-4 py-4'>
         <span className='text-base text-dark-gray'>고객 문의</span>

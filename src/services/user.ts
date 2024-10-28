@@ -62,13 +62,7 @@ export async function login() {
     .then((res) => res.data);
 }
 
+// 유저 데이터 가져옴
 export async function getUserInfo() {
   return serverInstance.get(`/v1/user/me/`).then((res) => res.data);
-}
-export async function updateUserInfo() {
-  return serverInstance.patch('/v1/user/me/').then((res) => res.data);
-}
-
-export async function withdrawUser(body: { reason: string }) {
-  await serverInstance.post('/v1/user/me/withdraw/', { body });
 }

@@ -30,10 +30,6 @@ export async function signInFetcher(body: SignInData) {
     .then((res) => res.data);
 }
 
-export async function updateUserInfoFetcher() {
-  return clientInstance.patch('/api/user/me').then((res) => res.data);
-}
-
 export type UserData = {
   lang: 'en' | 'ko';
   isAlarm: boolean;
@@ -47,7 +43,7 @@ export type UserData = {
     isServiceAccept: boolean;
     isInfoAccept: boolean;
     isMarketing: boolean;
-  };
+  } | null;
 };
 
 //  유저 데이터를 가져옴
@@ -55,14 +51,3 @@ export async function getUserFetcher(): Promise<UserData> {
   return clientInstance.get('/api/user/me').then((res) => res.data);
 }
 
-// 회원 탈퇴
-export async function withdrawUserFetcher(body: { reason: string }) {
-  await clientInstance.post('/v1/user/me/withdraw', { body });
-}
-
-// 닉네임 변경
-export async function changeNicknameFetcher(nickname: string) {
-  return clientInstance
-    .put('/api/user/me', { nickname })
-    .then((res) => res.data);
-}

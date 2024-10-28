@@ -7,9 +7,9 @@ type RendererProps = {
   rootPageId: string;
 };
 
-export const NotionRender = ({ recordMap, rootPageId }: RendererProps) => {
+export default function NotionRender({ recordMap, rootPageId }: RendererProps) {
   return (
-    <div className="notion__container">
+    <div>
       <NotionRenderer
         recordMap={recordMap}
         fullPage={true}
@@ -19,6 +19,4 @@ export const NotionRender = ({ recordMap, rootPageId }: RendererProps) => {
       />
     </div>
   );
-};
-
-export default NotionRender;
+}
