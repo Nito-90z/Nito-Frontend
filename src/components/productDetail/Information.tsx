@@ -1,8 +1,9 @@
 import { DetailProduct } from '@/models/product';
 import Badge from '../common/Badge';
 import { convertDollarToWon } from '@/utils/currency-converter';
-import { parseDateFromNow } from '@/utils/date';
+import { parseDateFromNow, parseExchangeDate } from '@/utils/date';
 import Link from 'next/link';
+import { useExchangeRateStore } from '@/stores/exchange';
 
 export default function Information({ product }: { product: DetailProduct }) {
   const {
@@ -16,6 +17,7 @@ export default function Information({ product }: { product: DetailProduct }) {
     optionStatus,
     affiliateUrl,
   } = product;
+  const { usdToKrw, createdAt } = useExchangeRateStore.use.exchangeRate();
   return (
     <div className="flex flex-col gap-3 py-4">
       <h1 className="leading-7 text-dark-gray">{title}</h1>
@@ -38,10 +40,12 @@ export default function Information({ product }: { product: DetailProduct }) {
               $ {presentPrice}
             </span>
             <span className="text-text">
-              {convertDollarToWon(presentPrice)}
+              {convertDollarToWon(presentPrice, usdToKrw)}
             </span>
           </p>
-          {/* 환율 정보 */}
+          <p className="text-xs leading-[18px] text-secondary">
+            USD/KRW = {usdToKrw}, {parseExchangeDate(createdAt)} 기준 UTC+9
+          </p>
         </div>
       </div>
       <div className="bg-platinum px-3 py-2 text-sm">

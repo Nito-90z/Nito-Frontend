@@ -16,3 +16,5 @@ export const DISCOUNT_RATE = '-discount_rate';
 // route handler
 export const BAD_REQUEST_ERROR_MESSAGE = 'Bad Request';
 export const DEFAULT_ERROR_MESSAGE = 'Something went wrong';
+
+export const EXCHANGE_RATE = '1350';

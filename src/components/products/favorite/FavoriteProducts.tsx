@@ -2,36 +2,31 @@
 
 import SelectHeader from '@/components/header/SelectHeader';
 import Main from '@/components/subHeader/Main';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NullProductList from './NullProductList';
 import ProductList from '../ProductList';
 import Button from '@/components/common/Button';
-import {
-  FavoriteProduct,
-  FavoriteProductQuery,
-  Ordering,
-} from '@/models/product';
 import Skeleton from '../Skeleton';
-import useFavoriteProduct from '@/hooks/favoriteProduct';
+import {
+  useFavoriteProduct,
+  useSetFavoriteProduct,
+} from '@/hooks/favoriteProduct';
+import { useFavoriteQueryStore } from '@/stores/favoriteQuery';
 
 export default function FavoriteProducts() {
   const [isEditing, setIsEditing] = useState(false);
   const [selected, setSelected] = useState<number[]>([]);
-  const [query, setQuery] = useState<FavoriteProductQuery>({
-    page_size: 20,
-    ordering: null,
-  });
+  const resetFavoriteQuery = useFavoriteQueryStore.use.resetFavoriteQuery();
   const {
-    data,
+    products,
+    totalCount,
     isLoading,
     fetchNextPage,
     hasNextPage,
     isFetching,
-    deleteFavoriteProduct,
-  } = useFavoriteProduct(query);
+  } = useFavoriteProduct();
+  const { deleteFavoriteProduct } = useSetFavoriteProduct();
   const selectedCount = selected.length;
-  const products: FavoriteProduct[] =
-    data?.map((page) => page.results).flat() || [];
 
   const handleSelect = (id: number) => {
     if (selected.includes(id)) {
@@ -50,10 +45,10 @@ export default function FavoriteProducts() {
     await deleteFavoriteProduct({ ids: selected });
     setSelected([]);
   };
-  const handleOrdering = (value: Ordering) => {
-    setQuery((prev) => ({ ...prev, ordering: value }));
-  };
 
+  useEffect(() => {
+    resetFavoriteQuery();
+  }, []);
   if (isLoading) return <Skeleton />;
   return (
     <section className="h-full overflow-y-auto pb-4">
@@ -68,18 +63,12 @@ export default function FavoriteProducts() {
           onClick={handleEditing}
         />
       ) : (
-        <Main
-          count={products.length}
-          query={query}
-          onEditing={() => setIsEditing(true)}
-          onChangeOrdering={handleOrdering}
-        />
+        <Main count={totalCount} onEditing={() => setIsEditing(true)} />
       )}
       {products.length === 0 ? (
         <NullProductList />
       ) : (
         <ProductList
-          query={query}
           products={products}
           isEditing={isEditing}
           selected={selected}

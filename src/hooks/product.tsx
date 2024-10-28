@@ -1,16 +1,7 @@
-import {
-  addFavoriteProductFetcher,
-  getProductsFetcher,
-} from '@/fetchers/product';
+import { getProductsFetcher } from '@/fetchers/product';
+import { Product } from '@/models/product';
 import { useProductQueryStore } from '@/stores/productQuery';
-import { useToastStore } from '@/stores/toast';
-import {
-  keepPreviousData,
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
-import axios from 'axios';
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 
 export default function useProducts() {
   const productQuery = useProductQueryStore.use.productQuery();
@@ -26,26 +17,15 @@ export default function useProducts() {
       refetchOnWindowFocus: false,
     });
 
-  return { data, isLoading, fetchNextPage, hasNextPage, isFetching };
-}
+  const products: Product[] = data?.map((page) => page.results).flat() || [];
+  const totalCount = data ? data[0].count : 0;
 
-export function useAddFavorite() {
-  const queryClient = useQueryClient();
-  const productQuery = useProductQueryStore.use.productQuery();
-  const setToast = useToastStore.use.setToast();
-
-  return useMutation({
-    mutationFn: ({ id }: { id: number }) => addFavoriteProductFetcher(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products', productQuery] });
-      setToast('상품을 추가했어요', 5000);
-    },
-    onError: (error) => {
-      if (axios.isAxiosError(error)) {
-        if (error.status === 400) {
-          setToast(error.response?.data.message, 5000);
-        }
-      }
-    },
-  });
+  return {
+    products,
+    totalCount,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  };
 }
