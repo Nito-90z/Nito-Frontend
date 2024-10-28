@@ -37,7 +37,7 @@ export default function RecentSearch({ setKeyword, onDelete, onClear }: Props) {
         </div>
       ) : (
         <ul className="h-full overflow-y-auto">
-          {recentSearches.map((keyword) => (
+          {recentSearches.map((keyword: string) => (
             <RecentSearchItem
               key={uuidv4()}
               keyword={keyword}

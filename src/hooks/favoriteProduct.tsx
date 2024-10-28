@@ -52,7 +52,7 @@ export function useSetFavoriteProduct(queryKey?: string[]) {
   const { mutateAsync: addFavoriteProduct } = useMutation({
     mutationFn: ({ id }: { id: number }) => addFavoriteProductFetcher(id),
     onSuccess: () => {
-      queryKey && queryClient.invalidateQueries({ queryKey });
+      if (queryKey) queryClient.invalidateQueries({ queryKey });
       setToast('상품을 추가했어요', 5000);
     },
     onError: (error) => {

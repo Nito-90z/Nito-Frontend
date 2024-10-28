@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import createSelectors from './selectors';
+import createSelectors from '.';
 
 type ModalState = {
   isModalOpen: boolean;

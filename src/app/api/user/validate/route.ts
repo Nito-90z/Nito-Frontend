@@ -3,6 +3,7 @@ import {
   NICKNAME_DUPLICATE_ERROR_MESSAGE,
 } from '@/constants';
 import { nicknameValidationCheck } from '@/services/user';
+import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -26,15 +27,18 @@ export async function GET(request: NextRequest) {
       );
     }
     return NextResponse.json(data);
-  } catch (error: any) {
-    const errorMessage =
-      error.status === 400
-        ? NICKNAME_DUPLICATE_ERROR_MESSAGE
-        : 'Something went wrong';
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.status === 400
+          ? NICKNAME_DUPLICATE_ERROR_MESSAGE
+          : 'Something went wrong';
 
-    return NextResponse.json(
-      { message: errorMessage },
-      { status: error.status || 500 },
-    );
+      return NextResponse.json(
+        { message: errorMessage },
+        { status: error.status || 500 },
+      );
+    }
+    console.log(error);
   }
 }

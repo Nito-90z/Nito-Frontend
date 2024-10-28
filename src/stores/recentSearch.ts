@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import createSelectors from './selectors';
+import createSelectors from '.';
 
 type RecentSearchState = {
   recentSearches: string[];

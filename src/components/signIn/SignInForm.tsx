@@ -67,7 +67,7 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
 
     try {
       await mutateAsync({ nickname: getValues('nickname'), agreement });
-    } catch (error: any) {
+    } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 400) {
           setError('nickname', {
@@ -77,6 +77,7 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
           setFocus('nickname');
         }
       }
+      console.log(error);
     }
   };
   return (

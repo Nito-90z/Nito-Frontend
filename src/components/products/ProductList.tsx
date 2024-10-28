@@ -37,10 +37,10 @@ export default function ProductList({
     setFavoriteProductAlarm({ id, isAlarm });
   };
   useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage && fetchNextPage();
+    if (inView && hasNextPage && fetchNextPage) {
+      fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, fetchNextPage, hasNextPage]);
   return (
     <div>
       <ul

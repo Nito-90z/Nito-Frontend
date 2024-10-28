@@ -44,7 +44,7 @@ export default function Category({
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, fetchNextPage, hasNextPage]);
   return (
     <div className="relative mb-4 inline-block w-full">
       <button
