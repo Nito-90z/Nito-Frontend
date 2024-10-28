@@ -48,7 +48,7 @@ export default function FavoriteProducts() {
 
   useEffect(() => {
     resetFavoriteQuery();
-  }, []);
+  }, [resetFavoriteQuery]);
   if (isLoading) return <Skeleton />;
   return (
     <section className="h-full overflow-y-auto pb-4">

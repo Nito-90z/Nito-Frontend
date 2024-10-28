@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import createSelectors from './selectors';
+import createSelectors from '.';
 import { ExchangeRate } from '@/models/exchange';
 import { EXCHANGE_RATE } from '@/constants';
 import { getExchangeRateFetcher } from '@/fetchers/exchange';

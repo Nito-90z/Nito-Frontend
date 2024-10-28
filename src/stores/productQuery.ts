@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import createSelectors from './selectors';
+import createSelectors from '.';
 import { Ordering } from '@/models/product';
 
 type QueryState = {

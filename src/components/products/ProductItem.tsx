@@ -57,17 +57,17 @@ export default function ProductItem({
 
   const handleClick = () => {
     if (isEditing && favoriteId) {
-      onSelect && onSelect(favoriteId);
+      if (onSelect) onSelect(favoriteId);
     } else {
       router.push(`/product-list/product/${id}`);
     }
   };
   const handleAddFavorite = (e: MouseEvent<HTMLButtonElement>) => {
-    addFavorite && addFavorite(id);
+    if (addFavorite) addFavorite(id);
     e.stopPropagation();
   };
   const handleSetIsAlarm = (e: MouseEvent<HTMLButtonElement>) => {
-    setIsAlarm && setIsAlarm(favoriteId!, isAlarm);
+    if (setIsAlarm) setIsAlarm(favoriteId!, isAlarm);
     e.stopPropagation();
   };
   return (

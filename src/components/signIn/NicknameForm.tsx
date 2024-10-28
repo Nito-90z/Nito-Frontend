@@ -39,7 +39,7 @@ export default function NicknameForm({
         type: 'success',
         message: NICKNAME_VALID_MESSAGE,
       });
-    } catch (error: any) {
+    } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 400) {
           setError('nickname', {
@@ -49,6 +49,7 @@ export default function NicknameForm({
           setFocus();
         }
       }
+      console.log(error);
     }
   };
   return (

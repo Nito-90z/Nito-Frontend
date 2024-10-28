@@ -4,6 +4,12 @@ import NotiSetting from '@/components/myPage/NotiSetting';
 import SocialLogin from '@/components/myPage/SocialLogin';
 import UserService from '@/components/myPage/UserService';
 import UserSetting from '@/components/myPage/UserSetting';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '마이페이지',
+  description: '본인의 정보를 손쉽게 관리해보세요',
+};
 
 export default function MyPage() {
   return (

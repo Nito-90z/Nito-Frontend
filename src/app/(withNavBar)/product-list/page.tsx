@@ -6,6 +6,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '모든 상품 목록',
+  description:
+    '다양한 카테고리별 상품을 확인해보세요. Nito에서 원하는 상품을 쉽게 찾아보고 비교할 수 있습니다',
+};
 
 export default async function ProductListPage() {
   const queryClient = new QueryClient();

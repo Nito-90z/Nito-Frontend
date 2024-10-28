@@ -5,6 +5,7 @@ import {
   getFavoriteProducts,
   setFavoriteProductAlarm,
 } from '@/services/product';
+import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 const QUERY_KEYS = ['cursor', 'page_size', 'ordering'];
@@ -35,16 +36,19 @@ export async function POST(request: NextRequest) {
     const data = await addFavoriteProduct(productId);
 
     return NextResponse.json(data);
-  } catch (error: any) {
-    const errorMessage =
-      error.status === 400
-        ? error.response.data.nonField[0]
-        : DEFAULT_ERROR_MESSAGE;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.status === 400
+          ? error.response?.data.nonField[0]
+          : DEFAULT_ERROR_MESSAGE;
 
-    return NextResponse.json(
-      { message: errorMessage },
-      { status: error.status || 500 },
-    );
+      return NextResponse.json(
+        { message: errorMessage },
+        { status: error.status || 500 },
+      );
+    }
+    console.log(error);
   }
 }
 
@@ -65,14 +69,19 @@ export async function DELETE(request: NextRequest) {
     await deleteFavoriteProducts(idsArray);
 
     return NextResponse.json({ message: 'Deleted!' }, { status: 200 });
-  } catch (error: any) {
-    const errorMessage =
-      error.status === 404 ? error.response.data.detail : DEFAULT_ERROR_MESSAGE;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.status === 404
+          ? error.response?.data.detail
+          : DEFAULT_ERROR_MESSAGE;
 
-    return NextResponse.json(
-      { message: errorMessage },
-      { status: error.status || 500 },
-    );
+      return NextResponse.json(
+        { message: errorMessage },
+        { status: error.status || 500 },
+      );
+    }
+    console.log(error);
   }
 }
 
@@ -90,13 +99,18 @@ export async function PUT(request: NextRequest) {
     const data = await setFavoriteProductAlarm(productId, isAlarm);
 
     return NextResponse.json(data);
-  } catch (error: any) {
-    const errorMessage =
-      error.status === 404 ? error.response.data.detail : DEFAULT_ERROR_MESSAGE;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.status === 404
+          ? error.response?.data.detail
+          : DEFAULT_ERROR_MESSAGE;
 
-    return NextResponse.json(
-      { message: errorMessage },
-      { status: error.status || 500 },
-    );
+      return NextResponse.json(
+        { message: errorMessage },
+        { status: error.status || 500 },
+      );
+    }
+    console.log(error);
   }
 }

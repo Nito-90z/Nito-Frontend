@@ -42,7 +42,7 @@ export default function SearchForm() {
     setProductQuery('search', '_initial_no_results');
 
     return () => resetProductQuery();
-  }, []);
+  }, [resetProductQuery, setProductQuery]);
   return (
     <section
       className={twMerge(

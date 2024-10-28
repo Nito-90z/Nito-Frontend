@@ -1,4 +1,5 @@
 import { serverInstance } from '@/libs/instance.server';
+import { ProductMetaData } from '@/models/product';
 
 export async function getProducts(query: { [k: string]: string | null }) {
   const queryParams = new URLSearchParams();
@@ -73,5 +74,13 @@ export async function setFavoriteProductAlarm(
 ) {
   return serverInstance
     .put(`/v1/favorite_product/${productId}/`, { isAlarm: !isAlarm })
+    .then((res) => res.data);
+}
+
+export async function getProductMetaData(
+  productId: string,
+): Promise<ProductMetaData> {
+  return serverInstance
+    .get(`/v1/product/${productId}/meta_description/?lang=ko`)
     .then((res) => res.data);
 }
