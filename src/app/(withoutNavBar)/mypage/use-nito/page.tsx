@@ -1,4 +1,4 @@
-import SubHeader from '@/components/header/SubHeader';
+import BackHeader from '@/components/header/BackHeader';
 import SelectButton from '@/components/myPage/SelectButton';
 import { Metadata } from 'next';
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function UseNitoPage() {
   return (
     <section className='relative flex flex-col h-full'>
-      <SubHeader text='니토 사용법' />
+      <BackHeader mainText='니토 사용법' />
       <div className='flex flex-col overflow-y-auto'>
         <SelectButton />
       </div>

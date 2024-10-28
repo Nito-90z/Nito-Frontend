@@ -1,23 +1,34 @@
 'use client';
 
-import { SetStateAction, useState } from "react";
-import Button from "@/components/common/Button";
-import SelectHeader from "@/components/header/SelectHeader";
+import { SetStateAction, useState } from 'react';
+import Button from '@/components/common/Button';
+import SelectHeader from '@/components/header/SelectHeader';
+import { usePathname, useRouter } from 'next/navigation';
 
 
 export default function ChangeLanguagePage() {
   const [selectedLanguage, setSelectedLanguage] = useState('');
 
+  const pathname = usePathname();
+  const router = useRouter();
+
   const handleLanguageSelect = (language: SetStateAction<string>) => {
     setSelectedLanguage(language);
   };
 
+  const handleComplete = () => {
+    router.back();
+  };
+
   return (
     <div>
-
-      <SelectHeader mainText="언어 변경" buttonText="완료" />
-      <div className="pt-8 pb-11 px-4">
-        <p className="text-xl py-1 font-bold text-dark-gray">
+      <SelectHeader
+        mainText="언어 변경"
+        buttonText="완료"
+        onClick={handleComplete}
+      />
+      <div className="px-4 pb-11 pt-8">
+        <p className="py-1 text-xl font-bold text-dark-gray">
           편리한 서비스 이용을 위해 <br />
           언어를 선택해주세요.
         </p>

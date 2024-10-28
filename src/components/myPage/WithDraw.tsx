@@ -18,7 +18,7 @@ export default function WithDraw({ onClose }: Props) {
   ];
 
   return (
-    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl bg-white shadow-xl p-4">
+    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl border-t-2 border-border bg-white shadow-xl p-4">
       <div className="flex justify-center items-center gap-36">
         <div className="h-6 w-10" />
         <div className="h-6 w-10" />

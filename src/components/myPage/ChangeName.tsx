@@ -16,11 +16,11 @@ export default function ChangeName({ onClose }: Props) {
   );
 
   return (
-    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl bg-white p-4 shadow-xl">
-      <div className="flex items-center justify-center gap-24 pb-2">
+    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl border-t-2 border-border bg-white p-4 shadow-xl">
+      <div className="flex items-center justify-center gap-28 pb-2">
         <div className="h-6 w-6" />
         <div className="flex font-bold text-black">닉네임 변경하기</div>
-        <Button className="flex h-8 w-8 items-center justify-center bg-white">
+        <Button className="flex h-8 w-8 items-center justify-center bg-white" onClick={onClose}>
           <CloseIcon />
         </Button>
       </div>

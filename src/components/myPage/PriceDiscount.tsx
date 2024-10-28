@@ -16,7 +16,7 @@ export default function PriceDiscount({onClose}: Props) {
   };
 
   return (
-    <div className='absolute bottom-0 z-50 w-full rounded-t-2xl bg-white shadow-xl p-4'>
+    <div className='absolute bottom-0 z-50 w-full rounded-t-2xl border-t-2 border-border bg-white shadow-xl p-4'>
       <div className='flex justify-center items-center gap-28'>
         <div className='h-6 w-6' />
         <h1 className='flex text-black font-bold'>가격할인 설정</h1>
