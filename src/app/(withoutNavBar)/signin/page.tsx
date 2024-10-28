@@ -5,6 +5,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '회원가입',
+  description:
+    '닉네임만 입력하고 간편하게 Nito에 가입하세요. 복잡한 절차 없이 쉽고 빠르게 시작할 수 있습니다',
+};
 
 type Props = {
   searchParams: {

@@ -20,6 +20,11 @@ export type ProductQuery = {
   search: string | null;
 };
 
+export type ProductMetaData = {
+  title: string;
+  image: string | null;
+};
+
 export type Product = {
   id: number; // 상품의 고유 ID
   image: string | null; // 상품 이미지 (nullable 가능성)

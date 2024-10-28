@@ -6,8 +6,11 @@ import ModalProvider from '@/contexts/ModalContext';
 import ToastProvider from '@/contexts/ToastContext';
 
 export const metadata: Metadata = {
-  title: 'Nito',
-  description: 'Amazon Price Monitoring Service',
+  title: {
+    default: 'Nito',
+    template: '%s | Nito',
+  },
+  description: '아마존 최저가 알림 플랫폼',
 };
 
 const pretendard = localFont({
