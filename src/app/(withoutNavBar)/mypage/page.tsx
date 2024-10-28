@@ -1,6 +1,5 @@
 import SubHeader from '@/components/header/SubHeader';
 import Intro from '@/components/myPage/Intro';
-import SocialLogin from '@/components/myPage/SocialLogin';
 import NotiSetting from '@/components/myPage/NotiSetting';
 import UserService from '@/components/myPage/UserService';
 import UserSetting from '@/components/myPage/UserSetting';

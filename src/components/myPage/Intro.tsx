@@ -10,6 +10,7 @@ import { getUserFetcher, UserData } from '@/fetchers/user';
 export default function Intro() {
   const [showChangeName, setShowChangeName] = useState(false);
 
+  // 유저 정보 조회
   const { data: userData, isLoading } = useQuery<UserData>({
     queryKey: ['userData'],
     queryFn: getUserFetcher,
