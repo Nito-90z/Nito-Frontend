@@ -9,6 +9,7 @@ type Props = {
 export default function MoreIcon({ className }: Props) {
   return (
     <Image
+      priority
       src={moreIcon}
       alt="more icon"
       className={twMerge('h-8 w-8', className)}

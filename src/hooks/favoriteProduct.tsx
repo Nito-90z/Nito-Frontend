@@ -30,8 +30,13 @@ export function useFavoriteProduct() {
       refetchOnWindowFocus: false,
     });
 
+  const products: FavoriteProduct[] =
+    data?.map((page) => page.results).flat() || [];
+  const totalCount = data ? data[0].count : 0;
+
   return {
-    data,
+    products,
+    totalCount,
     isLoading,
     fetchNextPage,
     hasNextPage,

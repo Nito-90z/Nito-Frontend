@@ -1,3 +1,4 @@
+import { DEFAULT_ERROR_MESSAGE } from '@/constants';
 import { signIn } from '@/services/user';
 import { checkIosDevice } from '@/utils/device';
 import { cookies, headers } from 'next/headers';
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
     const errorMessage =
       error.status === 400
         ? error.response.data.nickname[0]
-        : 'Something went wrong';
+        : DEFAULT_ERROR_MESSAGE;
 
     return NextResponse.json(
       { message: errorMessage },

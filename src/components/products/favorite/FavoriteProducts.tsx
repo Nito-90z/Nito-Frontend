@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import NullProductList from './NullProductList';
 import ProductList from '../ProductList';
 import Button from '@/components/common/Button';
-import { FavoriteProduct } from '@/models/product';
 import Skeleton from '../Skeleton';
 import {
   useFavoriteProduct,
@@ -18,12 +17,16 @@ export default function FavoriteProducts() {
   const [isEditing, setIsEditing] = useState(false);
   const [selected, setSelected] = useState<number[]>([]);
   const resetFavoriteQuery = useFavoriteQueryStore.use.resetFavoriteQuery();
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
-    useFavoriteProduct();
+  const {
+    products,
+    totalCount,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  } = useFavoriteProduct();
   const { deleteFavoriteProduct } = useSetFavoriteProduct();
   const selectedCount = selected.length;
-  const products: FavoriteProduct[] =
-    data?.map((page) => page.results).flat() || [];
 
   const handleSelect = (id: number) => {
     if (selected.includes(id)) {
@@ -60,10 +63,7 @@ export default function FavoriteProducts() {
           onClick={handleEditing}
         />
       ) : (
-        <Main
-          count={(data && data[0]?.count) || 0}
-          onEditing={() => setIsEditing(true)}
-        />
+        <Main count={totalCount} onEditing={() => setIsEditing(true)} />
       )}
       {products.length === 0 ? (
         <NullProductList />

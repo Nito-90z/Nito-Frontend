@@ -8,18 +8,16 @@ import { useInView } from 'react-intersection-observer';
 import { useSetFavoriteProduct } from '@/hooks/favoriteProduct';
 
 type Props = {
-  className?: string;
   products: (Product | FavoriteProduct)[];
   isEditing?: boolean;
   selected?: number[];
   onSelect?: (id: number) => void;
-  fetchNextPage?: () => void;
-  hasNextPage?: boolean;
-  isFetching?: boolean;
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+  isFetching: boolean;
 };
 
 export default function ProductList({
-  className,
   products,
   isEditing,
   selected,
@@ -49,10 +47,9 @@ export default function ProductList({
         className={twMerge(
           'flex flex-col gap-3 p-4',
           isEditing ? 'max-h-[calc(100%-62px)]' : 'max-h-[calc(100%-102px)]',
-          className,
         )}
       >
-        {products.map((item) => {
+        {products.map((item, index) => {
           const product = 'product' in item ? item.product : item;
           const favoriteId = 'id' in item ? item.id : null;
           const isAlarm = 'isAlarm' in item && item.isAlarm;
@@ -60,6 +57,7 @@ export default function ProductList({
           return (
             <ProductItem
               key={product.id}
+              priority={index < 15 && !!product.image}
               favoriteId={favoriteId}
               product={product}
               isAlarm={isAlarm}

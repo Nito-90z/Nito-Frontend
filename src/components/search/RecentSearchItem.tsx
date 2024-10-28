@@ -1,22 +1,27 @@
-import Button from '../common/Button';
 import CloseIcon from '../common/icons/CloseIcon';
 
 type Props = {
-  id: number;
   keyword: string;
-  onDelete: (id: number) => void;
+  setKeyword: (value: string) => void;
+  onDelete: (value: string) => void;
 };
 
-export default function RecentSearchItem({ id, keyword, onDelete }: Props) {
+export default function RecentSearchItem({
+  keyword,
+  setKeyword,
+  onDelete,
+}: Props) {
   return (
-    <li className="py-2">
-      <Button
-        className="flex h-fit items-center justify-between bg-transparent"
-        onClick={() => onDelete(id)}
+    <li className="flex items-center justify-between px-4 duration-75 hover:bg-neutral-100">
+      <button
+        className="grow py-2 text-start leading-7 text-dark-gray"
+        onClick={() => setKeyword(keyword)}
       >
-        <span className="leading-7 text-dark-gray">{keyword}</span>
+        {keyword}
+      </button>
+      <button className="py-2" onClick={() => onDelete(keyword)}>
         <CloseIcon />
-      </Button>
+      </button>
     </li>
   );
 }

@@ -21,6 +21,7 @@ type QueryState = {
       | 'search',
     value: string | number | boolean | null,
   ) => void;
+  resetProductQuery: () => void;
 };
 
 const queryStore = create<QueryState>()((set) => ({
@@ -35,6 +36,17 @@ const queryStore = create<QueryState>()((set) => ({
   setProductQuery: (name, value) =>
     set((state) => ({
       productQuery: { ...state.productQuery, [name]: value },
+    })),
+  resetProductQuery: () =>
+    set(() => ({
+      productQuery: {
+        page_size: 20,
+        category_id: null,
+        is_lowest_price_ever: null,
+        is_out_of_stock: null,
+        ordering: null,
+        search: null,
+      },
     })),
 }));
 

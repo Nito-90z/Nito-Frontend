@@ -1,4 +1,7 @@
-import { NICKNAME_DUPLICATE_ERROR_MESSAGE } from '@/constants';
+import {
+  BAD_REQUEST_ERROR_MESSAGE,
+  NICKNAME_DUPLICATE_ERROR_MESSAGE,
+} from '@/constants';
 import { nicknameValidationCheck } from '@/services/user';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -7,7 +10,10 @@ export async function GET(request: NextRequest) {
   const nickname = searchParams.get('nickname');
 
   if (!nickname) {
-    return NextResponse.json({ message: 'Bad Request' }, { status: 400 });
+    return NextResponse.json(
+      { message: BAD_REQUEST_ERROR_MESSAGE },
+      { status: 400 },
+    );
   }
 
   try {

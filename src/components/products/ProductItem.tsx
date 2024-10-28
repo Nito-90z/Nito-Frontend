@@ -17,6 +17,7 @@ import { MouseEvent } from 'react';
 import { useExchangeRateStore } from '@/stores/exchange';
 
 type Props = {
+  priority: boolean;
   favoriteId: number | null;
   product: Product | FavoriteProductInfo;
   isAlarm: boolean;
@@ -28,6 +29,7 @@ type Props = {
 };
 
 export default function ProductItem({
+  priority,
   favoriteId,
   product,
   isAlarm,
@@ -74,6 +76,7 @@ export default function ProductItem({
         'relative flex cursor-pointer items-start gap-3 border-b border-border py-4 last:border-none',
         isEditing && 'opacity-50',
         isSelected && 'opacity-100',
+        isOutOfStock && 'pointer-events-none',
       )}
       onClick={handleClick}
     >
@@ -89,6 +92,7 @@ export default function ProductItem({
       )}
       <div className="relative h-20 w-20 shrink-0">
         <ProductImage
+          priority={priority}
           src={image ?? ''}
           alt={`${title} product image`}
           className={twMerge(

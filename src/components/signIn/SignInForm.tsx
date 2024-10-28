@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import NicknameForm from './NicknameForm';
 import Button from '../common/Button';
 import CloseIcon from '../common/icons/CloseIcon';
@@ -10,6 +10,7 @@ import { generateNicknameFetcher } from '@/fetchers/user';
 import axios from 'axios';
 import { useSignIn } from '@/hooks/auth';
 import { AgreementType } from '@/models/user';
+import { useForm } from 'react-hook-form';
 
 const INITIAL_AGREEMENT = {
   isOverAge14: false,
@@ -25,30 +26,31 @@ const ALL_AGREEMENTS = {
   isMarketing: true,
 };
 
-const INITIAL_ERROR_COMMNET = {
-  value: '',
-  color: '',
-};
+export type Nickname = { nickname: string };
 
 export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
   const { data } = useQuery<{ nickname: string }>({
     queryKey: ['nickname'],
     queryFn: generateNicknameFetcher,
-    staleTime: 60 * 1000,
+    staleTime: Infinity,
   });
-  const [nickname, setNickname] = useState(data?.nickname || '');
-  const [nicknameComment, setNicknameComment] = useState(INITIAL_ERROR_COMMNET);
+  const {
+    register,
+    watch,
+    getValues,
+    setFocus,
+    setError,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Nickname>();
   const [agreement, setAgreement] = useState<AgreementType>(INITIAL_AGREEMENT);
   const isAllAgree = Object.values(agreement).every((v) => v === true);
   const isValidate =
     agreement.isOverAge14 &&
     agreement.isServiceAccept &&
-    nickname.trim() !== '';
+    watch('nickname').trim() !== '';
   const { mutateAsync } = useSignIn(callbackUrl);
 
-  const handleNicknameComment = (value: string, color: string) => {
-    setNicknameComment({ value, color });
-  };
   const handleAgreementChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setAgreement((prev) => ({ ...prev, [name]: checked }));
@@ -64,22 +66,19 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
     if (!isValidate) return;
 
     try {
-      await mutateAsync({ nickname, agreement });
+      await mutateAsync({ nickname: getValues('nickname'), agreement });
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 400) {
-          setNicknameComment({
-            value: error.response.data.message,
-            color: 'text-brand',
+          setError('nickname', {
+            type: 'duplicated',
+            message: error.response.data.message,
           });
+          setFocus('nickname');
         }
       }
     }
   };
-
-  useEffect(() => {
-    setNicknameComment(INITIAL_ERROR_COMMNET);
-  }, [nickname]);
   return (
     <div className="flex h-full flex-col">
       <div className="flex grow flex-col gap-6">
@@ -87,10 +86,12 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
           <CloseIcon />
         </Button>
         <NicknameForm
-          nickname={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-          commentMessage={nicknameComment}
-          onCommentChange={handleNicknameComment}
+          generatedNickname={data?.nickname || ''}
+          register={register}
+          setFocus={() => setFocus('nickname')}
+          onSubmit={handleSubmit}
+          errors={errors}
+          setError={setError}
         />
         <Agreement
           agreement={agreement}
