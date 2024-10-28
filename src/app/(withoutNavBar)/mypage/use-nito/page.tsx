@@ -1,5 +1,11 @@
 import SubHeader from '@/components/header/SubHeader';
 import SelectButton from '@/components/myPage/SelectButton';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Nito 사용법',
+  description: 'Nito의 사용법을 알아보세요!',
+};
 
 export default function UseNitoPage() {
   return (

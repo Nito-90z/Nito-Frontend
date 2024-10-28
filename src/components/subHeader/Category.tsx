@@ -1,12 +1,12 @@
-import { RefObject, useEffect, useState } from "react";
-import { twMerge } from "tailwind-merge";
-import MoreUpIcon from "../common/icons/MoreUpIcon";
-import MoreDownIcon from "../common/icons/MoreDownIcon";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getCategoryFetcher } from "@/fetchers/category";
-import { CategoryItem } from "@/models/product";
-import { useProductQueryStore } from "@/stores/productQuery";
-import { useInView } from "react-intersection-observer";
+import { RefObject, useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+import MoreUpIcon from '../common/icons/MoreUpIcon';
+import MoreDownIcon from '../common/icons/MoreDownIcon';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getCategoryFetcher } from '@/fetchers/category';
+import { CategoryItem } from '@/models/product';
+import { useProductQueryStore } from '@/stores/productQuery';
+import { useInView } from 'react-intersection-observer';
 
 export default function Category({
   topRef,
@@ -18,7 +18,7 @@ export default function Category({
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["category"],
+    queryKey: ['category'],
     queryFn: ({ pageParam }) => getCategoryFetcher(pageParam, 20),
     initialPageParam: null,
     getNextPageParam: (lastPage) => lastPage.cursor,
@@ -33,10 +33,10 @@ export default function Category({
   const setProductQuery = useProductQueryStore.use.setProductQuery();
 
   const handleSelect = (id: number | null) => {
-    setProductQuery("category_id", id);
+    setProductQuery('category_id', id);
     setIsOpen(false);
     if (topRef) {
-      topRef.current?.scrollIntoView({ behavior: "smooth" });
+      topRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -44,14 +44,14 @@ export default function Category({
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, fetchNextPage, hasNextPage]);
   return (
-    <div className="relative inline-block mb-4 w-full">
+    <div className="relative mb-4 inline-block w-full">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className={twMerge(
-          "flex w-full items-center justify-between px-4 py-[10px] border border-border rounded-sm bg-white text-sm focus:outline-none",
-          isOpen && "border-b-transparent"
+          'flex w-full items-center justify-between rounded-sm border border-border bg-white px-4 py-[10px] text-sm focus:outline-none',
+          isOpen && 'border-b-transparent',
         )}
       >
         <span>
@@ -60,20 +60,20 @@ export default function Category({
         <span>{isOpen ? <MoreUpIcon /> : <MoreDownIcon />}</span>
       </button>
       {isOpen && (
-        <ul className="w-full rounded-sm bg-white border border-t-0 border-border max-h-60 absolute overflow-auto z-30">
+        <ul className="absolute z-30 max-h-60 w-full overflow-auto rounded-sm border border-t-0 border-border bg-white">
           {categories &&
             categories.map((page) =>
               page.map(({ id, enTitle }: CategoryItem) => (
                 <li key={id}>
                   <button
-                    className="text-start px-4 py-[10px] w-full text-sm text-gray disabled:bg-neutral-100"
+                    className="w-full px-4 py-[10px] text-start text-sm text-gray disabled:bg-neutral-100"
                     onClick={() => handleSelect(id)}
                     disabled={id === productQuery.category_id}
                   >
                     {enTitle}
                   </button>
                 </li>
-              ))
+              )),
             )}
           <div ref={ref} />
         </ul>
@@ -84,9 +84,9 @@ export default function Category({
 
 function findSelectedCategory(
   categoryResults: CategoryItem[][] | undefined,
-  id: number | null
+  id: number | null,
 ) {
-  if (!categoryResults || !id) return "All";
+  if (!categoryResults || !id) return 'All';
 
   const categories = categoryResults.flat();
   const category = categories.find((category) => category.id === id);

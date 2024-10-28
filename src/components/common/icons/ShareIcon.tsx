@@ -1,5 +1,5 @@
-import Image from "next/image";
-import shareIcon from "../../../../public/images/share.svg";
+import Image from 'next/image';
+import shareIcon from '../../../../public/images/share.svg';
 
 export default function ShareIcon() {
   return (

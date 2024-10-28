@@ -1,8 +1,11 @@
-"use client";
+'use client';
 
-import { twMerge } from "tailwind-merge";
-import Button from "../common/Button";
-import HeaderAlarmIcon from "../common/icons/HeaderAlarmIcon";
+import { twMerge } from 'tailwind-merge';
+import Button from '../common/Button';
+import HeaderAlarmIcon from '../common/icons/HeaderAlarmIcon';
+import { Ordering } from '@/models/product';
+import { DISCOUNT_RATE, PRESENT_PRICE } from '@/constants';
+import { useFavoriteQueryStore } from '@/stores/favoriteQuery';
 
 type Props = {
   count: number;
@@ -10,10 +13,20 @@ type Props = {
 };
 
 export default function Main({ count, onEditing }: Props) {
+  const favoriteQuery = useFavoriteQueryStore.use.favoriteQuery();
+  const setFavoriteQuery = useFavoriteQueryStore.use.setFavoriteQuery();
+
+  const handleOrdering = (value: Ordering) => {
+    if (favoriteQuery.ordering === value) {
+      setFavoriteQuery('ordering', null);
+    } else {
+      setFavoriteQuery('ordering', value);
+    }
+  };
   return (
-    <div className="sticky top-0 bg-white z-50">
-      <header className="w-full p-4 pt-5 flex items-center justify-between">
-        <h1 className="text-[26px] leading-[38px] font-bold text-black">
+    <div className="sticky top-0 z-50 bg-white">
+      <header className="flex w-full items-center justify-between p-4 pt-5">
+        <h1 className="text-[26px] font-bold leading-[38px] text-black">
           찜한 상품{count !== 0 && `(${count})`}
         </h1>
         <div className="flex items-center">
@@ -22,27 +35,33 @@ export default function Main({ count, onEditing }: Props) {
           </button>
         </div>
       </header>
-      <div className="w-full pb-2 px-4 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-light-gray text-sm">
-          <Button
-            onClick={() => {}}
-            className="w-fit h-fit text-light-gray bg-transparent"
+      <div className="flex w-full items-center justify-between px-4 pb-2">
+        <div className="text-sm text-light-gray">
+          <button
+            onClick={() => handleOrdering(DISCOUNT_RATE)}
+            className={twMerge(
+              'rounded pr-2',
+              favoriteQuery.ordering === DISCOUNT_RATE && 'text-dark-gray',
+            )}
           >
             할인율순
-          </Button>
+          </button>
           |
-          <Button
-            onClick={() => {}}
-            className="w-fit h-fit text-light-gray bg-transparent"
+          <button
+            onClick={() => handleOrdering(PRESENT_PRICE)}
+            className={twMerge(
+              'rounded pl-2',
+              favoriteQuery.ordering === PRESENT_PRICE && 'text-dark-gray',
+            )}
           >
             낮은 가격순
-          </Button>
+          </button>
         </div>
         <Button
           disabled={count === 0}
           className={twMerge(
-            "text-sm text-dark-gray bg-transparent w-fit h-fit disabled:bg-transparent",
-            count === 0 && "text-light-gray"
+            'h-fit w-fit bg-transparent text-sm text-dark-gray disabled:bg-transparent',
+            count === 0 && 'text-light-gray',
           )}
           onClick={onEditing}
         >

@@ -1,5 +1,7 @@
-import { getRelatedProducts } from "@/services/product";
-import { NextRequest, NextResponse } from "next/server";
+import { DEFAULT_ERROR_MESSAGE } from '@/constants';
+import { getRelatedProducts } from '@/services/product';
+import axios from 'axios';
+import { NextRequest, NextResponse } from 'next/server';
 
 type Context = {
   params: {
@@ -12,15 +14,18 @@ export async function GET(_: NextRequest, { params: { id } }: Context) {
     const data = await getRelatedProducts(Number(id));
 
     return NextResponse.json(data);
-  } catch (error: any) {
-    const errorMessage =
-      error.status === 404
-        ? error.response.data.detail
-        : "Something went wrong";
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.status === 404
+          ? error.response?.data.detail
+          : DEFAULT_ERROR_MESSAGE;
 
-    return NextResponse.json(
-      { message: errorMessage },
-      { status: error.status || 500 } // 에러가 있다면 해당 코드, 없으면 500
-    );
+      return NextResponse.json(
+        { message: errorMessage },
+        { status: error.status || 500 },
+      );
+    }
+    console.log(error);
   }
 }

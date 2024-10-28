@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { RefObject } from "react";
-import Category from "./Category";
-import SortOptions from "./SortOptions";
+import { RefObject } from 'react';
+import Category from './Category';
+import SortOptions from './SortOptions';
 
 type Props = {
   count: number;
@@ -11,7 +11,7 @@ type Props = {
 
 export default function CategoryDefault({ count, topRef }: Props) {
   return (
-    <div className="sticky top-0 p-4 pb-2 bg-white z-30">
+    <div className="sticky top-0 z-30 bg-white p-4 pb-2">
       <Category topRef={topRef} />
       <SortOptions count={count} />
     </div>

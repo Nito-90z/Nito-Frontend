@@ -19,12 +19,12 @@ export default function NotiSetting() {
     if (serviceToast) {
       // 서비스 알림을 끌 때
       setToastMessage(
-        '주요 서비스 알림을 해제하여\n가격 할인 알람을 받을 수 없어요!'
+        '주요 서비스 알림을 해제하여\n가격 할인 알람을 받을 수 없어요!',
       );
     } else {
       // 서비스 알림을 켤 때
       setToastMessage(
-        '주요 서비스 알림을 켜서\n가격 할인 알림을 받을 수 있어요!'
+        '주요 서비스 알림을 켜서\n가격 할인 알림을 받을 수 있어요!',
       );
     }
     setShowServiceToast(true);
@@ -64,16 +64,15 @@ export default function NotiSetting() {
           있습니다.
         </p>
       </div>
-
       <div className="flex items-center justify-between px-4">
         <h3 className="text-base text-dark-gray">광고성 알림</h3>
         <ToggleButton isOn={eventToast} toggleHandler={handleToggleEvent} />
       </div>
-      <div className="flex items-center justify-between px-4 pt-2 pb-5">
-        <p className="text-sm text-gray-text pb-1">
+      <div className="flex items-center justify-between px-4 pb-5 pt-2">
+        <p className="pb-1 text-sm text-gray-text">
           다양한 이벤트와 혜택에 대한 정보를 받아보세요.
         </p>
-        <Button className="w-10 h-6 bg-white">
+        <Button className="h-6 w-10 bg-white">
           <MoreRightIcon />
         </Button>
       </div>
@@ -82,7 +81,6 @@ export default function NotiSetting() {
           <Toast text={toastMessage} />
         </div>
       )}
-
       {showEventToast && (
         <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-sm">
           <Toast text={toastMessage} position="flex" />

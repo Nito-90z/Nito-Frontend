@@ -1,28 +1,23 @@
-import Image from "next/image";
-import restockAlarmIcon from "../../../../public/images/restock-alarm.svg";
-import { CircleButtonSize } from "../CircleButton";
+import Image from 'next/image';
+import restockAlarmIcon from '../../../../public/images/restock-alarm.svg';
+import { CircleButtonSize } from '../CircleButton';
 
 export default function RestockAlarmIcon({ size }: { size: CircleButtonSize }) {
-  const { width, height } = getIconSizeStyle(size);
+  const className = getIconSizeStyle(size);
 
   return (
-    <Image
-      src={restockAlarmIcon}
-      alt="restock alarm"
-      width={width}
-      height={height}
-    />
+    <Image src={restockAlarmIcon} alt="restock alarm" className={className} />
   );
 }
 
 function getIconSizeStyle(size: CircleButtonSize) {
   switch (size) {
-    case "sm":
-      return { width: 24, height: 24 };
-    case "md":
-      return { width: 28, height: 28 };
-    case "lg":
-      return { width: 32, height: 32 };
+    case 'sm':
+      return 'w-6 h-6';
+    case 'md':
+      return 'w-7 h-7';
+    case 'lg':
+      return 'w-8 h-8';
     default:
       throw new Error(`Unsupported type size: ${size}`);
   }

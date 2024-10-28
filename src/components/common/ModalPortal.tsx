@@ -1,4 +1,4 @@
-import { createPortal } from "react-dom";
+import { createPortal } from 'react-dom';
 
 export default function ModalPortal({
   children,
@@ -6,11 +6,11 @@ export default function ModalPortal({
   children: React.ReactNode;
 }) {
   // client 상태에서만 실행하기 위해
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     return null;
   }
 
-  const modal = document.getElementById("modal") as HTMLElement;
+  const modal = document.getElementById('modal') as HTMLElement;
 
   return createPortal(children, modal);
 }

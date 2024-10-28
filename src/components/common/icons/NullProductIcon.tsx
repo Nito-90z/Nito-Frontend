@@ -1,5 +1,5 @@
-import Image from "next/image";
-import nullProductIcon from "../../../../public/images/null-product.svg";
+import Image from 'next/image';
+import nullProductIcon from '../../../../public/images/null-product.svg';
 
 export default function NullProductIcon() {
   return (

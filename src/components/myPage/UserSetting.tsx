@@ -31,7 +31,6 @@ export default function UserSetting() {
           </Button>
         </Link>
       </div>
-
       <div className="flex items-center justify-between px-4 py-4">
         <span className="pt-1 text-base text-dark-gray items-center">
           가격 할인 설정

@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function WithDraw({ onClose }: Props) {
-
+  
   const reasons = [
     '온라인 쇼핑을 잘 이용하지 않아요',
     '아마존을 잘 이용하지 않아요',
@@ -16,7 +16,6 @@ export default function WithDraw({ onClose }: Props) {
     '많은 알림에 피로를 느껴요',
     '기타',
   ];
-
 
   return (
     <div className="absolute bottom-0 z-50 w-full rounded-t-2xl bg-white shadow-xl p-4">

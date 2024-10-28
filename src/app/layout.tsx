@@ -1,20 +1,23 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "../css/index.css";
-import QueryProvider from "@/contexts/QueryContext";
-import ModalProvider from "@/contexts/ModalContext";
-import ToastProvider from "@/contexts/ToastContext";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import '../css/index.css';
+import QueryProvider from '@/contexts/QueryContext';
+import ModalProvider from '@/contexts/ModalContext';
+import ToastProvider from '@/contexts/ToastContext';
 
 export const metadata: Metadata = {
-  title: "Nito",
-  description: "Amazon Price Monitoring Service",
+  title: {
+    default: 'Nito',
+    template: '%s | Nito',
+  },
+  description: '아마존 최저가 알림 플랫폼',
 };
 
 const pretendard = localFont({
-  src: "../assets/fonts/PretendardVariable.woff2",
-  display: "swap",
-  weight: "45 920",
-  variable: "--font-pretendard",
+  src: '../assets/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
 });
 
 export default function RootLayout({
@@ -25,12 +28,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard content-center w-screen h-dvh bg-[#ECECEC]`}
+        className={`${pretendard.variable} h-dvh w-screen content-center bg-[#ECECEC] font-pretendard`}
       >
         <QueryProvider>
           <ModalProvider>
             <ToastProvider>
-              <main className="relative flex flex-col mx-auto max-w-[430px] min-w-[360px] w-full max-h-dvh h-full bg-white">
+              <main className="relative mx-auto flex h-full max-h-dvh w-full min-w-[360px] max-w-[430px] flex-col bg-white">
                 {children}
                 <div id="modal" />
                 <div id="toast" />

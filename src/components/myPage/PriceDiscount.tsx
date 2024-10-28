@@ -25,16 +25,16 @@ export default function PriceDiscount({onClose}: Props) {
         </Button>
       </div>
 
-      <p className='text-center text-sm text-gray-text pt-2 pb-4'>
+      <p className="pb-4 pt-2 text-center text-sm text-gray-text">
         평균 가격에서 몇 % 떨어질 때 알려드릴까요? <br />
         단, 역대 최저가일 경우에는 무조건 알려드려요!
       </p>
 
       {/* 할인율 선택 버튼 */}
-      <div className='flex justify-center gap-2.5 pb-4 w-80'>
+      <div className="flex w-80 justify-center gap-2.5 pb-4">
         <Button
           onClick={() => handleSelect('3%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '3%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'
@@ -44,7 +44,7 @@ export default function PriceDiscount({onClose}: Props) {
         </Button>
         <Button
           onClick={() => handleSelect('5%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '5%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'
@@ -54,7 +54,7 @@ export default function PriceDiscount({onClose}: Props) {
         </Button>
         <Button
           onClick={() => handleSelect('7%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '7%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'
@@ -64,7 +64,7 @@ export default function PriceDiscount({onClose}: Props) {
         </Button>
         <Button
           onClick={() => handleSelect('10%')}
-          className={`w-20 h-10 px-2.5 rounded-full text-xs ${
+          className={`h-10 w-20 rounded-full px-2.5 text-xs ${
             selectedPercentage === '10%'
               ? 'bg-brand text-white'
               : 'bg-border text-gray-text'
@@ -73,7 +73,6 @@ export default function PriceDiscount({onClose}: Props) {
           10% 이상
         </Button>
       </div>
-
       <Button>설정 완료</Button>
     </div>
   );

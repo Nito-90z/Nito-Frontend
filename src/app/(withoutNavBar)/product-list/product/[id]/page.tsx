@@ -1,7 +1,9 @@
-import Header from "@/components/productDetail/Header";
-import { Suspense } from "react";
-import Skeleton from "@/components/productDetail/Skeleton";
-import DetailDataFetcher from "@/components/productDetail/DetailDataFetcher";
+import Header from '@/components/productDetail/Header';
+import Skeleton from '@/components/productDetail/Skeleton';
+import DetailDataFetcher from '@/components/productDetail/DetailDataFetcher';
+import SSRSafeSuspense from '@/components/common/SSRSafeSuspense';
+import { Metadata } from 'next';
+import { getProductMetaData } from '@/services/product';
 
 type Props = {
   params: {
@@ -11,11 +13,25 @@ type Props = {
 
 export default function ProductDetailPage({ params: { id } }: Props) {
   return (
-    <section className="flex flex-col h-full overflow-y-auto">
+    <section className="flex h-full flex-col overflow-y-auto">
       <Header />
-      <Suspense fallback={<Skeleton />}>
+      <SSRSafeSuspense fallback={<Skeleton />}>
         <DetailDataFetcher id={id} />
-      </Suspense>
+      </SSRSafeSuspense>
     </section>
   );
+}
+
+export async function generateMetadata({
+  params: { id },
+}: Props): Promise<Metadata> {
+  const { title, image } = await getProductMetaData(id);
+
+  return {
+    title: title,
+    description: `${title}의 가격을 비교해 보세요`,
+    openGraph: {
+      images: image || undefined,
+    },
+  };
 }

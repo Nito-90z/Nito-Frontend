@@ -1,5 +1,5 @@
-import Image from "next/image";
-import headerAlarmIcon from "../../../../public/images/header-alarm.svg";
+import Image from 'next/image';
+import headerAlarmIcon from '../../../../public/images/header-alarm.svg';
 
 export default function HeaderAlarmIcon() {
   return (

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import moreRightIcon from "../../../../public/images/more-right.svg";
-import { twMerge } from "tailwind-merge";
+import Image from 'next/image';
+import moreRightIcon from '../../../../public/images/more-right.svg';
+import { twMerge } from 'tailwind-merge';
 
 type Props = {
   className?: string;
@@ -11,7 +11,7 @@ export default function MoreRightIcon({ className }: Props) {
     <Image
       src={moreRightIcon}
       alt="more up"
-      className={twMerge("w-6 h-6", className)}
+      className={twMerge('h-6 w-6', className)}
     />
   );
 }

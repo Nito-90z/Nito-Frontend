@@ -9,13 +9,20 @@ export type CategoryPage = {
   results: CategoryItem[];
 };
 
+export type Ordering = 'present_price' | '-discount_rate' | null;
+
 export type ProductQuery = {
   page_size: number;
   category_id: number | null;
   is_lowest_price_ever: boolean | null;
   is_out_of_stock: boolean | null;
-  ordering: "present_price" | "-discount_rate" | null;
+  ordering: Ordering;
   search: string | null;
+};
+
+export type ProductMetaData = {
+  title: string;
+  image: string | null;
 };
 
 export type Product = {
@@ -41,14 +48,19 @@ export type DetailProduct = Product & {
   optionStatus: boolean;
 };
 
+export type FavoriteProductQuery = {
+  page_size: number;
+  ordering: Ordering;
+};
+
 export type FavoriteProductInfo = Omit<
   Product,
-  | "price"
-  | "code"
-  | "crawlingUpdatedAt"
-  | "isFavorite"
-  | "affiliateUrl"
-  | "presentPriceUpdatedAt"
+  | 'price'
+  | 'code'
+  | 'crawlingUpdatedAt'
+  | 'isFavorite'
+  | 'affiliateUrl'
+  | 'presentPriceUpdatedAt'
 >;
 
 export type FavoriteProduct = {

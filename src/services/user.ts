@@ -21,7 +21,7 @@ export async function signIn(
       uid: string;
       token: string;
     };
-  }
+  },
 ) {
   return serverInstance
     .post('/v1/user/register/', body)

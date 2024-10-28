@@ -1,5 +1,5 @@
-import Slider, { Settings } from "react-slick";
-import ArrowButton from "../productDetail/ArrowButton";
+import Slider, { Settings } from 'react-slick';
+import ArrowButton from '../productDetail/ArrowButton';
 
 const settings: Settings = {
   infinite: true,
@@ -13,7 +13,7 @@ const settings: Settings = {
 
 export default function Carousel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative slider-container">
+    <div className="slider-container relative">
       <Slider {...settings}>{children}</Slider>
     </div>
   );

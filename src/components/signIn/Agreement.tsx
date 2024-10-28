@@ -1,7 +1,7 @@
-import { ChangeEvent } from "react";
-import CheckBox from "../common/CheckBox";
-import NextIcon from "../common/icons/NextIcon";
-import { AgreementType } from "@/models/user";
+import { ChangeEvent } from 'react';
+import CheckBox from '../common/CheckBox';
+import NextIcon from '../common/icons/NextIcon';
+import { AgreementType } from '@/models/user';
 
 type Props = {
   agreement: AgreementType;
@@ -14,7 +14,7 @@ export default function Agreement({ agreement, onChange, onAllChange }: Props) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="px-4 py-[14px] border border-light-gray">
+      <div className="border border-light-gray px-4 py-[14px]">
         <CheckBox checked={isAllAgree} onChange={onAllChange}>
           <span className="font-bold">전체동의</span>
         </CheckBox>
@@ -25,29 +25,29 @@ export default function Agreement({ agreement, onChange, onAllChange }: Props) {
           checked={agreement.isOverAge14}
           onChange={onChange}
         >
-          <span className="text-brand font-bold">[필수]</span> 만 14세 이상
+          <span className="font-bold text-brand">[필수]</span> 만 14세 이상
         </CheckBox>
         <div className="flex flex-col gap-1">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <CheckBox
               name="isServiceAccept"
               checked={agreement.isServiceAccept}
               onChange={onChange}
             >
-              <span className="text-brand font-bold">[필수]</span> 서비스 이용
+              <span className="font-bold text-brand">[필수]</span> 서비스 이용
               약관 동의
             </CheckBox>
             <NextIcon className="cursor-pointer" />
           </div>
           <p className="pl-7 text-[#8F8F8F]">개인정보처리방침 [보기]</p>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <CheckBox
             name="isMarketing"
             checked={agreement.isMarketing}
             onChange={onChange}
           >
-            <span className="text-[#8F8F8F] font-bold">[선택]</span> 마케팅 수신
+            <span className="font-bold text-[#8F8F8F]">[선택]</span> 마케팅 수신
             동의
           </CheckBox>
           <NextIcon className="cursor-pointer" />
