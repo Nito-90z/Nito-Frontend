@@ -27,7 +27,7 @@ export default async function SignInPage({
   await queryClient.prefetchQuery({
     queryKey: ['nickname'],
     queryFn: generateNickname,
-    staleTime: 60 * 1000,
+    staleTime: Infinity,
   });
 
   return (

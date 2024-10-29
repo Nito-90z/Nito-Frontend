@@ -66,3 +66,9 @@ export async function login() {
 export async function getUserInfo() {
   return serverInstance.get(`/v1/user/me/`).then((res) => res.data);
 }
+
+export async function withdraw(reason: string) {
+  serverInstance
+    .post('/v1/user/me/withdrawal/', { reason })
+    .catch(() => new Response('Not Found!', { status: 404 }));
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import Toast2 from '@/components/common/Toast2';
+import Toast from '@/components/common/Toast';
 import ToastPortal from '@/components/common/ToastPortal';
 import { useToastStore } from '@/stores/toast';
 
@@ -16,7 +16,7 @@ export default function ToastProvider({ children }: Props) {
       {children}
       {text && (
         <ToastPortal>
-          <Toast2 text={text} />
+          <Toast text={text} />
         </ToastPortal>
       )}
     </>

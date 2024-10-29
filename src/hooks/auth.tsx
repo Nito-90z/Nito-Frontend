@@ -1,9 +1,13 @@
 import CompleteSignInModal from '@/components/signIn/CompleteSignInModal';
-import { nicknameValidationCheckFetcher, signInFetcher } from '@/fetchers/user';
+import {
+  nicknameValidationCheckFetcher,
+  signInFetcher,
+  withdrawFetcher,
+} from '@/fetchers/user';
 import { AgreementType } from '@/models/user';
 import { useModalStore } from '@/stores/modal';
 import { useMutation } from '@tanstack/react-query';
-import { setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
 export function useNicknameCheck() {
@@ -37,6 +41,22 @@ export function useSignIn(callbackUrl: string) {
       setCookie('refreshToken', refreshToken);
       router.push(callbackUrl ? callbackUrl : '/');
       setModal(<CompleteSignInModal />);
+    },
+  });
+}
+
+export function useWithDraw() {
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: ({ reason }: { reason: string }) => withdrawFetcher(reason),
+    onSuccess: () => {
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('token');
+      deleteCookie('uid');
+      router.push('/signin');
+      router.refresh();
     },
   });
 }
