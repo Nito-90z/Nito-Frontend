@@ -29,6 +29,7 @@ export default async function SignInPage({
     queryFn: generateNickname,
     staleTime: 60 * 1000,
   });
+
   return (
     <section className="h-full px-4 pt-4">
       <HydrationBoundary state={dehydrate(queryClient)}>

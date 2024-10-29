@@ -4,7 +4,11 @@ import { SetStateAction, useState } from 'react';
 import Button from '../common/Button';
 import CloseIcon from '../common/icons/CloseIcon';
 
-export default function PriceDiscount() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function PriceDiscount({onClose}: Props) {
   const [selectedPercentage, setSelectedPercentage] = useState('');
 
   const handleSelect = (percentage: SetStateAction<string>) => {
@@ -12,11 +16,11 @@ export default function PriceDiscount() {
   };
 
   return (
-    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl bg-white p-4 shadow-xl">
-      <div className="flex items-center justify-center gap-28">
-        <div className="h-6 w-6" />
-        <h1 className="flex font-bold text-black">가격할인 설정</h1>
-        <Button className="flex h-8 w-8 items-center justify-center bg-white">
+    <div className='absolute bottom-0 z-50 w-full rounded-t-2xl border-t-2 border-border bg-white shadow-xl p-4'>
+      <div className='flex justify-center items-center gap-28'>
+        <div className='h-6 w-6' />
+        <h1 className='flex text-black font-bold'>가격할인 설정</h1>
+        <Button className='justify-center items-center flex h-8 w-8 bg-white' onClick={onClose}>
           <CloseIcon />
         </Button>
       </div>
@@ -69,7 +73,6 @@ export default function PriceDiscount() {
           10% 이상
         </Button>
       </div>
-
       <Button>설정 완료</Button>
     </div>
   );

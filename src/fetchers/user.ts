@@ -29,3 +29,25 @@ export async function signInFetcher(body: SignInData) {
     })
     .then((res) => res.data);
 }
+
+export type UserData = {
+  lang: 'en' | 'ko';
+  isAlarm: boolean;
+  nickname: string;
+  social: {
+    email: string;
+    socialKind: string;
+  } | null;
+  agreement: {
+    isOverAge14: boolean;
+    isServiceAccept: boolean;
+    isInfoAccept: boolean;
+    isMarketing: boolean;
+  } | null;
+};
+
+//  유저 데이터를 가져옴
+export async function getUserFetcher(): Promise<UserData> {
+  return clientInstance.get('/api/user/me').then((res) => res.data);
+}
+

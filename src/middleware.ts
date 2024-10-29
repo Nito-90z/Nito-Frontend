@@ -36,10 +36,8 @@ export async function middleware(request: NextRequest) {
   if (nextUrl.pathname.startsWith('/signin')) {
     return NextResponse.redirect(nextUrl.origin);
   }
-
   return NextResponse.next();
 }
-
 export const config = {
   matcher: [
     '/',

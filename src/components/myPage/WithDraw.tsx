@@ -2,7 +2,12 @@ import Button from '../common/Button';
 import CheckBox from '../common/CheckBox';
 import CloseIcon from '../common/icons/CloseIcon';
 
-export default function WithDraw() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function WithDraw({ onClose }: Props) {
+  
   const reasons = [
     '온라인 쇼핑을 잘 이용하지 않아요',
     '아마존을 잘 이용하지 않아요',
@@ -13,16 +18,19 @@ export default function WithDraw() {
   ];
 
   return (
-    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl bg-white p-4 shadow-xl">
-      <div className="flex items-center justify-center gap-36">
+    <div className="absolute bottom-0 z-50 w-full rounded-t-2xl border-t-2 border-border bg-white shadow-xl p-4">
+      <div className="flex justify-center items-center gap-36">
         <div className="h-6 w-10" />
         <div className="h-6 w-10" />
-        <Button className="flex h-8 w-8 items-center justify-center bg-white">
+        <Button
+          className="justify-center items-center flex h-8 w-8 bg-white"
+          onClick={onClose}
+        >
           <CloseIcon />
         </Button>
       </div>
-      <div className="flex flex-col gap-4">
-        <span className="text-xl font-bold text-black">
+      <div className="gap-4 flex flex-col">
+        <span className="font-bold text-xl text-black">
           탈퇴하시는 이유가 무엇인가요?
         </span>
         {reasons.map((reason, index) => (
@@ -33,11 +41,10 @@ export default function WithDraw() {
         ))}
       </div>
       <textarea
-        className="text-gray-500 my-4 h-48 w-full rounded-sm bg-bar p-4 placeholder:text-sm focus:outline-none"
+        className="h-48 w-full my-4 p-4 bg-bar rounded-sm text-gray-500 focus:outline-none placeholder:text-sm"
         placeholder="자유롭게 작성해주세요."
       ></textarea>
-
-      <Button>회원 탈퇴</Button>
+      <Button>회원탈퇴</Button>
     </div>
   );
 }

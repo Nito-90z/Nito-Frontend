@@ -47,10 +47,22 @@ export default function ProductMenual() {
           <div className="text-bold flex h-5 w-5 items-center justify-center rounded-full bg-brand p-1.5 text-base text-white">
             3
           </div>
-          <p className="text-base font-bold text-dark-gray">
-            앱 리스트에서 NITO를 클릭하면 상품 추가가 완료 돼
-            <br />
-            요!
+          <p className='text-base font-bold text-dark-gray'>
+            앱 리스트에서 NITO를 클릭하면 상품 추가가 완료 돼요!
+          </p>
+        </div>       
+        <div className='rounded-xl bg-platinum px-4 py-6 items-center justify-center flex'>
+          <Product3Icon />
+        </div>
+      </div>
+      <div className='px-4 py-4'>
+        <div className='flex gap-2.5 pb-4'>
+          <div className='bg-brand h-5 w-5 text-white text-base text-bold rounded-full items-center justify-center flex p-1.5'>
+            4
+          </div>
+          <p className='text-base font-bold text-dark-gray'>
+            우측 상단의 편집 버튼을 눌러 NITO를 맨 앞으로
+            <br />고정할 수도 있어요!
           </p>
         </div>
 

@@ -33,8 +33,8 @@ serverInstance.interceptors.response.use(
           const originRequest = error.config as InternalAxiosRequestConfig;
           const { accessToken, refreshToken } = await refresh();
 
-          cookieStore.set('accessToken', accessToken);
-          cookieStore.set('refreshToken', refreshToken);
+          cookieStore.set("accessToken", accessToken);
+          cookieStore.set("refreshToken", refreshToken);
           originRequest.headers.Authorization = `Bearer ${accessToken}`;
 
           return axios(originRequest);
@@ -44,5 +44,5 @@ serverInstance.interceptors.response.use(
       }
     }
     return Promise.reject(error);
-  },
+  }
 );

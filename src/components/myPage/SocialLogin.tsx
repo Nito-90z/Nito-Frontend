@@ -1,12 +1,22 @@
 'use client';
 
+import { useState } from 'react';
 import Button from '../common/Button';
 import AppleIcon from '../common/icons/AppleIcon';
 import GoogleIcon from '../common/icons/GoogleIcon';
 import PencilIcon from '../common/icons/PencilIcon';
+import ChangeName from './ChangeName';
 
 export default function SocialLogin() {
-  const onClick = () => {};
+  const [showChangeName, setShowChangeName] = useState(false);
+
+  const onPencilClick = () => {
+    setShowChangeName(true);
+  };
+
+  const handleClose = () => {
+    setShowChangeName(false);
+  };
 
   return (
     <>
@@ -15,9 +25,9 @@ export default function SocialLogin() {
           안녕하세요, {`{유저닉네임}`}님
         </span>
         <Button
-          type="button"
-          onClick={onClick}
-          className="ml-2 flex h-7 w-7 items-center justify-center rounded-full bg-border"
+          type='button'
+          onClick={onPencilClick}
+          className='ml-2 w-7 h-7 flex items-center justify-center bg-border rounded-full'
         >
           <PencilIcon />
         </Button>
@@ -44,6 +54,7 @@ export default function SocialLogin() {
           <p className="pt-2 text-center text-xs text-secondary">Google</p>
         </div>
       </div>
+      {showChangeName && <ChangeName onClose={handleClose} />}
     </>
   );
 }

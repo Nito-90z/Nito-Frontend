@@ -1,6 +1,4 @@
-import SubHeader from '@/components/header/SubHeader';
-import PriceSetting from '@/components/myPage/PriceSetting';
-import ProductMenual from '@/components/myPage/ProductMenual';
+import BackHeader from '@/components/header/BackHeader';
 import SelectButton from '@/components/myPage/SelectButton';
 import { Metadata } from 'next';
 
@@ -9,13 +7,13 @@ export const metadata: Metadata = {
   description: 'Nito의 사용법을 알아보세요!',
 };
 
-export default function UseNitopage() {
+export default function UseNitoPage() {
   return (
-    <>
-      <SubHeader text="니토 사용법" />
-      <SelectButton />
-      <PriceSetting />
-      <ProductMenual />
-    </>
+    <section className='relative flex flex-col h-full'>
+      <BackHeader mainText='니토 사용법' />
+      <div className='flex flex-col overflow-y-auto'>
+        <SelectButton />
+      </div>
+    </section>
   );
 }

@@ -61,3 +61,8 @@ export async function login() {
     .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/user/login/`, body)
     .then((res) => res.data);
 }
+
+// 유저 데이터 가져옴
+export async function getUserInfo() {
+  return serverInstance.get(`/v1/user/me/`).then((res) => res.data);
+}

@@ -3,18 +3,28 @@
 import { SetStateAction, useState } from 'react';
 import Button from '@/components/common/Button';
 import SelectHeader from '@/components/header/SelectHeader';
-import PriceDiscount from '@/components/myPage/PriceDiscount';
+import { useRouter } from 'next/navigation';
+
 
 export default function ChangeLanguagePage() {
   const [selectedLanguage, setSelectedLanguage] = useState('');
+  const router = useRouter();
 
   const handleLanguageSelect = (language: SetStateAction<string>) => {
     setSelectedLanguage(language);
   };
 
+  const handleComplete = () => {
+    router.back();
+  };
+
   return (
     <div>
-      <SelectHeader mainText="언어 변경" buttonText="완료" onClick={() => {}} />
+      <SelectHeader
+        mainText="언어 변경"
+        buttonText="완료"
+        onClick={handleComplete}
+      />
       <div className="px-4 pb-11 pt-8">
         <p className="py-1 text-xl font-bold text-dark-gray">
           편리한 서비스 이용을 위해 <br />
@@ -46,7 +56,6 @@ export default function ChangeLanguagePage() {
           Korean(KR)
         </Button>
       </div>
-      <PriceDiscount />
     </div>
   );
 }

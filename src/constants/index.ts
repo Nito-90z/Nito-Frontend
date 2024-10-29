@@ -10,11 +10,16 @@ export const NICKNAME_PATTERN = /^[a-zA-Z0-9]{6,16}$/;
 export const IOS_PATTERN = /iPhone|iPad|iPod/i;
 
 // product-ordering
-export const PRESENT_PRICE = 'present_price';
-export const DISCOUNT_RATE = '-discount_rate';
+export const PRESENT_PRICE = "present_price";
+export const DISCOUNT_RATE = "-discount_rate";
 
 // route handler
 export const BAD_REQUEST_ERROR_MESSAGE = 'Bad Request';
 export const DEFAULT_ERROR_MESSAGE = 'Something went wrong';
 
 export const EXCHANGE_RATE = '1350';
+
+// notion error
+export const NOTION_SERVICE_ERROR = "NEXT_PUBLIC_NOTION_TERMS_OF_SERVICE is not defined";
+export const NOTION_POLICY_ERROR = "NEXT_PUBLIC_NOTION_PRIVACY_POLICY is not defined";
+

@@ -1,9 +1,9 @@
 import SubHeader from '@/components/header/SubHeader';
 import Intro from '@/components/myPage/Intro';
 import NotiSetting from '@/components/myPage/NotiSetting';
-import SocialLogin from '@/components/myPage/SocialLogin';
 import UserService from '@/components/myPage/UserService';
 import UserSetting from '@/components/myPage/UserSetting';
+
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,7 +17,6 @@ export default function MyPage() {
       <SubHeader text="마이페이지" />
       <div className="flex flex-col overflow-y-auto">
         <Intro />
-        <SocialLogin />
         <NotiSetting />
         <UserSetting />
         <UserService />
