@@ -51,3 +51,8 @@ export async function getUserFetcher(): Promise<UserData> {
   return clientInstance.get('/api/user/me').then((res) => res.data);
 }
 
+export async function withdrawFetcher(reason: string) {
+  return clientInstance
+    .post('/api/user/me', { reason })
+    .then((res) => res.data);
+}
