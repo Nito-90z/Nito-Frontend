@@ -25,7 +25,7 @@ export default function UserService() {
       <div className='flex items-center justify-between px-4 py-4'>
         <span className='pt-1 text-base text-dark-gray'>NITO 사용법</span>
         <Link href='/mypage/use-nito'>
-          <Button className='w-10 h-6 bg-white'>
+          <Button className='w-7 h-6 bg-white'>
             <MoreRightIcon />
           </Button>
         </Link>
@@ -36,7 +36,7 @@ export default function UserService() {
         </span>
 
         <Link href='/mypage/privacy-policy'>
-          <Button className='w-10 h-6 bg-white'>
+          <Button className='w-7 h-6 bg-white'>
             <MoreRightIcon />
           </Button>
         </Link>
@@ -46,7 +46,7 @@ export default function UserService() {
           이용약관
         </span>
         <Link href='/mypage/tos'>
-          <Button className='w-10 h-6 bg-white'>
+          <Button className='w-7 h-6 bg-white'>
             <MoreRightIcon />
           </Button>
         </Link>

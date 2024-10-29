@@ -72,7 +72,7 @@ export default function NotiSetting() {
         <p className="pb-1 text-sm text-gray-text">
           다양한 이벤트와 혜택에 대한 정보를 받아보세요.
         </p>
-        <Button className="h-6 w-10 bg-white">
+        <Button className="h-6 w-7 bg-white">
           <MoreRightIcon />
         </Button>
       </div>

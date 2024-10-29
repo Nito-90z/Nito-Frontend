@@ -17,7 +17,6 @@ export default function MyPage() {
       <SubHeader text="마이페이지" />
       <div className="flex flex-col overflow-y-auto">
         <Intro />
-        {/* <SocialLogin /> */}
         <NotiSetting />
         <UserSetting />
         <UserService />

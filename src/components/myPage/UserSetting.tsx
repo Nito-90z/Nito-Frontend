@@ -26,7 +26,7 @@ export default function UserSetting() {
       <div className="flex items-center justify-between px-4 py-4">
         <span className=" pt-1 text-base text-dark-gray">언어 변경</span>
         <Link href="/mypage/change-language">
-          <Button className="w-10 h-6 bg-white">
+          <Button className="w-7 h-6 bg-white">
             <MoreRightIcon />
           </Button>
         </Link>
@@ -35,7 +35,7 @@ export default function UserSetting() {
         <span className="pt-1 text-base text-dark-gray items-center">
           가격 할인 설정
         </span>
-        <Button className="w-10 h-6 bg-white" onClick={onMoreRightClick}>
+        <Button className="w-7 h-6 bg-white" onClick={onMoreRightClick}>
           <MoreRightIcon />
         </Button>
       </div>
