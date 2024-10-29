@@ -1,28 +1,18 @@
-import { twMerge } from 'tailwind-merge';
+'use client';
 
-type Props = {
-  text: string;
-  textColor?: string;
-  bgColor?: string;
-  position?: string;
-};
+import { useToastStore } from '@/stores/toast';
 
-export default function Toast({
-  text = 'Toast',
-  bgColor = 'bg-dark-gray',
-  textColor = 'text-white',
-  position = '',
-}: Props) {
+export default function Toast({ text }: { text: string }) {
+  const setToast = useToastStore.use.setToast();
+
   return (
-    <div
-      className={twMerge(
-        'z-50 h-[52px] w-[343px] items-center justify-center whitespace-pre-line rounded-sm px-2 py-1 text-center',
-        position,
-        bgColor,
-        textColor,
-      )}
+    <button
+      className="absolute bottom-8 z-50 w-full text-center"
+      onClick={() => setToast(null)}
     >
-      {text}
-    </div>
+      <div className="mx-[15px] bg-dark-gray py-4">
+        <p className="text-sm text-[#FFFFFF]">{text}</p>
+      </div>
+    </button>
   );
 }
