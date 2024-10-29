@@ -168,8 +168,12 @@ export default function ProductItem({
               {convertDollarToWon(presentPrice, usdToKrw)}
             </span>
             {!!discountRate && (
-              <Badge size="sm" direction="down" icon>
-                {discountRate}%
+              <Badge
+                size="sm"
+                direction={discountRate < 0 ? 'up' : 'down'}
+                icon
+              >
+                {Math.abs(discountRate)}%
               </Badge>
             )}
           </div>
