@@ -14,21 +14,13 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // 로그인은 했지만 access token이 없는 상태로 api 요청한 경우(말이 안되는데)
-    if (nextUrl.pathname.startsWith('/api')) {
-      return NextResponse.json(
-        { message: 'Authentication Error' },
-        { status: 444 },
-      );
-    }
-
     const { pathname, search, origin, basePath } = nextUrl;
     const signInUrl = new URL(`${basePath}/signin`, origin);
     signInUrl.searchParams.append(
       'callbackUrl',
       `${basePath}${pathname}${search}`,
     );
-    // 로그인하지 않는 사용자가 로그인이 필요한 페이지에 접근 시 로그인 페이지로 이동
+    // 로그인하지 않은 사용자가 로그인이 필요한 페이지에 접근 시 로그인 페이지로 이동
     return NextResponse.redirect(signInUrl);
   }
 
@@ -36,6 +28,7 @@ export async function middleware(request: NextRequest) {
   if (nextUrl.pathname.startsWith('/signin')) {
     return NextResponse.redirect(nextUrl.origin);
   }
+
   return NextResponse.next();
 }
 export const config = {
